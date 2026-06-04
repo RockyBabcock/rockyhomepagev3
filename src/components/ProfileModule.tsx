@@ -1,78 +1,48 @@
+import { useState } from "react";
 import { motion } from "motion/react";
-import { useState, useEffect } from "react";
 
-const heroJumps = [
-  {
-    label: "Projects",
-    desc: "Selected builds and implementation stories.",
-    target: "projects",
-    color: "var(--blue)",
-  },
-  {
-    label: "Skill Spectrum",
-    desc: "Tools, skills, workflows, and proof-of-work.",
-    target: "forge",
-    color: "var(--orange)",
-  },
-  {
-    label: "AI Chamber",
-    desc: "AI interfaces, experiments, and prototypes.",
-    target: "experiments",
-    color: "var(--purple)",
-  },
-  {
-    label: "Signal Room",
-    desc: "Contact, collaboration, and external links.",
-    target: "signal",
-    color: "var(--pink)",
-  },
+// Data
+const museumMap = [
+  { id: "projects", label: "Project Laboratory", desc: "Selected builds, case studies, and implementation stories.", color: "var(--blue)" },
+  { id: "forge", label: "Capability Forge", desc: "Tools, workflows, skills, and proof-of-work.", color: "var(--orange)" },
+  { id: "experiments", label: "Experiment Chambers", desc: "AI interfaces, Web3 prototypes, and playful technical experiments.", color: "var(--purple)" },
+  { id: "archives", label: "Personal Archives", desc: "Chess, media, memories, identity fragments, and personal signals.", color: "var(--pink)" },
+  { id: "garden", label: "Digital Garden", desc: "Notes, reflections, unfinished ideas, and future writing.", color: "var(--green)" },
+  { id: "signal", label: "Signal Room", desc: "Contact, collaboration, and external links.", color: "var(--orange)" },
 ];
 
 export function ProfileModule() {
-  const [liveLive, setLiveLive] = useState(
-    new Date().toLocaleTimeString("en-US", { hour12: false, hour: "2-digit", minute: "2-digit", second: "2-digit" })
-  );
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setLiveLive(new Date().toLocaleTimeString("en-US", { hour12: false, hour: "2-digit", minute: "2-digit", second: "2-digit" }));
-    }, 1000);
-    return () => clearInterval(timer);
-  }, []);
+  const [copied, setCopied] = useState(false);
 
   const scrollToElement = (id: string) => {
-    const el = document.getElementById(id);
-    if (!el) {
-      console.warn(`Section with id "${id}" was not found.`);
-      return;
+    const element = document.getElementById(id);
+    if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
     }
+  };
 
-    const offset = 88;
-    const pos = el.getBoundingClientRect().top + window.pageYOffset - offset;
-
-    window.scrollTo({
-      top: pos,
-      behavior: "smooth",
-    });
+  const copyHandle = async () => {
+    await navigator.clipboard.writeText("@braverocky");
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1600);
   };
 
   return (
-    <div className="flex flex-col relative z-10 w-full mb-16 lg:mb-24">
-      {/* Hero Section */}
-      <section className="w-full relative min-h-screen pt-28 lg:pt-36 pb-16 flex flex-col justify-center items-center overflow-hidden">
-        {/* Very subtle overall hero radial glow */}
-        <div className="pointer-events-none absolute inset-0 -z-10 flex justify-center items-center">
-           <div className="w-[800px] h-[800px] rounded-full bg-gradient-to-br from-[var(--pink)]/5 via-transparent to-[var(--cyan)]/5 blur-3xl opacity-50" />
-        </div>
+    <div className="flex flex-col relative z-10 w-full mb-16 lg:mb-24 pt-24 lg:pt-32 hero-entrance-bg">
+      {/* Texture overlay (if any) */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: "linear-gradient(var(--ink) 1px, transparent 1px), linear-gradient(90deg, var(--ink) 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
+      <div className="absolute bottom-0 left-0 spectrum-rule" />
 
-        <div className="max-w-7xl mx-auto w-full grid gap-12 lg:gap-8 lg:grid-cols-[minmax(0,1.4fr)_minmax(380px,1fr)] lg:items-center relative z-10 flex-grow px-4 sm:px-6 lg:px-8">
-          {/* Left Column: Hero Copy */}
-          <div className="flex flex-col items-start justify-center">
+      <section className="homepage-canvas">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 lg:gap-8 pb-16">
+          
+          {/* Identity Statement - 6 Columns */}
+          <div className="col-span-1 md:col-span-2 lg:col-span-6 flex flex-col justify-center pr-0 lg:pr-8 relative z-10 lg:pl-4 mb-8 lg:mb-0">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="mb-6 lg:mb-8 font-mono text-xs font-semibold uppercase tracking-[0.2em] text-[var(--ink-soft)]"
+              className="mb-4 font-mono text-xs font-semibold uppercase tracking-[0.2em] text-[var(--ink-soft)]"
             >
               PERSONAL DIGITAL MUSEUM / {new Date().getFullYear()}
             </motion.div>
@@ -81,201 +51,300 @@ export function ProfileModule() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="font-space text-6xl lg:text-[6.5rem] font-black leading-[0.88] tracking-[-0.055em] text-[var(--ink)] mb-6 relative"
+              className="font-space text-6xl lg:text-[7.5rem] font-black leading-[0.80] tracking-[-0.055em] text-[var(--ink)] mb-6"
             >
               ROCKY
               <br />
-              <span className="spectrum-text">BABCOCK</span>
+              BABCOCK
             </motion.h1>
 
-            <motion.h2
+             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="mb-5 lg:mb-6 font-mono text-xs sm:text-sm uppercase tracking-[0.15em] text-[var(--ink-soft)] font-semibold"
+              className="mb-6 font-mono text-xs sm:text-sm uppercase tracking-[0.15em] text-[var(--ink-soft)] font-semibold leading-relaxed"
             >
-              Creative Technologist · AI Interface Builder · Web Systems Explorer
-            </motion.h2>
+              Creative Technologist · AI Interface Builder<br className="hidden lg:block"/> · Web Systems Explorer
+             </motion.h2>
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="mb-10 max-w-2xl text-base sm:text-lg lg:text-xl leading-relaxed text-[var(--ink-soft)]"
+              className="max-w-xl text-base lg:text-lg leading-relaxed text-[var(--ink-soft)] font-medium mb-8"
             >
-              I build colorful interfaces, experimental systems, and digital spaces where code, design, and imagination meet.
+              I build colorful interfaces, experimental systems, and digital spaces where code, design, and imagination meet. This homepage is my living digital museum: part portfolio, part archive, part laboratory, and part personal operating system.
             </motion.p>
-
-            {/* CTA Row */}
+            
             <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="flex flex-wrap items-center gap-4 mb-12 lg:mb-16"
+               initial={{ opacity: 0, y: 20 }}
+               animate={{ opacity: 1, y: 0 }}
+               transition={{ duration: 0.6, delay: 0.4 }}
+               className="flex flex-wrap gap-4"
             >
-              <button
-                onClick={() => scrollToElement("projects")}
-                className="group relative overflow-hidden rounded-full bg-[var(--ink)] px-8 py-3.5 text-sm font-semibold text-white shadow-xl shadow-[var(--ink)]/10 transition hover:-translate-y-0.5"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-[100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-in-out" />
-                View Projects
-              </button>
+               <button
+                 onClick={() => scrollToElement("projects")}
+                 aria-label="View Projects"
+                 className="group relative overflow-hidden rounded-full bg-[var(--ink)] px-8 py-3.5 text-sm font-semibold text-white shadow-xl shadow-[var(--ink)]/10 transition hover:-translate-y-0.5 inline-block focus:outline-none focus:ring-2 focus:ring-[var(--ink)] focus:ring-offset-2"
+               >
+                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-[100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-in-out" />
+                 View Projects
+               </button>
 
-              <button
-                onClick={() => scrollToElement("projects")}
-                className="rounded-full border border-[var(--border-strong)] bg-[var(--card)] backdrop-blur-md px-8 py-3.5 text-sm font-semibold text-[var(--ink)] shadow-sm transition hover:-translate-y-0.5 hover:bg-white"
-              >
-                Enter the Museum
-              </button>
-            </motion.div>
-
-            {/* Meta Row / Status */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              className="flex flex-col md:flex-row md:items-center gap-y-3 gap-x-6 font-mono text-xs uppercase tracking-[0.1em] text-[var(--ink-muted)] lg:mt-4"
-            >
-              <div className="flex items-center gap-2">
-                <div className="h-2 w-2 rounded-full bg-[var(--green)] animate-pulse" />
-                Available for collaboration
-              </div>
-              <div className="hidden h-1 w-1 rounded-full bg-[var(--border-strong)] md:block" />
-              <div>Building with React / TS / AI tools</div>
-              <div className="hidden h-1 w-1 rounded-full bg-[var(--border-strong)] md:block" />
-              <div>Based in the digital frontier</div>
+               <button
+                 onClick={() => scrollToElement("forge")}
+                 aria-label="Explore Museum map"
+                 className="rounded-full border border-[var(--border-strong)] bg-white/50 backdrop-blur-md px-8 py-3.5 text-sm font-semibold text-[var(--ink)] shadow-sm transition hover:-translate-y-0.5 hover:bg-white focus:outline-none focus:ring-2 focus:ring-[var(--ink)] focus:ring-offset-2"
+               >
+                 Explore Museum map
+               </button>
             </motion.div>
           </div>
 
-          {/* Right Column: Status Dashboard */}
-          <div className="relative z-10 flex justify-center lg:justify-end mt-4 lg:mt-0 w-full group">
-            {/* Soft rainbow glow behind the card */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[110%] rounded-full blur-[70px] pointer-events-none opacity-30 transition-opacity duration-1000 group-hover:opacity-60"
-              style={{
-                background: "conic-gradient(from 180deg at 50% 50%, var(--pink) 0deg, var(--orange) 72deg, var(--yellow) 144deg, var(--cyan) 216deg, var(--blue) 288deg, var(--pink) 360deg)"
-              }}
-            />
+          {/* Current Build - 3 Columns */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2, type: "spring", stiffness: 50 }}
+            className="col-span-1 lg:col-span-3 museum-card bg-white/70 p-6 lg:p-8 flex flex-col group transition-all hover:shadow-md hover:-translate-y-1 relative overflow-hidden"
+          >
+            <div className="absolute top-0 left-0 w-full h-1 bg-[var(--pink)] opacity-50 group-hover:opacity-100 transition-opacity" />
+            <h3 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--ink)] font-bold mb-4 flex items-center gap-2">
+               <div className="w-1.5 h-1.5 rounded-full bg-[var(--pink)]" /> Current Build
+            </h3>
+            <p className="text-sm font-medium text-[var(--ink-soft)] leading-relaxed mb-4">
+              I am rebuilding this homepage into a warmer, wider, rainbow-like digital museum. The goal is not only to show projects, but to create an interface that expresses my taste, learning path, technical experiments, and personal world.
+            </p>
+            <div className="mt-auto pt-4 border-t border-transparent group-hover:border-[var(--border)] transition-colors">
+                <span className="text-[10px] font-mono uppercase tracking-widest text-[var(--pink)] block mb-2 opacity-50 group-hover:opacity-100 transition-opacity">Priorities</span>
+                <ul className="text-xs font-medium text-[var(--ink-soft)] space-y-1">
+                   <li>- Enrich content density</li>
+                   <li>- Improve rainbow system</li>
+                   <li>- Expand case studies</li>
+                   <li>- Add personal archives</li>
+                </ul>
+            </div>
+          </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.4, type: "spring", stiffness: 50 }}
-              className="museum-card-strong w-full max-w-[420px] p-6 lg:p-8 relative overflow-hidden self-start mx-auto lg:mx-0"
-            >
-              {/* Internal card grid / decoration */}
-              <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: "linear-gradient(var(--ink) 1px, transparent 1px), linear-gradient(90deg, var(--ink) 1px, transparent 1px)", backgroundSize: "16px 16px" }} />
+          {/* Quick Status - 3 Columns */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.3, type: "spring", stiffness: 50 }}
+            className="col-span-1 lg:col-span-3 museum-card-strong bg-[var(--ink)] text-white p-6 lg:p-8 flex flex-col justify-between overflow-hidden relative group hover:shadow-xl hover:-translate-y-1 transition-all"
+          >
+             <div className="absolute top-0 left-0 w-full h-1 bg-[var(--cyan)] opacity-70 group-hover:opacity-100 transition-opacity z-20" />
+             <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: "linear-gradient(white 1px, transparent 1px), linear-gradient(90deg, white 1px, transparent 1px)", backgroundSize: "16px 16px" }} />
+             
+             <div className="relative z-10 space-y-5">
+                <div>
+                   <h3 className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/50 mb-1">Mode</h3>
+                   <div className="flex items-center gap-2.5">
+                     <span className="relative flex h-2 w-2">
+                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--green)] opacity-75"></span>
+                       <span className="relative inline-flex rounded-full h-2 w-2 bg-[var(--green)]"></span>
+                     </span>
+                     <span className="text-sm font-mono font-bold text-[var(--green)]">Active Build</span>
+                   </div>
+                </div>
+                <div>
+                   <h3 className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/50 mb-1">Focus</h3>
+                   <span className="text-sm font-medium text-white/90">Rocky Homepage V3</span>
+                </div>
+                <div>
+                   <h3 className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/50 mb-1">Status</h3>
+                   <span className="text-sm font-medium text-[var(--cyan)]">Currently Expanding</span>
+                </div>
+                <div>
+                   <h3 className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/50 mb-2">Stack</h3>
+                   <div className="flex flex-wrap gap-1.5">
+                     {["React", "TypeScript", "Tailwind", "Motion", "AI Studio"].map(tag => (
+                        <span key={tag} className="text-[10px] font-mono px-2 py-1 bg-white/10 rounded text-white/90 border border-white/5">{tag}</span>
+                     ))}
+                   </div>
+                </div>
+             </div>
+          </motion.div>
 
-              <div className="flex justify-between items-start mb-6 border-b border-[var(--border)] pb-5 relative z-10">
-                <div>
-                  <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--ink-muted)] mb-2">
-                    IDENT
-                  </p>
-                  <div className="font-space font-bold text-lg lg:text-xl text-[var(--ink)] tracking-tight">
-                    Rocky Babcock
-                  </div>
-                </div>
-                <div className="text-right">
-                  <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--ink-muted)] mb-2">
-                    SYSTEM TIME
-                  </p>
-                  <span className="font-mono text-sm text-[var(--ink-soft)] font-medium bg-slate-50 border border-slate-100 px-2 py-0.5 rounded shadow-sm">
-                    {liveLive}
-                  </span>
-                </div>
-              </div>
-
-              <div className="space-y-6 lg:space-y-8 relative z-10">
-                <div>
-                  <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--ink-muted)] mb-3">
-                    Current Focus
-                  </p>
-                  <ul className="space-y-3">
-                    <li className="flex items-center gap-3 text-sm text-[var(--ink-soft)] font-medium">
-                      <div className="w-1.5 h-1.5 rounded-full bg-[var(--blue)] shadow-[0_0_8px_var(--blue)]" />
-                      Rocky Homepage V2
-                    </li>
-                    <li className="flex items-center gap-3 text-sm text-[var(--ink-soft)] font-medium">
-                      <div className="w-1.5 h-1.5 rounded-full bg-[var(--purple)] shadow-[0_0_8px_var(--purple)]" />
-                      AI Interface Experiments
-                    </li>
-                    <li className="flex items-center gap-3 text-sm text-[var(--ink-soft)] font-medium">
-                      <div className="w-1.5 h-1.5 rounded-full bg-[var(--orange)] shadow-[0_0_8px_var(--orange)]" />
-                      Web3 Learning Archive
-                    </li>
-                  </ul>
-                </div>
-                
-                <div>
-                  <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--ink-muted)] mb-3">
-                    Main Stack
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {["React", "TypeScript", "Tailwind", "Motion", "AI Models"].map((skill) => (
-                      <span key={skill} className="px-2.5 py-1.5 bg-[var(--canvas-soft)] border border-[var(--border)] rounded-md text-[11px] font-mono font-medium text-[var(--ink)] shadow-sm">
-                        {skill}
+          {/* Museum Map - 4 Columns */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="col-span-1 md:col-span-2 lg:col-span-4 museum-card p-6 lg:p-8 bg-white/70 hover:shadow-md hover:-translate-y-1 transition-all group overflow-hidden relative"
+          >
+             <div className="absolute top-0 left-0 w-full h-1 bg-[var(--blue)] opacity-50 group-hover:opacity-100 transition-opacity" />
+             <h3 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--ink)] font-bold mb-5 border-b border-[var(--border)] pb-3 flex items-center gap-2">
+               <div className="w-1.5 h-1.5 rounded-full bg-[var(--blue)]" /> Museum Map
+             </h3>
+             <ul className="space-y-4">
+                {museumMap.map((item, i) => (
+                  <li key={item.id}>
+                    <button onClick={() => scrollToElement(item.id)} className="text-left group/btn flex flex-col focus:outline-none w-full hover:bg-[var(--canvas-soft)] p-2 -mx-2 rounded-lg transition-colors">
+                      <div className="flex items-center gap-2 mb-0.5">
+                         <span className="font-mono text-[10px] font-bold text-[var(--ink-muted)] group-hover/btn:text-[var(--blue)] transition-colors">0{i+1}.</span>
+                         <span className="font-space font-bold text-sm text-[var(--ink)] group-hover/btn:text-[var(--blue)] transition-colors">{item.label}</span>
+                      </div>
+                      <span className="text-xs text-[var(--ink-soft)] pl-6 cursor-pointer">
+                        {item.desc}
                       </span>
-                    ))}
-                  </div>
-                </div>
+                    </button>
+                  </li>
+                ))}
+             </ul>
+          </motion.div>
+          
+          {/* Design Manifesto - 4 Columns */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            className="col-span-1 md:col-span-1 lg:col-span-4 museum-card p-6 lg:p-8 bg-white/70 hover:shadow-md hover:-translate-y-1 transition-all group relative overflow-hidden"
+          >
+             <div className="absolute top-0 left-0 w-full h-1 bg-[var(--orange)] opacity-50 group-hover:opacity-100 transition-opacity" />
+             <h3 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--ink)] font-bold mb-5 border-b border-[var(--border)] pb-3 flex items-center gap-2">
+               <div className="w-1.5 h-1.5 rounded-full bg-[var(--orange)]" /> Design Manifesto
+             </h3>
+             <ul className="space-y-4 mb-4">
+               {[
+                 "Interfaces should feel alive.",
+                 "Personal websites should show personality, not only credentials.",
+                 "Color should guide emotion and navigation.",
+                 "Every module should justify its existence.",
+                 "A homepage can be a museum, not just a resume."
+               ].map((text, i) => (
+                 <li key={i} className="text-sm font-medium text-[var(--ink-soft)] flex items-start gap-3">
+                    <span className="font-mono text-[10px] text-[var(--orange)] mt-0.5 font-bold">0{i+1}</span>
+                    <span className="leading-snug">{text}</span>
+                 </li>
+               ))}
+             </ul>
+          </motion.div>
 
-                <div className="pt-2">
-                  <div className="flex items-center justify-between p-3 lg:p-4 rounded-xl bg-[var(--canvas-soft)] shadow-inner border border-[var(--border)]">
-                    <div className="flex flex-col">
-                      <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--ink-muted)] mb-1">Mode</span>
-                      <span className="font-mono text-xs font-semibold text-[var(--ink)]">Live Build</span>
-                    </div>
-                    <div className="h-6 w-px bg-[var(--border)]" />
-                    <div className="flex flex-col text-right">
-                      <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--ink-muted)] mb-1">Status</span>
-                      <span className="font-mono text-xs font-semibold text-[var(--green)] flex items-center gap-1.5 justify-end">
-                        <span className="relative flex h-2 w-2">
-                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--green)] opacity-75"></span>
-                          <span className="relative inline-flex rounded-full h-2 w-2 bg-[var(--green)]"></span>
-                        </span>
-                        Online
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
+          {/* Active Experiments - 4 Columns */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="col-span-1 md:col-span-1 lg:col-span-4 museum-card p-6 lg:p-8 bg-white/70 hover:shadow-md hover:-translate-y-1 transition-all group relative overflow-hidden"
+          >
+             <div className="absolute top-0 left-0 w-full h-1 bg-[var(--purple)] opacity-50 group-hover:opacity-100 transition-opacity" />
+             <h3 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--ink)] font-bold mb-5 border-b border-[var(--border)] pb-3 flex items-center gap-2">
+               <div className="w-1.5 h-1.5 rounded-full bg-[var(--purple)]" /> Active Experiments
+             </h3>
+             <ul className="space-y-4">
+                {[
+                  { title: "Rainbow Interface System", text: "Building a warmer color language for the homepage." },
+                  { title: "AI Studio Workflow", text: "Using AI-assisted iteration to reshape layout, copy, and interaction." },
+                  { title: "Web3 Learning Archive", text: "Collecting early interface patterns around wallets, identity, and ownership." },
+                  { title: "Personal Archive Expansion", text: "Turning chess, media, notes, and memories into interactive exhibits." }
+                ].map((exp, i) => (
+                  <li key={i} className="text-sm font-medium group/exp">
+                     <span className="text-[var(--ink)] flex items-center gap-2 font-semibold">
+                       <span className="w-1 h-1 rounded-full bg-[var(--border-strong)] group-hover/exp:bg-[var(--purple)] transition-colors" /> {exp.title}
+                     </span>
+                     <span className="text-[var(--ink-soft)] block text-xs mt-1 pl-3 leading-snug">{exp.text}</span>
+                  </li>
+                ))}
+             </ul>
+          </motion.div>
 
-        {/* Quick jump cards placing */}
-        <div className="w-full relative z-10 px-4 sm:px-6 lg:px-8 mt-16 lg:mt-24 max-w-7xl mx-auto">
-           <motion.div 
-             initial={{ opacity: 0, y: 20 }}
-             animate={{ opacity: 1, y: 0 }}
-             transition={{ duration: 0.6, delay: 0.6 }}
-             className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4"
-           >
-              {heroJumps.map((item) => (
-                <button
-                  key={item.label}
-                  onClick={() => scrollToElement(item.target)}
-                  className="museum-card group p-5 text-left transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-[var(--ink-muted)]"
-                >
-                  <div className="flex justify-between items-start mb-4">
-                    <div className="h-1.5 w-12 rounded-full transition-all duration-300 group-hover:w-16" style={{ backgroundColor: item.color }} />
-                    <div className="opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0">
-                      <svg className="w-4 h-4 text-[var(--ink-soft)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                      </svg>
-                    </div>
+          {/* Focus Stack - 4 Columns */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.7 }}
+            className="col-span-1 md:col-span-2 lg:col-span-4 museum-card p-6 lg:p-8 bg-white/70 hover:shadow-md hover:-translate-y-1 transition-all group relative overflow-hidden"
+          >
+             <div className="absolute top-0 left-0 w-full h-1 bg-[var(--cyan)] opacity-50 group-hover:opacity-100 transition-opacity" />
+             <h3 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--ink)] font-bold mb-5 border-b border-[var(--border)] pb-3 flex items-center gap-2">
+               <div className="w-1.5 h-1.5 rounded-full bg-[var(--cyan)]" /> Focus Stack
+             </h3>
+             <ul className="space-y-3">
+                {[
+                  { name: "React", desc: "component architecture" },
+                  { name: "TypeScript", desc: "safer interface logic" },
+                  { name: "Tailwind", desc: "fast visual system iteration" },
+                  { name: "Motion", desc: "subtle interaction & presence" },
+                  { name: "AI Studio", desc: "AI-assisted prototyping" },
+                  { name: "Vercel", desc: "live deployment workflow" }
+                ].map((stack, i) => (
+                  <li key={i} className="text-sm font-medium flex flex-wrap items-baseline gap-x-2">
+                     <span className="text-[var(--ink)] font-bold">{stack.name}</span>
+                     <span className="text-[var(--ink-muted)] hidden xs:inline">—</span>
+                     <span className="text-[var(--ink-soft)] text-xs">{stack.desc}</span>
+                  </li>
+                ))}
+             </ul>
+          </motion.div>
+
+          {/* Build Log Preview - 4 Columns */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.8 }}
+            className="col-span-1 md:col-span-1 lg:col-span-4 museum-card p-6 lg:p-8 bg-white/70 hover:shadow-md hover:-translate-y-1 transition-all group relative overflow-hidden flex flex-col"
+          >
+             <div className="absolute top-0 left-0 w-full h-1 bg-[var(--green)] opacity-50 group-hover:opacity-100 transition-opacity" />
+             <h3 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--ink)] font-bold mb-5 border-b border-[var(--border)] pb-3 flex items-center gap-2">
+               <div className="w-1.5 h-1.5 rounded-full bg-[var(--green)]" /> Build Log Preview
+             </h3>
+             <div className="space-y-5 flex-1">
+                {[
+                  "Rebuilding Homepage V3 into a wider rainbow museum layout.",
+                  "Fixing sparse homepage content by adding richer project stories and personal archive modules.",
+                  "Moving from narrow centered layout to a wider 90% content canvas."
+                ].map((log, i) => (
+                  <div key={i} className="text-sm font-medium relative pl-4">
+                     <div className="absolute left-0 top-1.5 w-1.5 h-1.5 rounded-full border border-[var(--green)] bg-white" />
+                     <span className="font-mono text-[10px] font-bold text-[var(--ink-muted)] block mb-0.5">JUNE 2026</span>
+                     <span className="text-[var(--ink-soft)] leading-snug block">{log}</span>
                   </div>
-                  <div className="font-space text-base font-bold text-[var(--ink)] mb-1.5">
-                    {item.label}
-                  </div>
-                  <div className="text-xs leading-relaxed text-[var(--ink-soft)]">
-                    {item.desc}
-                  </div>
-                </button>
-              ))}
-           </motion.div>
+                ))}
+             </div>
+          </motion.div>
+
+          {/* Quick Actions - 4 Columns */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.9 }}
+            className="col-span-1 md:col-span-1 lg:col-span-4 flex flex-col gap-4"
+          >
+             <button
+               onClick={() => scrollToElement("projects")}
+               className="museum-card w-full p-6 text-left hover:shadow-md hover:-translate-y-1 transition-all group focus:outline-none flex justify-between items-center bg-white relative overflow-hidden"
+             >
+               <div className="absolute left-0 top-0 w-1 h-full bg-[var(--blue)] opacity-0 group-hover:opacity-100 transition-opacity" />
+               <span className="font-space font-bold text-[var(--ink)]">View Projects</span>
+               <span className="font-mono text-xl text-[var(--ink-muted)] group-hover:text-[var(--blue)] group-hover:translate-x-1 transition-all">→</span>
+             </button>
+
+             <button
+               onClick={() => scrollToElement("signal")}
+               className="museum-card w-full p-6 text-left hover:shadow-md hover:-translate-y-1 transition-all group focus:outline-none flex justify-between items-center bg-white relative overflow-hidden"
+             >
+               <div className="absolute left-0 top-0 w-1 h-full bg-[var(--orange)] opacity-0 group-hover:opacity-100 transition-opacity" />
+               <span className="font-space font-bold text-[var(--ink)]">Send Signal</span>
+               <span className="font-mono text-xl text-[var(--ink-muted)] group-hover:text-[var(--orange)] group-hover:translate-x-1 transition-all">→</span>
+             </button>
+
+             <button
+               onClick={copyHandle}
+               className="museum-card w-full p-6 text-left hover:shadow-md hover:-translate-y-1 transition-all group focus:outline-none flex justify-between items-center bg-white mt-auto relative overflow-hidden"
+             >
+               <div className="absolute left-0 top-0 w-1 h-full bg-[var(--pink)] opacity-0 group-hover:opacity-100 transition-opacity" />
+               <span className="font-space font-bold text-[var(--ink)]">
+                 {copied ? "Copied!" : "Copy @braverocky"}
+               </span>
+               <span className="text-[var(--ink-muted)] group-hover:text-[var(--pink)] group-hover:scale-110 transition-all">
+                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+               </span>
+             </button>
+          </motion.div>
+          
         </div>
       </section>
     </div>
   );
 }
-
