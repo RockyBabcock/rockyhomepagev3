@@ -15,39 +15,49 @@ export interface ProjectEntry {
   problem: string;
   built: string[];
   learned: string[];
+  proves?: string[];
   limitations?: string[];
+  nextSteps?: string[];
   liveUrl?: string;
   repoUrl?: string;
 }
 
 export const projectLabData: ProjectEntry[] = [
   {
-    id: "rocky-homepage-v2",
-    title: "Rocky Homepage V2",
+    id: "rocky-homepage-v3",
+    title: "Rocky Homepage V3",
     oneLine:
-      "A personal digital museum combining portfolio, archive, experiments, and interactive identity.",
+      "A personal digital museum combining portfolio, archive, experiments, and interactive identity inside a rainbow spectrum.",
     role: "Designer / Frontend Developer",
     status: "Active Build",
     techStack: ["React", "TypeScript", "Tailwind CSS", "Vite", "Motion"],
     problem:
-      "Most personal portfolios feel too generic and fail to express technical identity and creative taste.",
+      "Most personal portfolios feel too generic, lacking personality or a real technical identity.",
     built: [
-      "Designed a museum-style homepage structure",
-      "Created modular sections for projects, skills, archives, AI, Web3, and personal systems",
-      "Built a dark terminal-inspired visual system",
-      "Implemented interactive modules and animated UI details",
+      "Modular museum-style homepage",
+      "Rainbow visual system and colorful spectrum themes",
+      "Project laboratory for deep case studies",
+      "Skill forge and technical mapping",
+      "Personal archive and digital garden modules"
+    ],
+    proves: [
+      "React architecture and modular component design",
+      "Visual system thinking and layout grids",
+      "AI-assisted development workflow"
     ],
     learned: [
       "How to organize a dense homepage without making it feel random",
       "How to balance professional proof and personal expression",
-      "How to structure React modules for a long-form interactive homepage",
     ],
     limitations: [
-      "Some modules are still being converted from concept to evidence-based content",
-      "Analytics and skill data need to be connected to real sources",
+      "The site is still expanding, and some modules need more real content.",
+    ],
+    nextSteps: [
+      "Expand chess, media, and personal archive modules",
+      "Build a stronger rainbow color system",
     ],
     liveUrl: "https://rockybabcock.fun",
-    repoUrl: "https://github.com/RockyBabcock/rockyhomepageV2",
+    repoUrl: "https://github.com/RockyBabcock/rockyhomepageV3",
   },
   {
     id: "ai-assistant",

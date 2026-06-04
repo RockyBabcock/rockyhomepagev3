@@ -561,9 +561,23 @@
     width: 180px;
   }
 
+  .homepage-canvas {
+    width: min(90vw, 1680px);
+    margin-inline: auto;
+  }
+
+  .homepage-rainbow-bg {
+    background:
+      radial-gradient(circle at 10% 20%, rgba(255, 77, 109, 0.18), transparent 30%),
+      radial-gradient(circle at 90% 10%, rgba(58, 134, 255, 0.16), transparent 32%),
+      radial-gradient(circle at 20% 85%, rgba(6, 214, 160, 0.14), transparent 30%),
+      radial-gradient(circle at 85% 80%, rgba(131, 56, 236, 0.14), transparent 32%),
+      var(--canvas);
+  }
+
   @media (min-width: 1280px) {
     .museum-page-shell {
-      padding-left: 220px;
+      /* padding-left: 220px; -> removed since we don't have sidebar on home */
     }
   }
 

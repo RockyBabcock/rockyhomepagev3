@@ -68,10 +68,10 @@ export const ProjectLabModule = () => {
           </div>
 
           <div className="w-full space-y-6 bg-white/60 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-[var(--lab-border)] shadow-sm mt-auto">
-            <div className="grid md:grid-cols-2 gap-8">
+            <div className="grid md:grid-cols-2 gap-8 mb-6">
               <div>
                 <h4 className="text-xs font-mono uppercase text-[var(--color-rainbow-blue)] font-bold tracking-widest mb-3 flex items-center gap-2">
-                  <Workflow className="w-4 h-4" /> Core Challenge
+                  <Workflow className="w-4 h-4" /> The Problem
                 </h4>
                 <p className="text-sm font-body text-[var(--lab-text-soft)] leading-relaxed">
                   {featuredProject.problem}
@@ -80,10 +80,10 @@ export const ProjectLabModule = () => {
 
               <div>
                 <h4 className="text-xs font-mono uppercase text-[var(--color-rainbow-cyan)] font-bold tracking-widest mb-3 flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4" /> Executed Scope
+                  <CheckCircle2 className="w-4 h-4" /> What I Built
                 </h4>
                 <ul className="space-y-3">
-                  {featuredProject.built.slice(0, 3).map((item, i) => (
+                  {featuredProject.built.slice(0, 4).map((item, i) => (
                     <li
                       key={i}
                       className="text-sm font-body text-[var(--lab-text-soft)] leading-relaxed flex items-start gap-2"
@@ -94,6 +94,45 @@ export const ProjectLabModule = () => {
                   ))}
                 </ul>
               </div>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-8 border-t border-[var(--lab-border)] pt-6">
+              {featuredProject.proves && (
+                <div>
+                  <h4 className="text-xs font-mono uppercase text-[var(--color-rainbow-purple)] font-bold tracking-widest mb-3 flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4" /> What This Proves
+                  </h4>
+                  <ul className="space-y-3">
+                    {featuredProject.proves.map((item, i) => (
+                      <li key={i} className="text-sm font-body text-[var(--lab-text-soft)] flex items-start gap-2">
+                         <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-rainbow-purple)] mt-1.5 shrink-0" />
+                         {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {featuredProject.limitations && (
+                <div>
+                  <h4 className="text-xs font-mono uppercase text-[var(--color-rainbow-pink)] font-bold tracking-widest mb-3 flex items-center gap-2">
+                    <RefreshCw className="w-4 h-4" /> Current Limitations
+                  </h4>
+                  <p className="text-sm font-body text-[var(--lab-text-soft)] leading-relaxed">
+                    {featuredProject.limitations[0]}
+                  </p>
+                  {featuredProject.nextSteps && (
+                    <div className="mt-4">
+                       <span className="text-xs font-mono uppercase text-[var(--ink-muted)] block mb-2">Next Steps</span>
+                       <ul className="space-y-1">
+                         {featuredProject.nextSteps.map((step, i) => (
+                           <li key={i} className="text-sm text-[var(--ink-soft)]">- {step}</li>
+                         ))}
+                       </ul>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </div>

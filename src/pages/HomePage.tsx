@@ -6,6 +6,8 @@ import { GitHubModule } from "../components/GitHubModule";
 import { ConnectModule } from "../components/ConnectModule";
 import { ProjectLabModule } from "../components/ProjectLabModule";
 import { TableOfContents } from "../components/TableOfContents";
+import { NowBuildingModule } from "../components/NowBuildingModule";
+import { DesignPrinciplesModule, LearningMapModule, BuildLogModule } from "../components/InfoModules";
 
 // Museum components
 import { ExhibitNote } from "../components/ExhibitNote";
@@ -46,9 +48,11 @@ const VisitorAnalyticsModule = lazy(() =>
 
 export default function HomePage() {
   return (
-    <main className="rainbow-lab-bg text-[var(--museum-text)] museum-page-shell">
+    <main className="homepage-rainbow-bg text-[var(--museum-text)] museum-page-shell">
       {/* 01 Entrance */}
       <ProfileModule />
+
+      <NowBuildingModule />
 
       {/* 02 Proof of Work */}
       <MuseumSectionLayout
@@ -79,6 +83,9 @@ export default function HomePage() {
       >
         <CoreCapabilitiesModule />
       </MuseumSectionLayout>
+
+      <DesignPrinciplesModule />
+      <LearningMapModule />
 
       {/* 04 Experiments */}
       <MuseumSectionLayout
@@ -225,6 +232,8 @@ export default function HomePage() {
           <TimelineModule />
         </Suspense>
       </MuseumSectionLayout>
+
+      <BuildLogModule />
 
       {/* 08 Contact */}
       <MuseumSectionLayout
