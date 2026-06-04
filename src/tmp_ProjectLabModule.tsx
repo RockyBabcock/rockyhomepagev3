@@ -438,7 +438,7 @@ export const ProjectLabModule = () => {
                 )}
               </motion.div>
             </AnimatePresence>
-          </>)}
+          </>}
         </motion.article>
         </div>
 

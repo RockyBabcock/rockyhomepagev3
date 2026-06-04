@@ -2,13 +2,13 @@ import { useState } from "react";
 import { motion } from "motion/react";
 
 const visitorRouteElements = [
-  { id: "entrance", title: "Entrance", subtitle: "Identity + museum map", color: "var(--pink)" },
-  { id: "projects", title: "Projects", subtitle: "Builds + case studies", color: "var(--blue)" },
-  { id: "forge", title: "Forge", subtitle: "Skills + workflows", color: "var(--orange)" },
-  { id: "experiments", title: "Experiments", subtitle: "AI + Web3 prototypes", color: "var(--purple)" },
-  { id: "archives", title: "Archives", subtitle: "Chess + media + memory", color: "var(--pink)" },
-  { id: "garden", title: "Garden", subtitle: "Notes + ideas", color: "var(--green)" },
-  { id: "signal", title: "Signal", subtitle: "Contact + links", color: "var(--orange)" },
+  { id: "entrance", index: "01", title: "Entrance", subtitle: "Identity + museum map", color: "var(--pink)" },
+  { id: "projects", index: "02", title: "Projects", subtitle: "Builds + case studies", color: "var(--blue)" },
+  { id: "forge", index: "03", title: "Forge", subtitle: "Skills + workflows", color: "var(--orange)" },
+  { id: "experiments", index: "04", title: "Experiments", subtitle: "AI + Web3 prototypes", color: "var(--purple)" },
+  { id: "archives", index: "05", title: "Archives", subtitle: "Chess + media + memory", color: "var(--pink)" },
+  { id: "garden", index: "06", title: "Garden", subtitle: "Notes + ideas", color: "var(--green)" },
+  { id: "signal", index: "07", title: "Signal", subtitle: "Contact + links", color: "var(--orange)" },
 ];
 
 const explorationTrackElements = [
@@ -94,10 +94,38 @@ export function ProfileModule() {
              </motion.h2>
 
             <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }}
-              className="max-w-lg text-sm sm:text-base leading-relaxed text-[var(--ink-soft)] font-medium mb-8"
+              className="max-w-medium text-sm sm:text-base leading-relaxed text-[var(--ink-soft)] font-medium mb-6"
             >
               <strong className="text-[var(--ink)] font-semibold">I build colorful interfaces, experimental systems, and digital spaces where code, design, and imagination meet.</strong><br aria-hidden="true" className="mb-2 block"/>This homepage is my living digital museum: part portfolio, part archive, part laboratory, and part personal operating system.
             </motion.p>
+            
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.35 }}
+                className="mb-8"
+            >
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {["Active Build", "Creative Technologist", "AI Interfaces", "Web Systems", "Personal Archive"].map(chip => (
+                    <span key={chip} className="px-2 py-1 bg-white/60 border border-[var(--border)] text-[var(--ink-muted)] font-mono text-[10px] uppercase font-bold rounded-md tracking-wider">{chip}</span>
+                  ))}
+                </div>
+
+                <div className="flex flex-wrap gap-x-6 gap-y-2 mb-5">
+                  {[
+                    { label: "Halls", val: "7" },
+                    { label: "Active Rebuild", val: "1" },
+                    { label: "Explo Tracks", val: "5" },
+                    { label: "In Progress", val: "V3" }
+                  ].map(stat => (
+                    <div key={stat.label} className="flex items-baseline gap-1.5">
+                      <span className="font-space font-bold text-lg text-[var(--ink)]">{stat.val}</span>
+                      <span className="font-mono text-[10px] uppercase text-[var(--ink-muted)] font-bold">{stat.label}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <p className="text-xs font-bold text-[var(--ink)] uppercase tracking-wide border-l-2 border-[var(--pink)] pl-3">
+                  This is not a finished portfolio.<br className="hidden sm:block"/> It is a public creative system under active construction.
+                </p>
+            </motion.div>
             
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.4 }}
                className="flex flex-wrap gap-4"
@@ -122,7 +150,7 @@ export function ProfileModule() {
             
             {/* 1. Museum Passport */}
             <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.2, type: "spring" }}
-              className="museum-card p-5 lg:p-6 bg-white/80 backdrop-blur-md group hover:-translate-y-0.5 hover:shadow-md transition-all relative overflow-hidden border border-[var(--border)] rounded-2xl flex flex-col h-full"
+              className="museum-card p-5 lg:p-6 bg-white/80 backdrop-blur-md group hover:-translate-y-0.5 hover:shadow-md transition-all relative overflow-hidden border border-[var(--border)] rounded-xl flex flex-col h-full"
             >
               <div className="absolute top-0 left-0 w-full h-1 bg-[var(--blue)] opacity-50 group-hover:opacity-100 transition-colors" />
                <h3 className="font-mono text-[10px] uppercase font-bold text-[var(--blue)] mb-4 flex items-center gap-2">
@@ -145,16 +173,20 @@ export function ProfileModule() {
                    <span className="font-mono text-[10px] uppercase text-[var(--ink-muted)] font-bold">Direction</span>
                    <span className="font-medium text-sm text-[var(--ink)]">Warm Rainbow Museum</span>
                  </div>
-                 <div className="flex flex-col gap-1">
+                 <div className="flex flex-col gap-1 pb-2 border-b border-[var(--border)]">
                    <span className="font-mono text-[10px] uppercase text-[var(--ink-muted)] font-bold">Medium</span>
                    <span className="font-medium text-sm text-[var(--ink)]">React / TS / Motion</span>
+                 </div>
+                 <div className="flex justify-between items-baseline gap-2">
+                   <span className="font-mono text-[10px] uppercase text-[var(--ink-muted)] font-bold">Zone</span>
+                   <span className="font-medium text-sm text-[var(--ink)]">Personal Digital Museum</span>
                  </div>
                </div>
             </motion.div>
 
             {/* 2. Current Status */}
             <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.3, type: "spring" }}
-              className="museum-card p-5 lg:p-6 bg-white/80 backdrop-blur-md group hover:-translate-y-0.5 hover:shadow-md transition-all relative overflow-hidden border border-[var(--border)] rounded-2xl flex flex-col h-full"
+              className="museum-card p-5 lg:p-6 bg-white/80 backdrop-blur-md group hover:-translate-y-0.5 hover:shadow-md transition-all relative overflow-hidden border border-[var(--border)] rounded-xl flex flex-col h-full"
             >
               <div className="absolute top-0 left-0 w-full h-1 bg-[var(--cyan)] opacity-50 group-hover:opacity-100 transition-colors" />
                <h3 className="font-mono text-[10px] uppercase font-bold text-[var(--cyan)] mb-4 flex items-center gap-2">
@@ -173,16 +205,20 @@ export function ProfileModule() {
                     <span className="font-mono text-[10px] uppercase text-[var(--ink-muted)] font-bold">Visual Pass</span>
                     <span className="font-medium text-sm text-[var(--ink)]">Rainbow System</span>
                   </div>
-                  <div className="flex flex-col gap-1">
+                  <div className="flex flex-col gap-1 pb-2 border-b border-[var(--border)]">
                     <span className="font-mono text-[10px] uppercase text-[var(--ink-muted)] font-bold">Build Mode</span>
                     <span className="font-medium text-sm text-[var(--ink)]">Public Iteration</span>
+                  </div>
+                  <div className="flex flex-col gap-1">
+                    <span className="font-mono text-[10px] uppercase text-[var(--ink-muted)] font-bold">Priority</span>
+                    <span className="font-medium text-sm text-[var(--ink)]">Hero + Project Density</span>
                   </div>
                </div>
             </motion.div>
 
             {/* 3. Focus Stack */}
             <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.4, type: "spring" }}
-              className="museum-card p-5 lg:p-6 bg-white/80 backdrop-blur-md group hover:-translate-y-0.5 hover:shadow-md transition-all relative overflow-hidden border border-[var(--border)] rounded-2xl flex flex-col h-full"
+              className="museum-card p-5 lg:p-6 bg-white/80 backdrop-blur-md group hover:-translate-y-0.5 hover:shadow-md transition-all relative overflow-hidden border border-[var(--border)] rounded-xl flex flex-col h-full"
             >
               <div className="absolute top-0 left-0 w-full h-1 bg-[var(--pink)] opacity-50 group-hover:opacity-100 transition-colors" />
                <h3 className="font-mono text-[10px] uppercase font-bold text-[var(--pink)] mb-4 flex items-center gap-2">
@@ -207,24 +243,24 @@ export function ProfileModule() {
 
             {/* 4. Quick Actions */}
             <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.5, type: "spring" }}
-              className="museum-card p-5 lg:p-6 bg-white/80 backdrop-blur-md group/parent hover:-translate-y-0.5 hover:shadow-md transition-all relative overflow-hidden border border-[var(--border)] rounded-2xl flex flex-col h-full"
+              className="museum-card p-5 lg:p-6 bg-white/80 backdrop-blur-md group/parent hover:-translate-y-0.5 hover:shadow-md transition-all relative overflow-hidden border border-[var(--border)] rounded-xl flex flex-col h-full"
             >
               <div className="absolute top-0 left-0 w-full h-1 bg-[var(--orange)] opacity-50 group-hover/parent:opacity-100 transition-colors" />
                <h3 className="font-mono text-[10px] uppercase font-bold text-[var(--orange)] mb-4 flex items-center gap-2">
                  <span className="w-1.5 h-1.5 rounded-full bg-[var(--orange)]" /> Quick Actions
                </h3>
-               <div className="flex flex-col gap-2.5 flex-1 justify-center">
-                  <button onClick={() => scrollToElement("projects")} aria-label="View Projects button" className="text-left text-sm font-bold text-[var(--ink)] hover:text-[var(--blue)] transition-colors flex justify-between items-center bg-white border border-[var(--border)] px-4 py-2.5 rounded-xl shadow-sm focus:ring-2 focus:ring-[var(--blue)] outline-none group">
+               <div className="flex flex-col gap-2.5 flex-1 justify-center relative">
+                  <button onClick={() => scrollToElement("projects")} aria-label="View Projects button" className="text-left text-sm font-bold text-[var(--ink)] hover:text-[var(--blue)] hover:border-[var(--blue)] transition-colors flex justify-between items-center bg-white border border-[var(--border)] px-4 py-2.5 rounded-xl shadow-sm focus:ring-2 focus:ring-[var(--blue)] outline-none group">
                     View Projects <span className="text-[var(--ink-muted)] group-hover:text-[var(--blue)] group-hover:translate-x-0.5 transition-all">→</span>
                   </button>
-                  <button onClick={() => scrollToElement("visitor-route")} aria-label="Explore Route map button" className="text-left text-sm font-bold text-[var(--ink)] hover:text-[var(--pink)] transition-colors flex justify-between items-center bg-white border border-[var(--border)] px-4 py-2.5 rounded-xl shadow-sm focus:ring-2 focus:ring-[var(--pink)] outline-none group">
+                  <button onClick={() => scrollToElement("visitor-route")} aria-label="Explore Route map button" className="text-left text-sm font-bold text-[var(--ink)] hover:text-[var(--pink)] hover:border-[var(--pink)] transition-colors flex justify-between items-center bg-white border border-[var(--border)] px-4 py-2.5 rounded-xl shadow-sm focus:ring-2 focus:ring-[var(--pink)] outline-none group">
                     Explore Route <span className="text-[var(--ink-muted)] group-hover:text-[var(--pink)] group-hover:translate-x-0.5 transition-all">→</span>
                   </button>
-                  <button onClick={copyHandle} aria-label="Copy twitter handle" className="text-left text-sm font-bold text-[var(--ink)] hover:text-[var(--orange)] transition-colors flex justify-between items-center bg-white border border-[var(--border)] px-4 py-2.5 rounded-xl shadow-sm focus:ring-2 focus:ring-[var(--orange)] outline-none group">
-                    {copiedHandle ? "Copied!" : "Copy Handle"} <span className="text-[var(--ink-muted)] group-hover:text-[var(--orange)] transition-colors">@</span>
+                  <button onClick={copyHandle} aria-label="Copy twitter handle" className="text-left text-sm font-bold text-[var(--ink)] hover:text-[var(--orange)] hover:border-[var(--orange)] transition-colors flex justify-between items-center bg-white border border-[var(--border)] px-4 py-2.5 rounded-xl shadow-sm focus:ring-2 focus:ring-[var(--orange)] outline-none group">
+                    {copiedHandle ? <span className="text-[var(--orange)]">Copied!</span> : "Copy Handle"} <span className={`text-[var(--ink-muted)] transition-colors ${copiedHandle ? "text-[var(--orange)]" : "group-hover:text-[var(--orange)]"}`}>@</span>
                   </button>
-                  <button onClick={copyEmail} aria-label="Copy email address" className="text-left text-sm font-bold text-[var(--ink)] hover:text-[var(--cyan)] transition-colors flex justify-between items-center bg-white border border-[var(--border)] px-4 py-2.5 rounded-xl shadow-sm focus:ring-2 focus:ring-[var(--cyan)] outline-none group">
-                    {copiedEmail ? "Copied!" : "Copy Email"} <span className="text-[var(--ink-muted)] group-hover:text-[var(--cyan)] transition-colors">✉</span>
+                  <button onClick={copyEmail} aria-label="Copy email address" className="text-left text-sm font-bold text-[var(--ink)] hover:text-[var(--cyan)] hover:border-[var(--cyan)] transition-colors flex justify-between items-center bg-white border border-[var(--border)] px-4 py-2.5 rounded-xl shadow-sm focus:ring-2 focus:ring-[var(--cyan)] outline-none group">
+                    {copiedEmail ? <span className="text-[var(--cyan)]">Copied!</span> : "Copy Email"} <span className={`text-[var(--ink-muted)] transition-colors ${copiedEmail ? "text-[var(--cyan)]" : "group-hover:text-[var(--cyan)]"}`}>✉</span>
                   </button>
                </div>
             </motion.div>
@@ -235,7 +271,7 @@ export function ProfileModule() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-6">
           {/* Current Quest */}
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.6 }}
-            className="col-span-1 lg:col-span-6 museum-card p-6 lg:p-8 bg-white/80 backdrop-blur-md rounded-2xl border border-[var(--border)] border-l-4 border-l-[var(--orange)] group hover:-translate-y-0.5 hover:shadow-md transition-all relative overflow-hidden"
+            className="col-span-1 lg:col-span-6 museum-card p-6 lg:p-8 bg-white/80 backdrop-blur-md rounded-xl border border-[var(--border)] border-l-4 border-l-[var(--orange)] group hover:-translate-y-0.5 hover:shadow-md transition-all relative overflow-hidden flex flex-col"
           >
             <div className="absolute right-0 bottom-0 w-32 h-32 bg-[var(--yellow)] opacity-10 blur-[40px] rounded-full group-hover:opacity-20 transition-opacity" />
             
@@ -246,9 +282,18 @@ export function ProfileModule() {
             <p className="text-sm font-medium text-[var(--ink-soft)] leading-relaxed mb-4">
               <strong className="text-[var(--ink)]">I am turning this homepage from a normal portfolio into a living personal museum.</strong> The current focus is content density: richer project stories, stronger section identities, more personal archive material, and a warmer rainbow visual language.
             </p>
-            <p className="text-sm font-medium text-[var(--ink)] leading-relaxed italic border-l-2 border-[var(--yellow)] pl-4 mb-6">
+            <p className="text-sm font-medium text-[var(--ink)] leading-relaxed italic border-l-2 border-[var(--yellow)] pl-4 mb-4">
               This build is not pretending to be finished. It is a visible process.
             </p>
+
+            <div className="mt-2 pt-4 border-t border-[var(--border)] mb-6 relative z-10 w-full pl-0">
+               <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-[var(--orange)] block mb-3 font-bold">Current Priorities</span>
+               <ul className="text-xs font-medium text-[var(--ink-soft)] space-y-2">
+                  <li className="flex items-start gap-1.5"><span className="text-[var(--orange)] mt-0.5 font-bold">•</span> Richer homepage density</li>
+                  <li className="flex items-start gap-1.5"><span className="text-[var(--orange)] mt-0.5 font-bold">•</span> Deeper project storytelling</li>
+                  <li className="flex items-start gap-1.5"><span className="text-[var(--orange)] mt-0.5 font-bold">•</span> Stronger visual rhythm</li>
+               </ul>
+            </div>
 
             <div className="flex flex-wrap gap-2 mt-auto">
                {["Active Build", "Layout Pass", "Content Expansion", "Rainbow System"].map(badge => (
@@ -259,7 +304,7 @@ export function ProfileModule() {
 
           {/* Proof Preview */}
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.7 }}
-            className="col-span-1 lg:col-span-6 museum-card p-6 lg:p-8 bg-white/80 backdrop-blur-md rounded-2xl border border-[var(--border)] border-l-4 border-l-[var(--purple)] group hover:-translate-y-0.5 hover:shadow-md transition-all relative overflow-hidden"
+            className="col-span-1 lg:col-span-6 museum-card p-6 lg:p-8 bg-white/80 backdrop-blur-md rounded-xl border border-[var(--border)] border-l-4 border-l-[var(--purple)] group hover:-translate-y-0.5 hover:shadow-md transition-all relative overflow-hidden flex flex-col"
           >
              <div className="absolute left-0 bottom-0 w-32 h-32 bg-[var(--cyan)] opacity-10 blur-[40px] rounded-full group-hover:opacity-20 transition-opacity" />
 
@@ -275,49 +320,60 @@ export function ProfileModule() {
                 <p className="text-xs font-medium text-[var(--ink-soft)] mt-2 leading-relaxed"><strong className="text-[var(--ink)] font-bold">Build:</strong> A modular digital museum with project halls, capability systems, personal archives, live proof, and a colorful interface language.</p>
              </div>
 
-             <div className="mt-auto pt-4 border-t border-[var(--border)] relative z-10">
-                 <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-[var(--cyan)] block mb-3 font-bold">What this proves</span>
-                 <ul className="text-xs font-medium text-[var(--ink-soft)] space-y-2 grid grid-cols-1 sm:grid-cols-2">
-                    <li className="flex items-start gap-1.5"><span className="text-[var(--purple)] mt-0.5 font-bold">•</span> React component architecture</li>
-                    <li className="flex items-start gap-1.5"><span className="text-[var(--cyan)] mt-0.5 font-bold">•</span> Visual system thinking</li>
-                    <li className="flex items-start gap-1.5"><span className="text-[var(--purple)] mt-0.5 font-bold">•</span> AI-assisted iteration workflow</li>
-                    <li className="flex items-start gap-1.5"><span className="text-[var(--cyan)] mt-0.5 font-bold">•</span> Personal branding via design</li>
-                    <li className="flex items-start gap-1.5"><span className="text-[var(--purple)] mt-0.5 font-bold">•</span> Responsive layout design</li>
-                    <li className="flex items-start gap-1.5"><span className="text-[var(--cyan)] mt-0.5 font-bold">•</span> Component-based systems</li>
-                 </ul>
+             <div className="mt-auto pt-4 border-t border-[var(--border)] relative z-10 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                 <div>
+                   <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-[var(--cyan)] block mb-3 font-bold">What this proves</span>
+                   <ul className="text-xs font-medium text-[var(--ink-soft)] space-y-2">
+                      <li className="flex items-start gap-1.5"><span className="text-[var(--purple)] mt-0.5 font-bold">•</span> React component architecture</li>
+                      <li className="flex items-start gap-1.5"><span className="text-[var(--cyan)] mt-0.5 font-bold">•</span> Visual system thinking</li>
+                      <li className="flex items-start gap-1.5"><span className="text-[var(--purple)] mt-0.5 font-bold">•</span> AI-assisted iteration workflow</li>
+                      <li className="flex items-start gap-1.5"><span className="text-[var(--cyan)] mt-0.5 font-bold">•</span> Personal branding via design</li>
+                      <li className="flex items-start gap-1.5"><span className="text-[var(--purple)] mt-0.5 font-bold">•</span> Responsive layout design</li>
+                      <li className="flex items-start gap-1.5"><span className="text-[var(--cyan)] mt-0.5 font-bold">•</span> Component-based systems</li>
+                   </ul>
+                 </div>
+                 <div>
+                   <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-[var(--purple)] block mb-3 font-bold">Next Steps</span>
+                   <ul className="text-xs font-medium text-[var(--ink-soft)] space-y-2">
+                      <li className="flex items-start gap-1.5"><span className="text-[var(--cyan)] mt-0.5 font-bold">•</span> Expand project evidence</li>
+                      <li className="flex items-start gap-1.5"><span className="text-[var(--purple)] mt-0.5 font-bold">•</span> Improve module richness</li>
+                      <li className="flex items-start gap-1.5"><span className="text-[var(--cyan)] mt-0.5 font-bold">•</span> Connect Hero downstream</li>
+                   </ul>
+                 </div>
              </div>
           </motion.div>
         </div>
 
         {/* THIRD ROW: Visitor Route */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.8 }}
-          id="visitor-route" className="w-full relative py-6 my-6 border border-[var(--border)] bg-white/50 backdrop-blur-sm rounded-2xl flex flex-col items-center"
+          id="visitor-route" className="w-full relative py-5 lg:py-6 my-4 lg:my-6 border border-[var(--border)] bg-white/50 backdrop-blur-sm rounded-xl flex flex-col items-center overflow-hidden"
         >
-          <h3 className="font-mono text-[10px] uppercase font-bold text-[var(--ink-muted)] mb-5 text-center">Visitor Route</h3>
-          <div className="flex flex-wrap justify-center items-center gap-2 sm:gap-3 px-4 relative z-10">
+          <div className="absolute top-0 left-0 w-full h-1 spectrum-rule opacity-60" />
+          <h3 className="font-mono text-[10px] uppercase font-bold text-[var(--ink-muted)] mb-4 text-center mt-2">Visitor Route</h3>
+          <div className="flex flex-wrap justify-center items-center gap-2 sm:gap-3 px-4 relative z-10 w-full">
             {visitorRouteElements.map((route, i) => (
-              <div key={route.id} className="flex items-center gap-2 sm:gap-3">
+              <div key={route.id} className="flex items-center gap-2 sm:gap-3 shrink-0 lg:flex-1 w-[140px] lg:w-auto">
                 <button onClick={() => scrollToElement(route.id)} aria-label={`Go to ${route.title}`}
-                  className="flex flex-col text-left px-4 py-2.5 rounded-xl bg-white border border-[var(--border)] hover:border-[var(--ink-muted)] hover:-translate-y-0.5 hover:shadow-sm transition-all focus:outline-none focus:ring-2 group/route"
+                  className="flex flex-col text-left px-3 py-2.5 w-full rounded-xl bg-white border border-[var(--border)] hover:border-[var(--ink-muted)] hover:-translate-y-0.5 hover:shadow-sm transition-all focus:outline-none focus:ring-2 group/route"
                   style={{'--tw-ring-color': route.color} as any}
                 >
-                    <span className="font-space font-bold text-sm text-[var(--ink)] group-hover/route:text-[var(--ink)] transition-colors">{route.title}</span>
-                    <span className="text-[10px] font-medium text-[var(--ink-soft)] transition-colors mt-0.5" style={{color: route.color}}>{route.subtitle}</span>
+                    <span className="font-mono text-[10px] font-bold opacity-60 mb-1" style={{color: route.color}}>{route.index}</span>
+                    <span className="font-space font-bold text-sm text-[var(--ink)] group-hover/route:text-[var(--ink)] transition-colors leading-tight mb-0.5">{route.title}</span>
+                    <span className="text-[10px] font-medium text-[var(--ink-soft)] transition-colors leading-tight line-clamp-1">{route.subtitle}</span>
                 </button>
-                {i !== visitorRouteElements.length - 1 && <span className="font-mono text-lg text-[var(--ink-muted)] opacity-30 mt-1 hidden sm:block">→</span>}
+                {i !== visitorRouteElements.length - 1 && <span className="font-mono text-lg text-[var(--ink-muted)] opacity-30 mx-auto hidden lg:block shrink-0">→</span>}
               </div>
             ))}
           </div>
-          <div className="w-11/12 max-w-6xl h-0.5 mt-8 spectrum-rule opacity-60 rounded-full" />
         </motion.div>
 
         {/* FOURTH ROW: Exploration Tracks */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.9 }}
-           className="mt-6"
+           className="mt-2 lg:mt-4"
         >
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 lg:gap-5">
             {explorationTrackElements.map(track => (
-               <div key={track.id} className="museum-card bg-white/80 backdrop-blur-sm group hover:-translate-y-1 hover:shadow-md transition-all p-5 lg:p-6 rounded-2xl relative overflow-hidden flex flex-col h-full border border-[var(--border)]">
+               <div key={track.id} className="museum-card bg-white/80 backdrop-blur-sm group hover:-translate-y-1 hover:shadow-md transition-all p-5 lg:p-6 rounded-xl relative overflow-hidden flex flex-col h-full border border-[var(--border)]">
                   <div className="absolute top-0 left-0 w-full h-1 opacity-50 group-hover:opacity-100 transition-colors" style={{backgroundColor: track.color}} />
                   
                   <h4 className="font-mono text-[10px] uppercase font-bold tracking-widest mb-3" style={{color: track.color}}>{track.label}</h4>

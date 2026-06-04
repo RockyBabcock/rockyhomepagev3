@@ -33,6 +33,8 @@ export interface TechItem {
   evidence: string[];
   usedIn: string[];
   learningFocus?: string;
+  nextStep?: string;
+  relatedTools?: string[];
   version?: string;
   operationalStatus?: string;
   adoption?: string;
@@ -117,16 +119,16 @@ const rawData = [
 export const TECH_DATABASE: Record<string, Partial<TechItem>> = {
   React: {
     level: "Primary Tool",
-    description:
-      "Component architecture, interaction design, frontend systems.",
+    description: "Primary interface framework.",
     evidence: [
       "Built modular homepage architecture",
       "Created reusable interface modules",
       "Managed component-level interaction logic",
     ],
-    usedIn: ["Rocky Homepage V2", "AI Assistant Experiments"],
-    learningFocus:
-      "Better state organization, lazy loading, cleaner component boundaries",
+    usedIn: ["Rocky Homepage V3", "Project Laboratory", "Capability Forge", "Personal archive sections"],
+    learningFocus: "Better state organization, lazy loading, cleaner component boundaries",
+    nextStep: "Refactor repeated UI patterns into reusable design-system components.",
+    relatedTools: ["TypeScript", "Tailwind CSS", "Framer Motion", "Vite"]
   },
   TypeScript: {
     level: "Primary Tool",
@@ -136,17 +138,33 @@ export const TECH_DATABASE: Record<string, Partial<TechItem>> = {
       "Integrated strict enums for status and module modes",
       "Enforced component logic contracts",
     ],
-    usedIn: ["Rocky Homepage V2", "AI Assistant Experiments"],
+    usedIn: ["Rocky Homepage V3", "AI Assistant Experiments"],
+    relatedTools: ["React", "Vite"]
   },
   "Tailwind CSS": {
     level: "Primary Tool",
     description: "Rapid structural design and interaction aesthetics.",
     evidence: [
-      "Created neo-brutalist dark terminal visual system",
+      "Created active section tones and visual systems",
       "Implemented responsive token scales",
       "Crafted component micro-interactions",
     ],
-    usedIn: ["Rocky Homepage V2"],
+    usedIn: ["Rocky Homepage V3"],
+    relatedTools: ["React", "Figma"]
+  },
+  "Framer Motion": {
+    level: "Primary Tool",
+    description: "Fluid interaction and state animations.",
+    evidence: ["Smooth card mounts and list rendering", "Layout transitions"],
+    usedIn: ["Rocky Homepage V3", "Project Laboratory"],
+    relatedTools: ["React", "Tailwind CSS"]
+  },
+  Vite: {
+    level: "Primary Tool",
+    description: "Fast bundler and dev server.",
+    evidence: ["Used as core build tool"],
+    usedIn: ["Rocky Homepage V3"],
+    relatedTools: ["React", "TypeScript"]
   },
   Solidity: {
     level: "Learning",
@@ -166,8 +184,7 @@ export const TECH_DATABASE: Record<string, Partial<TechItem>> = {
       "Exploring tool formulation schemas",
     ],
     usedIn: ["AI Assistant Experiments"],
-    learningFocus:
-      "Function calling robustness and continuous context management",
+    learningFocus: "Function calling robustness and continuous context management",
   },
 };
 
@@ -195,6 +212,8 @@ rawData.forEach((row) => {
       ],
       usedIn: dbEntry.usedIn || [`Various local prototypes.`],
       learningFocus: dbEntry.learningFocus || undefined,
+      nextStep: dbEntry.nextStep || undefined,
+      relatedTools: dbEntry.relatedTools || undefined,
     });
   });
 });

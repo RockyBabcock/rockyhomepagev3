@@ -20,6 +20,11 @@ export interface ProjectEntry {
   nextSteps?: string[];
   liveUrl?: string;
   repoUrl?: string;
+  category?: "Featured" | "Prototype" | "Concept" | "Learning Archive" | "Active Build";
+  focus?: string;
+  mainProof?: string;
+  nextStep?: string;
+  caseStudyAvailable?: boolean;
 }
 
 export const projectLabData: ProjectEntry[] = [
@@ -27,84 +32,103 @@ export const projectLabData: ProjectEntry[] = [
     id: "rocky-homepage-v3",
     title: "Rocky Homepage V3",
     oneLine:
-      "A personal digital museum combining portfolio, archive, experiments, and interactive identity inside a rainbow spectrum.",
+      "A personal digital museum combining portfolio, archive, experiments, and interactive identity inside a rainbow spectrum interface.",
     role: "Designer / Frontend Developer",
     status: "Active Build",
-    techStack: ["React", "TypeScript", "Tailwind CSS", "Vite", "Motion"],
+    category: "Featured",
+    focus: "Portfolio system / visual identity / content architecture",
+    mainProof: "React component architecture + visual system thinking",
+    nextStep: "Expand project case studies",
+    caseStudyAvailable: true,
+    techStack: ["React", "TypeScript", "Tailwind CSS", "Vite", "Motion", "Vercel", "AI Studio"],
     problem:
-      "Most personal portfolios feel too generic, lacking personality or a real technical identity.",
+      "Most personal portfolios feel generic, narrow, and forgettable. They show links, but not personality, process, or system thinking.",
     built: [
-      "Modular museum-style homepage",
-      "Rainbow visual system and colorful spectrum themes",
-      "Project laboratory for deep case studies",
-      "Skill forge and technical mapping",
-      "Personal archive and digital garden modules"
+      "Wide 90% homepage canvas",
+      "Hero entrance console",
+      "Project laboratory",
+      "Capability forge",
+      "Personal archive modules",
+      "Rainbow visual system",
+      "Interactive route navigation",
+      "AI-assisted iteration workflow",
     ],
     proves: [
-      "React architecture and modular component design",
-      "Visual system thinking and layout grids",
-      "AI-assisted development workflow"
+      "React component architecture",
+      "TypeScript-based UI structure",
+      "Tailwind visual system iteration",
+      "Responsive layout design",
+      "Content modeling",
+      "Personal branding through interface design",
     ],
-    learned: [
-      "How to organize a dense homepage without making it feel random",
-      "How to balance professional proof and personal expression",
-    ],
+    learned: [],
     limitations: [
-      "The site is still expanding, and some modules need more real content.",
+      "The site is still expanding. Some modules need more real content, stronger project evidence, and deeper archive material.",
     ],
     nextSteps: [
-      "Expand chess, media, and personal archive modules",
-      "Build a stronger rainbow color system",
+      "Expand project case studies",
+      "Improve chess and media archive modules",
+      "Add richer interactive details",
+      "Refine visual consistency across sections",
     ],
-    liveUrl: "https://rockybabcock.fun",
-    repoUrl: "https://github.com/RockyBabcock/rockyhomepageV3",
+    liveUrl: "https://rockyhomepagev3.vercel.app/",
+    repoUrl: "https://github.com/RockyBabcock/rockyhomepagev3",
   },
   {
     id: "ai-assistant",
     title: "AI Studio Prototype",
     oneLine:
-      "An experimental UI orchestrating multi-agent chains and tool execution contexts.",
+      "An experimental workflow for using AI-assisted iteration to reshape homepage layout, copy, visual hierarchy, and interaction behavior.",
     role: "Full-Stack Researcher",
     status: "Prototype",
-    techStack: ["Prompting", "LLMs", "Node.js", "React", "Gemini API"],
+    category: "Prototype",
+    focus: "AI-assisted interface iteration",
+    mainProof: "Prompt-driven UI iteration workflow",
+    nextStep: "Document case study",
+    caseStudyAvailable: true,
+    techStack: ["Prompting", "LLMs", "Node.js", "GitHub", "Vercel"],
     problem:
-      "Exploring how AI agents can interact with human intent seamlessly without requiring purely terminal-based inputs.",
+      "Test how AI Studio can help generate, revise, and deploy interface improvements faster.",
     built: [
-      "Constructed multi-agent decision chains with tool-using capabilities",
-      "Explored tool formulation schemas mapped to UI generation",
-      "Designed an experimental orchestration window showcasing background step executions",
+      "Prompt-driven UI iteration",
+      "Component-level code editing",
+      "Homepage layout experiments",
+      "Design feedback loops",
+      "GitHub + Vercel deployment workflow",
     ],
-    learned: [
-      "AI tools need clear boundaries, context, and visible state.",
-      "Latency masking through skeleton loaders is critical for agent interactions.",
+    learned: [],
+    limitations: [],
+    nextSteps: [
+      "Turn this into a documented AI-assisted development case study."
     ],
-    limitations: [
-      "Connect the interface to real API flows and add saved experiment logs.",
-      "Currently runs completely client-side with hardcoded logic for demonstration.",
-    ],
-    repoUrl: "https://github.com/RockyBabcock/ai-studio-experiments",
+    repoUrl: "https://github.com/RockyBabcock/rockyhomepagev3",
   },
   {
     id: "interactive-chess",
     title: "Interactive Chess Visualizer",
     oneLine:
-      "Rendered interactive modular 3D chess boards and geometric tactical game state visualizations.",
+      "A concept module for turning chess ideas into visual, interactive, and personal archive experiences.",
     role: "Developer",
     status: "Concept",
-    techStack: ["Chess.com API", "Three.js", "LocalStorage"],
+    category: "Concept",
+    focus: "Chess archive / interaction / personal system",
+    mainProof: "Interactive archive concept",
+    nextStep: "Connect to Personal Archives",
+    caseStudyAvailable: true,
+    techStack: ["Chess.com API", "Three.js", "LocalStorage", "Interaction Design", "Personal Archive"],
     problem:
-      "Transforming standard 2D algebraic notation into an engaging, geometric, and strategic online representation.",
+      "Use chess as a way to express strategy, memory, personality, and systems thinking.",
     built: [
-      "Modular 3D chess board environment via Three.js primitives",
-      "Visual geometry mapping of potential maneuvers using a depth-first search for move calculations",
-      "Local state synchronizer matching Chess.com game IDs",
+      "Interactive 8×8 board",
+      "Famous chess quotes",
+      "Master constellation map",
+      "Piece personality cards",
+      "Tactical state visualization",
     ],
-    learned: [
-      "Chess provides a useful metaphor for interface design: every move changes the available system state.",
-      "Three.js performance dramatically degrades with too many overlapping mesh instances; instancing is required.",
-    ],
-    limitations: [
-      "The board requires hardware acceleration and struggles on mid-tier mobile browsers.",
+    learned: [],
+    limitations: [],
+    nextSteps: [
+      "Connect the chess visualizer with the Personal Archives section.",
     ],
   },
   {
@@ -114,6 +138,11 @@ export const projectLabData: ProjectEntry[] = [
       "A visual archive for Web3 concepts, wallet interaction patterns, and ownership models.",
     role: "Smart Contract Explorer",
     status: "Learning Archive",
+    category: "Learning Archive",
+    focus: "Smart contract research & interaction",
+    mainProof: "Decentralized state management",
+    nextStep: "Deploy testnet demo",
+    caseStudyAvailable: false,
     techStack: ["Solidity", "Foundry", "WalletConnect", "Ethers.js"],
     problem:
       "Understanding decentralization primitives and multi-signature operations systematically.",

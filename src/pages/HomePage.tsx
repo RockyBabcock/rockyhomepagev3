@@ -63,8 +63,8 @@ export default function HomePage() {
         tone="projects"
         layout="custom"
         size="xl"
-        width="wide"
-        headerVariant="side"
+        width="full"
+        headerVariant="hidden"
       >
         <ProjectLabModule />
       </MuseumSectionLayout>
