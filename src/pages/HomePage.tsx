@@ -47,8 +47,6 @@ const VisitorAnalyticsModule = lazy(() =>
 export default function HomePage() {
   return (
     <main className="rainbow-lab-bg text-[var(--museum-text)] museum-page-shell">
-      <TableOfContents />
-
       {/* 01 Entrance */}
       <ProfileModule />
 

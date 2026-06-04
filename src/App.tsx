@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { Navigation } from "./components/Navigation";
 import { Sidebar } from "./components/Sidebar";
 import HomePage from "./pages/HomePage";
@@ -25,7 +25,18 @@ const SpectrumSpine = () => {
   
   // Use scroll progress to shift colors
   const color1 = useTransform(scrollYProgress, [0, 0.25, 0.5, 0.75, 1], ["#FF006E", "#FF9F1C", "#06D6A0", "#00C2FF", "#8338EC"]);
-  const color2 = useTransform(scrollYProgress, [0, 0.25, 0.5, 0.75, 1], ["#FF9F1C", "#06D6A0", "#00C2FF", "#8338EC", "#FF006E"]);
+  
+  const gradient = useTransform(
+    scrollYProgress,
+    [0, 0.25, 0.5, 0.75, 1],
+    [
+      "linear-gradient(to bottom, #FF006E, #FF9F1C)",
+      "linear-gradient(to bottom, #FF9F1C, #FFE66D)",
+      "linear-gradient(to bottom, #06D6A0, #00C2FF)",
+      "linear-gradient(to bottom, #00C2FF, #3A86FF)",
+      "linear-gradient(to bottom, #8338EC, #FF006E)"
+    ]
+  );
   
   // Scale the inner progress bar
   const scaleY = useTransform(scrollYProgress, [0, 1], [0.1, 1]);
@@ -41,7 +52,7 @@ const SpectrumSpine = () => {
          style={{
            height: "100%",
            scaleY,
-           background: `linear-gradient(to bottom, var(--color-rainbow-red), var(--color-rainbow-pink))`
+           background: gradient
          }}
        >
           <motion.div 
@@ -65,48 +76,57 @@ const SpectrumSpine = () => {
   );
 };
 
-export default function App() {
+function AppContent() {
+  const location = useLocation();
+  const isHome = location.pathname === "/";
+
   return (
-    <BrowserRouter>
-      <div className="min-h-screen relative selection:bg-[var(--museum-accent-soft)] selection:text-[var(--museum-accent)]">
-        <SpectrumSpine />
-        <Navigation />
-        <Sidebar />
+    <div className="min-h-screen relative selection:bg-[var(--museum-accent-soft)] selection:text-[var(--museum-accent)]">
+      <SpectrumSpine />
+      <Navigation />
+      {!isHome && <Sidebar />}
 
-        <main className="lg:ml-64 pt-24 pb-12 px-4 md:px-8 max-w-[1600px] mx-auto">
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/projects" element={<ProjectsPage />} />
-            <Route path="/blog" element={<BlogPage />} />
-            <Route path="/blog/:slug" element={<BlogArticlePage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/fun" element={<FunPage />} />
-            <Route path="/garden" element={<GardenPage />} />
-            <Route path="/contact" element={<ContactPage />} />
-            <Route path="/chess" element={
-              <Suspense fallback={<ModuleSkeleton label="Loading Chess Archive..." />}>
-                <ChessModule />
-              </Suspense>
-            } />
-            <Route path="/basketball" element={
-              <Suspense fallback={<ModuleSkeleton label="Loading Basketball Archive..." />}>
-                <BasketballModule />
-              </Suspense>
-            } />
-            <Route path="/media" element={
-              <Suspense fallback={<ModuleSkeleton label="Loading Media Universe..." />}>
-                <GameMediaModule />
-              </Suspense>
-            } />
-            <Route path="/watering" element={
-              <Suspense fallback={<ModuleSkeleton label="Loading Watering System..." />}>
-                <WateringSystemModule />
-              </Suspense>
-            } />
-          </Routes>
-          <BackToTop />
-        </main>
+      <main
+        className={
+          isHome
+            ? "pt-20 overflow-hidden"
+            : "lg:ml-64 pt-24 pb-12 px-4 md:px-8 max-w-[1600px] mx-auto"
+        }
+      >
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/projects" element={<ProjectsPage />} />
+          <Route path="/blog" element={<BlogPage />} />
+          <Route path="/blog/:slug" element={<BlogArticlePage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/fun" element={<FunPage />} />
+          <Route path="/garden" element={<GardenPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/chess" element={
+            <Suspense fallback={<ModuleSkeleton label="Loading Chess Archive..." />}>
+              <ChessModule />
+            </Suspense>
+          } />
+          <Route path="/basketball" element={
+            <Suspense fallback={<ModuleSkeleton label="Loading Basketball Archive..." />}>
+              <BasketballModule />
+            </Suspense>
+          } />
+          <Route path="/media" element={
+            <Suspense fallback={<ModuleSkeleton label="Loading Media Universe..." />}>
+              <GameMediaModule />
+            </Suspense>
+          } />
+          <Route path="/watering" element={
+            <Suspense fallback={<ModuleSkeleton label="Loading Watering System..." />}>
+              <WateringSystemModule />
+            </Suspense>
+          } />
+        </Routes>
+        <BackToTop />
+      </main>
 
+      {!isHome && (
         <footer className="w-full max-w-7xl mx-auto px-8 py-16 flex flex-col md:flex-row justify-between items-center border-t border-[rgba(15,23,42,0.05)] lg:ml-64 relative z-10 transition-colors">
           <p className="font-body text-xs text-[var(--museum-text-muted)] mb-6 md:mb-0 font-medium">
             © 2024 Rocky Babcock. Built with React, Tailwind & Framer Motion.
@@ -132,7 +152,15 @@ export default function App() {
             </a>
           </div>
         </footer>
-      </div>
+      )}
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <AppContent />
     </BrowserRouter>
   );
 }

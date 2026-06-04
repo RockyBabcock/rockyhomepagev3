@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { techStackData, categoryColors } from "../data/techStack";
+import { techStackData } from "../data/techStack";
 import { cn } from "../lib/utils";
-import { Layers, MonitorSmartphone, Server, Sparkles, Settings, Cpu, Box, Disc, TerminalSquare, Search, Code, CheckCircle2 } from "lucide-react";
+import { Layers, MonitorSmartphone, Server, Sparkles, Settings, Cpu, Box, Disc, TerminalSquare, Search } from "lucide-react";
 
 function getCategoryIcon(cat: string) {
   switch (cat) {
@@ -53,7 +53,7 @@ export function CoreCapabilitiesModule() {
         A living map of the tools, systems, and workflows I use to build interfaces, experiments, and digital spaces.
       </div>
       
-      <div className="flex flex-col lg:grid lg:grid-cols-[220px_minmax(0,1fr)_360px] gap-6 lg:gap-8 items-start">
+      <div className="flex flex-col lg:grid lg:grid-cols-[200px_minmax(0,1.2fr)_280px] gap-6 lg:gap-8 items-start">
         {/* Left Column: Domain Rail */}
         <div className="flex flex-col gap-2 w-full">
           <h3 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--ink-muted)] mb-2 flex items-center gap-2">
@@ -84,145 +84,96 @@ export function CoreCapabilitiesModule() {
           </div>
         </div>
 
-        {/* Center Column: Tool Constellation */}
-        <div className="flex flex-col gap-4 w-full h-full min-h-[300px]">
+        {/* Center Column: Capability Highlight & Chips */}
+        <div className="flex flex-col gap-6 w-full h-full min-h-[300px]">
           <h3 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--ink-muted)] mb-0 lg:hidden">
-            Capabilities
+            Capability
           </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-3 lg:gap-4">
-            {techStackData.filter(t => t.category === activeCategory).map((tool) => {
-              const isActive = activeToolId === tool.id;
-              return (
-                <button
-                  key={tool.id}
-                  onClick={() => setActiveToolId(tool.id)}
-                  className={cn(
-                    "museum-card group text-left flex flex-col p-4 transition-all duration-300 relative overflow-hidden",
-                    isActive 
-                      ? "ring-2 ring-[var(--hall-primary)] shadow-md"
-                      : "hover:-translate-y-1 hover:shadow-lg border-[var(--border)]"
-                  )}
-                  style={isActive ? { borderColor: 'transparent' } : {}}
-                >
-                  {isActive && (
-                    <div className="absolute inset-0 bg-gradient-to-br from-[var(--hall-soft)] to-transparent opacity-50" />
-                  )}
-                  <div className="relative z-10">
-                    <div className="flex justify-between items-start mb-2">
-                       <span className="font-space font-bold text-[var(--ink)] tracking-tight text-lg">
-                         {tool.name}
-                       </span>
-                    </div>
-                    <div className="mb-3">
-                      <span className={cn(
-                        "inline-flex font-mono text-[10px] uppercase tracking-widest font-semibold px-2 py-0.5 rounded-sm",
-                        isActive ? "bg-[var(--hall-surface)] text-[var(--hall-secondary)]" : "bg-[var(--canvas-soft)] text-[var(--ink-muted)] border border-[var(--border)]"
-                      )}>
-                        {tool.level}
-                      </span>
-                    </div>
-                    <div className="text-xs text-[var(--ink-soft)] line-clamp-2 leading-relaxed h-8 mb-2">
-                      {tool.description}
-                    </div>
-                    <div className="flex items-center gap-1.5 text-[10px] font-mono uppercase text-[var(--ink-muted)]">
-                      <CheckCircle2 size={12} className={isActive ? "text-[var(--hall-primary)]" : ""} />
-                      {tool.evidence?.length || 1} Proof{(tool.evidence?.length || 1) !== 1 ? 's' : ''}
-                    </div>
-                  </div>
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Right Column: Tool Dossier */}
-        <div className="flex flex-col w-full h-full lg:sticky lg:top-24 mt-6 lg:mt-0">
           <AnimatePresence mode="wait">
             {activeTool && (
               <motion.div 
                 key={activeTool.id}
-                initial={{ opacity: 0, x: 10 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 10 }}
+                initial={{ opacity: 0, y: 5 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -5 }}
                 transition={{ duration: 0.2 }}
-                className="museum-card spectrum-edge flex flex-col p-6 lg:p-7 relative overflow-hidden"
+                className="museum-card spectrum-edge flex flex-col p-6 lg:p-8 relative overflow-hidden"
               >
-                <div className="absolute top-0 right-0 p-3 opacity-10 text-[var(--hall-primary)] pointer-events-none">
-                  <Code size={120} />
-                </div>
+                <h3 className="text-3xl font-space font-bold tracking-tight text-[var(--ink)] mb-4">{activeTool.name}</h3>
+                <p className="text-base text-[var(--ink-soft)] mb-6 leading-relaxed bg-[var(--canvas-soft)] p-4 rounded-xl border border-[var(--border)]">{activeTool.description}</p>
                 
-                <div className="relative z-10 flex flex-col h-full">
-                  <div className="mb-6 border-b border-[var(--border)] pb-5">
-                    <div className="flex justify-between items-start mb-2">
-                      <h3 className="text-2xl font-space font-bold tracking-tight text-[var(--ink)]">
-                        {activeTool.name}
-                      </h3>
-                      <span className="font-mono text-[10px] uppercase tracking-wider text-[var(--hall-secondary)] bg-[var(--hall-surface)] px-2 py-1 rounded">
-                        {activeTool.category}
-                      </span>
-                    </div>
-                    <div className="inline-block mt-1">
-                      <span className="font-mono text-xs uppercase tracking-widest font-bold text-[var(--hall-primary)] px-2 py-0.5 rounded-sm border border-[var(--hall-primary)]/20 shadow-sm bg-white">
-                        {activeTool.level}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="space-y-6">
-                    <div>
-                      <h4 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--ink-muted)] mb-2">
-                         Description
-                      </h4>
-                      <p className="text-sm text-[var(--ink-soft)] leading-relaxed">
-                         {activeTool.description}
-                      </p>
-                    </div>
-
-                    <div>
-                      <h4 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--ink-muted)] mb-2">
-                         How I use it
-                      </h4>
-                      <ul className="space-y-2">
-                         {activeTool.evidence?.map((item, i) => (
-                           <li key={i} className="flex items-start gap-2 text-sm text-[var(--ink-soft)]">
-                              <span className="mt-1.5 shrink-0 w-1.5 h-1.5 rounded-full bg-[var(--hall-secondary)]" />
-                              <span className="leading-relaxed">{item}</span>
-                           </li>
-                         )) || (
-                           <li className="text-sm text-[var(--ink-soft)]">Applied in core feature workflows and isolated architecture experiments.</li>
-                         )}
-                      </ul>
-                    </div>
-
-                    {activeTool.usedIn && activeTool.usedIn.length > 0 && (
-                      <div>
-                        <h4 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--ink-muted)] mb-2">
-                           Used in
-                        </h4>
-                        <div className="flex flex-wrap gap-2 text-sm text-[var(--ink-soft)]">
-                           {activeTool.usedIn.map((item, i) => (
-                              <span key={i} className="px-2.5 py-1 bg-[var(--canvas-soft)] border border-[var(--border)] rounded text-xs font-medium shadow-sm">
-                                {item}
-                              </span>
-                           ))}
-                        </div>
-                      </div>
-                    )}
-
-                    {activeTool.learningFocus && (
-                      <div className="mt-auto">
-                        <h4 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--ink-muted)] mb-2">
-                           Current Learning Focus
-                        </h4>
-                        <p className="text-sm text-[var(--ink-soft)] italic bg-[var(--hall-surface)]/50 p-3 rounded-lg border border-[var(--hall-primary)]/10">
-                           {activeTool.learningFocus}
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                </div>
+                <h4 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--ink-muted)] mb-3">How I use it</h4>
+                <ul className="space-y-3 mb-2">
+                  {activeTool.evidence?.map((item, i) => (
+                    <li key={i} className="flex items-start gap-3 text-sm text-[var(--ink)]">
+                      <span className="mt-1.5 shrink-0 w-1.5 h-1.5 rounded-full bg-[var(--hall-secondary)] shadow-sm" />
+                      <span className="leading-relaxed font-medium">{item}</span>
+                    </li>
+                  )) || (
+                    <li className="text-sm text-[var(--ink-soft)]">Applied in core feature workflows and isolated architecture experiments.</li>
+                  )}
+                </ul>
               </motion.div>
             )}
+          </AnimatePresence>
+
+          <div>
+             <h4 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--ink-muted)] mb-3 mt-2">Tools in domain</h4>
+             <div className="flex flex-wrap gap-2">
+               {techStackData.filter(t => t.category === activeCategory).map((tool) => (
+                 <button
+                   key={tool.id}
+                   onClick={() => setActiveToolId(tool.id)}
+                   className={cn(
+                     "px-3 py-1.5 rounded-full text-xs font-mono font-medium border transition-all shadow-sm",
+                     activeToolId === tool.id 
+                       ? "bg-[var(--hall-soft)] text-[var(--hall-primary)] border-[var(--hall-primary)] ring-1 ring-[var(--hall-primary)]/50"
+                       : "bg-white text-[var(--ink-soft)] border-[var(--border)] hover:bg-[var(--canvas-soft)] hover:text-[var(--ink)]"
+                   )}
+                 >
+                   {tool.name}
+                 </button>
+               ))}
+             </div>
+          </div>
+        </div>
+
+        {/* Right Column: Proof Cards */}
+        <div className="flex flex-col gap-4 w-full h-full lg:mt-6">
+          <AnimatePresence mode="wait">
+             {activeTool && (
+               <motion.div
+                  key={`proofs-${activeTool.id}`}
+                  initial={{ opacity: 0, x: 10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 5 }}
+                  transition={{ duration: 0.2 }}
+                  className="flex flex-col gap-4"
+               >
+                 {activeTool.usedIn && activeTool.usedIn.length > 0 && (
+                   <div className="bg-white/80 backdrop-blur border border-[var(--border)] rounded-2xl p-5 shadow-sm hover:shadow-md transition-shadow">
+                      <h4 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--hall-primary)] mb-3 font-semibold">Used In</h4>
+                      <div className="flex flex-col gap-2 text-sm text-[var(--ink)]">
+                        {activeTool.usedIn.map((item, i) => (
+                          <div key={i} className="font-semibold bg-[var(--canvas-soft)] px-3 py-1.5 rounded-lg border border-[var(--border)]">{item}</div>
+                        ))}
+                      </div>
+                   </div>
+                 )}
+                 
+                 {activeTool.learningFocus && (
+                   <div className="bg-white/80 backdrop-blur border border-[var(--border)] rounded-2xl p-5 shadow-sm hover:shadow-md transition-shadow">
+                      <h4 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--orange)] mb-3 font-semibold">Learning Focus</h4>
+                      <p className="text-sm text-[var(--ink-soft)] leading-relaxed italic">{activeTool.learningFocus}</p>
+                   </div>
+                 )}
+
+                 <div className="bg-white/80 backdrop-blur border border-[var(--border)] rounded-2xl p-5 shadow-sm hover:shadow-md transition-shadow">
+                    <h4 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--blue)] mb-3 font-semibold">Proficiency</h4>
+                    <p className="text-sm text-[var(--ink)] font-bold">{activeTool.level || "Advanced"}</p>
+                 </div>
+               </motion.div>
+             )}
           </AnimatePresence>
         </div>
       </div>

@@ -81,9 +81,11 @@ export function ProfileModule() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="font-space text-5xl sm:text-6xl lg:text-[5.5rem] font-black leading-[0.9] tracking-[-0.04em] text-[var(--ink)] mb-6 relative"
+              className="font-space text-6xl lg:text-[6.5rem] font-black leading-[0.88] tracking-[-0.055em] text-[var(--ink)] mb-6 relative"
             >
-              ROCKY BABCOCK
+              ROCKY
+              <br />
+              <span className="spectrum-text">BABCOCK</span>
             </motion.h1>
 
             <motion.h2
