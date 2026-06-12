@@ -63,7 +63,7 @@ const homeSections = [
     description:
       "A curated overview of the systems, tools, and archives within this museum.",
     layout: "custom",
-    size: "xl",
+    size: "compact",
     width: "full",
     headerVariant: "hidden",
     component: <FeaturedExhibitsWall />,
@@ -88,10 +88,10 @@ const homeSections = [
     title: "Capability Forge",
     description:
       "A living map of the tools I use to design, build, automate, and experiment.",
-    layout: "dashboard",
-    size: "xl",
-    width: "wide",
-    headerVariant: "side",
+    layout: "custom",
+    size: "compact",
+    width: "full",
+    headerVariant: "hidden",
     component: <CoreCapabilitiesModule />,
   },
   {

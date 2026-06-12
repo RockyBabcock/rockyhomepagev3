@@ -8,10 +8,11 @@ import {
   Disc,
   Speaker,
   Fingerprint,
-  Braces,
+  Code2,
+  Languages,
+  Workflow,
   Maximize,
   TerminalSquare,
-  Database,
 } from "lucide-react";
 
 export const iconMap: Record<string, any> = {
@@ -24,7 +25,9 @@ export const iconMap: Record<string, any> = {
   creative: Disc,
   audio: Speaker,
   hardware: Fingerprint,
-  language: Braces,
+  programming_languages: Code2,
+  natural_languages: Languages,
+  language_systems: Workflow,
   spatial: Maximize,
   tooling: TerminalSquare,
 };

@@ -1,6 +1,6 @@
 {
-  "name": "",
-  "description": "",
+  "name": "Rocky Babcock Personal Digital Museum",
+  "description": "A colorful, modular, expressive personal website and digital museum representing projects, design engineering skills, and system telemetry.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
