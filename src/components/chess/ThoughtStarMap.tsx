@@ -173,7 +173,9 @@ export function ThoughtStarMap() {
                   <span
                     className={cn(
                       "whitespace-nowrap font-mono text-[9px] uppercase tracking-widest transition-colors duration-500 max-w-[200px] truncate",
-                      activeQuoteId === p.id ? "text-[#d4af37]" : "text-white/50",
+                      activeQuoteId === p.id
+                        ? "text-[#d4af37]"
+                        : "text-white/50",
                     )}
                   >
                     {p.category}

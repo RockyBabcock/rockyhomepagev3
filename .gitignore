@@ -6,3 +6,10 @@ coverage/
 *.log
 .env*
 !.env.example
+tmp/
+src/tmp_*
+*.backup.*
+*.bak
+*.old
+.aistudio/
+assets/.aistudio/

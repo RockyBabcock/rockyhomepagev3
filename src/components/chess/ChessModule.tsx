@@ -9,7 +9,12 @@ import { QuoteTemple } from "./QuoteTemple";
 import { InteractiveChessboard } from "./InteractiveChessboard";
 import { StatusPill } from "../StatusPill";
 
-type ChessLayer = "quote-temple" | "star-map" | "board" | "archetypes" | "infinite";
+type ChessLayer =
+  | "quote-temple"
+  | "star-map"
+  | "board"
+  | "archetypes"
+  | "infinite";
 
 const chessLayers = [
   { id: "quote-temple", label: "01. Quote Temple" },
@@ -150,7 +155,8 @@ export function ChessModule() {
                 className="mt-0.5 text-[#d4af37]/70 shrink-0"
               />
               <span>
-                Document famous positions, add saved studies, and connect chess patterns to design decisions.
+                Document famous positions, add saved studies, and connect chess
+                patterns to design decisions.
               </span>
             </div>
           </div>

@@ -3,7 +3,15 @@ import React from "react";
 type MuseumCardProps = {
   children: React.ReactNode;
   className?: string;
-  glowColor?: "blue" | "purple" | "green" | "pink" | "red" | "orange" | "yellow" | "cyan";
+  glowColor?:
+    | "blue"
+    | "purple"
+    | "green"
+    | "pink"
+    | "red"
+    | "orange"
+    | "yellow"
+    | "cyan";
 };
 
 const GLOW_SHADOWS = {
@@ -18,13 +26,17 @@ const GLOW_SHADOWS = {
   default: "0 20px 60px rgba(15, 23, 42, 0.08)",
 };
 
-export function MuseumCard({ children, className = "", glowColor }: MuseumCardProps) {
+export function MuseumCard({
+  children,
+  className = "",
+  glowColor,
+}: MuseumCardProps) {
   const shadow = glowColor ? GLOW_SHADOWS[glowColor] : GLOW_SHADOWS.default;
   return (
     <div
       className={`bg-[rgba(255,255,255,0.76)] border border-[rgba(15,23,42,0.10)] rounded-[28px] backdrop-blur-[20px] transition-all duration-300 hover:-translate-y-1 ${className}`}
       style={{
-        boxShadow: `${shadow}, inset 0 1px 0 rgba(255,255,255,0.85)`
+        boxShadow: `${shadow}, inset 0 1px 0 rgba(255,255,255,0.85)`,
       }}
     >
       {children}

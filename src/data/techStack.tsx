@@ -125,10 +125,17 @@ export const TECH_DATABASE: Record<string, Partial<TechItem>> = {
       "Created reusable interface modules",
       "Managed component-level interaction logic",
     ],
-    usedIn: ["Rocky Homepage V3", "Project Laboratory", "Capability Forge", "Personal archive sections"],
-    learningFocus: "Better state organization, lazy loading, cleaner component boundaries",
-    nextStep: "Refactor repeated UI patterns into reusable design-system components.",
-    relatedTools: ["TypeScript", "Tailwind CSS", "Framer Motion", "Vite"]
+    usedIn: [
+      "Rocky Homepage V3",
+      "Project Laboratory",
+      "Capability Forge",
+      "Personal archive sections",
+    ],
+    learningFocus:
+      "Better state organization, lazy loading, cleaner component boundaries",
+    nextStep:
+      "Refactor repeated UI patterns into reusable design-system components.",
+    relatedTools: ["TypeScript", "Tailwind CSS", "Framer Motion", "Vite"],
   },
   TypeScript: {
     level: "Primary Tool",
@@ -139,7 +146,7 @@ export const TECH_DATABASE: Record<string, Partial<TechItem>> = {
       "Enforced component logic contracts",
     ],
     usedIn: ["Rocky Homepage V3", "AI Assistant Experiments"],
-    relatedTools: ["React", "Vite"]
+    relatedTools: ["React", "Vite"],
   },
   "Tailwind CSS": {
     level: "Primary Tool",
@@ -150,21 +157,21 @@ export const TECH_DATABASE: Record<string, Partial<TechItem>> = {
       "Crafted component micro-interactions",
     ],
     usedIn: ["Rocky Homepage V3"],
-    relatedTools: ["React", "Figma"]
+    relatedTools: ["React", "Figma"],
   },
   "Framer Motion": {
     level: "Primary Tool",
     description: "Fluid interaction and state animations.",
     evidence: ["Smooth card mounts and list rendering", "Layout transitions"],
     usedIn: ["Rocky Homepage V3", "Project Laboratory"],
-    relatedTools: ["React", "Tailwind CSS"]
+    relatedTools: ["React", "Tailwind CSS"],
   },
   Vite: {
     level: "Primary Tool",
     description: "Fast bundler and dev server.",
     evidence: ["Used as core build tool"],
     usedIn: ["Rocky Homepage V3"],
-    relatedTools: ["React", "TypeScript"]
+    relatedTools: ["React", "TypeScript"],
   },
   Solidity: {
     level: "Learning",
@@ -184,7 +191,8 @@ export const TECH_DATABASE: Record<string, Partial<TechItem>> = {
       "Exploring tool formulation schemas",
     ],
     usedIn: ["AI Assistant Experiments"],
-    learningFocus: "Function calling robustness and continuous context management",
+    learningFocus:
+      "Function calling robustness and continuous context management",
   },
 };
 

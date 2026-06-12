@@ -20,7 +20,12 @@ export interface ProjectEntry {
   nextSteps?: string[];
   liveUrl?: string;
   repoUrl?: string;
-  category?: "Featured" | "Prototype" | "Concept" | "Learning Archive" | "Active Build";
+  category?:
+    | "Featured"
+    | "Prototype"
+    | "Concept"
+    | "Learning Archive"
+    | "Active Build";
   focus?: string;
   mainProof?: string;
   nextStep?: string;
@@ -40,7 +45,15 @@ export const projectLabData: ProjectEntry[] = [
     mainProof: "React component architecture + visual system thinking",
     nextStep: "Expand project case studies",
     caseStudyAvailable: true,
-    techStack: ["React", "TypeScript", "Tailwind CSS", "Vite", "Motion", "Vercel", "AI Studio"],
+    techStack: [
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Vite",
+      "Motion",
+      "Vercel",
+      "AI Studio",
+    ],
     problem:
       "Most personal portfolios feel generic, narrow, and forgettable. They show links, but not personality, process, or system thinking.",
     built: [
@@ -99,7 +112,7 @@ export const projectLabData: ProjectEntry[] = [
     learned: [],
     limitations: [],
     nextSteps: [
-      "Turn this into a documented AI-assisted development case study."
+      "Turn this into a documented AI-assisted development case study.",
     ],
     repoUrl: "https://github.com/RockyBabcock/rockyhomepagev3",
   },
@@ -115,7 +128,13 @@ export const projectLabData: ProjectEntry[] = [
     mainProof: "Interactive archive concept",
     nextStep: "Connect to Personal Archives",
     caseStudyAvailable: true,
-    techStack: ["Chess.com API", "Three.js", "LocalStorage", "Interaction Design", "Personal Archive"],
+    techStack: [
+      "Chess.com API",
+      "Three.js",
+      "LocalStorage",
+      "Interaction Design",
+      "Personal Archive",
+    ],
     problem:
       "Use chess as a way to express strategy, memory, personality, and systems thinking.",
     built: [

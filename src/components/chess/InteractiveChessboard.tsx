@@ -4,10 +4,38 @@ import { cn } from "@/lib/utils";
 const files = ["a", "b", "c", "d", "e", "f", "g", "h"];
 
 const startingPieces: Record<string, string> = {
-  a1: "♖", b1: "♘", c1: "♗", d1: "♕", e1: "♔", f1: "♗", g1: "♘", h1: "♖",
-  a2: "♙", b2: "♙", c2: "♙", d2: "♙", e2: "♙", f2: "♙", g2: "♙", h2: "♙",
-  a7: "♟", b7: "♟", c7: "♟", d7: "♟", e7: "♟", f7: "♟", g7: "♟", h7: "♟",
-  a8: "♜", b8: "♞", c8: "♝", d8: "♛", e8: "♚", f8: "♝", g8: "♞", h8: "♜",
+  a1: "♖",
+  b1: "♘",
+  c1: "♗",
+  d1: "♕",
+  e1: "♔",
+  f1: "♗",
+  g1: "♘",
+  h1: "♖",
+  a2: "♙",
+  b2: "♙",
+  c2: "♙",
+  d2: "♙",
+  e2: "♙",
+  f2: "♙",
+  g2: "♙",
+  h2: "♙",
+  a7: "♟",
+  b7: "♟",
+  c7: "♟",
+  d7: "♟",
+  e7: "♟",
+  f7: "♟",
+  g7: "♟",
+  h7: "♟",
+  a8: "♜",
+  b8: "♞",
+  c8: "♝",
+  d8: "♛",
+  e8: "♚",
+  f8: "♝",
+  g8: "♞",
+  h8: "♜",
 };
 
 const famousPositions = [
@@ -52,7 +80,7 @@ export function InteractiveChessboard() {
                     "relative flex items-center justify-center text-3xl sm:text-4xl lg:text-5xl transition-all",
                     isDark ? "bg-[#3b2f20]" : "bg-[#d9c49a]",
                     isHighlighted && "ring-2 ring-[#d4af37] ring-inset",
-                    isSelected && "scale-95 brightness-125"
+                    isSelected && "scale-95 brightness-125",
                   )}
                 >
                   <span className="drop-shadow-md">
@@ -63,7 +91,7 @@ export function InteractiveChessboard() {
                   </span>
                 </button>
               );
-            })
+            }),
           )}
         </div>
       </div>
@@ -90,7 +118,7 @@ export function InteractiveChessboard() {
                 "w-full rounded-xl border px-4 py-3 text-left text-sm transition",
                 activePosition.name === position.name
                   ? "border-[#d4af37] bg-[#d4af37]/15 text-[#d4af37]"
-                  : "border-white/10 text-white/55 hover:bg-white/10"
+                  : "border-white/10 text-white/55 hover:bg-white/10",
               )}
             >
               {position.name}

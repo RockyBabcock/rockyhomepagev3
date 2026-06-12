@@ -36,7 +36,8 @@ export class ModuleErrorBoundary extends React.Component<
             {this.props.fallbackTitle ?? "Exhibit temporarily unavailable"}
           </h3>
           <p className="mt-2 text-sm text-stone-500 font-mono">
-            This module failed to load, but the rest of the museum remains online.
+            This module failed to load, but the rest of the museum remains
+            online.
           </p>
         </section>
       );

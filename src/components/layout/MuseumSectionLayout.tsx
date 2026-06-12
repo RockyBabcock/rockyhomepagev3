@@ -64,12 +64,7 @@ type SectionTone = keyof typeof sectionTones;
 
 type SectionSize = "xl" | "lg" | "md" | "compact";
 
-type HeaderVariant =
-  | "featured"
-  | "compact"
-  | "side"
-  | "centered"
-  | "hidden";
+type HeaderVariant = "featured" | "compact" | "side" | "centered" | "hidden";
 
 type LayoutVariant =
   | "default"
@@ -136,7 +131,7 @@ function SectionEyebrow({
 
   return (
     <div className="mb-8 flex items-center gap-4">
-      <span 
+      <span
         className="font-mono text-xs uppercase tracking-[0.2em] font-semibold"
         style={{ color: "var(--hall-primary)" }}
       >
@@ -145,7 +140,8 @@ function SectionEyebrow({
       <div
         className="h-px flex-1"
         style={{
-          background: "linear-gradient(90deg, var(--hall-soft), transparent 80%)"
+          background:
+            "linear-gradient(90deg, var(--hall-soft), transparent 80%)",
         }}
       />
     </div>
@@ -172,9 +168,7 @@ function SectionHeader({
     <h2
       className={cn(
         "mt-5 font-space font-bold tracking-[-0.06em] text-slate-950",
-        variant === "compact"
-          ? "text-3xl md:text-4xl"
-          : "text-4xl md:text-6xl",
+        variant === "compact" ? "text-3xl md:text-4xl" : "text-4xl md:text-6xl",
       )}
     >
       {title}
@@ -235,10 +229,7 @@ function SectionHeader({
 
   return (
     <header
-      className={cn(
-        "max-w-4xl",
-        variant === "compact" ? "mb-8" : "mb-12",
-      )}
+      className={cn("max-w-4xl", variant === "compact" ? "mb-8" : "mb-12")}
     >
       <SectionEyebrow eyebrow={eyebrow} color={colors.primary} />
       {titleNode}
@@ -267,11 +258,7 @@ export function MuseumSectionLayout({
   return (
     <section
       id={id}
-      className={cn(
-        "relative overflow-hidden",
-        sizeClasses[size],
-        className,
-      )}
+      className={cn("relative overflow-hidden", sizeClasses[size], className)}
       style={
         {
           "--hall-primary": colors.primary,
@@ -282,20 +269,23 @@ export function MuseumSectionLayout({
         } as React.CSSProperties
       }
     >
-      <div
-        className="pointer-events-none absolute inset-0 opacity-60 hall-glow"
-      />
+      <div className="pointer-events-none absolute inset-0 opacity-60 hall-glow" />
 
       {/* Threshold Divider */}
       <div className="absolute top-0 inset-x-0 w-full flex items-center justify-center pointer-events-none opacity-40 mix-blend-multiply">
-         <div className="flex-1 h-px bg-gradient-to-r from-transparent to-[var(--hall-primary)]" />
-         <span className="px-4 font-mono text-[8px] font-bold text-[var(--hall-primary)] tracking-[0.3em] uppercase">
-             ━━ TRANSITION / TONE {tone.toUpperCase()} ━━
-         </span>
-         <div className="flex-1 h-px bg-gradient-to-l from-transparent to-[var(--hall-primary)]" />
+        <div className="flex-1 h-px bg-gradient-to-r from-transparent to-[var(--hall-primary)]" />
+        <span className="px-4 font-mono text-[8px] font-bold text-[var(--hall-primary)] tracking-[0.3em] uppercase">
+          ━━ TRANSITION / TONE {tone.toUpperCase()} ━━
+        </span>
+        <div className="flex-1 h-px bg-gradient-to-l from-transparent to-[var(--hall-primary)]" />
       </div>
 
-      <div className={cn("mx-auto w-full px-4 sm:px-6 lg:px-8 relative z-10", widthClasses[width])}>
+      <div
+        className={cn(
+          "mx-auto w-full px-4 sm:px-6 lg:px-8 relative z-10",
+          widthClasses[width],
+        )}
+      >
         <SectionHeader
           eyebrow={eyebrow}
           title={title}

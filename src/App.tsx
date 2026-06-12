@@ -15,17 +15,37 @@ import { ModuleSkeleton } from "@/components/common/ModuleSkeleton";
 
 import { motion, useScroll, useTransform } from "motion/react";
 
-const ChessModule = lazy(() => import("./components/chess/ChessModule").then((m) => ({ default: m.ChessModule })));
-const BasketballModule = lazy(() => import("./components/BasketballModule").then((m) => ({ default: m.BasketballModule })));
-const GameMediaModule = lazy(() => import("./components/GameMediaModule").then((m) => ({ default: m.GameMediaModule })));
-const WateringSystemModule = lazy(() => import("./components/WateringSystemModule").then((m) => ({ default: m.WateringSystemModule })));
+const ChessModule = lazy(() =>
+  import("./components/chess/ChessModule").then((m) => ({
+    default: m.ChessModule,
+  })),
+);
+const BasketballModule = lazy(() =>
+  import("./components/BasketballModule").then((m) => ({
+    default: m.BasketballModule,
+  })),
+);
+const GameMediaModule = lazy(() =>
+  import("./components/GameMediaModule").then((m) => ({
+    default: m.GameMediaModule,
+  })),
+);
+const WateringSystemModule = lazy(() =>
+  import("./components/WateringSystemModule").then((m) => ({
+    default: m.WateringSystemModule,
+  })),
+);
 
 const SpectrumSpine = () => {
   const { scrollYProgress } = useScroll();
-  
+
   // Use scroll progress to shift colors
-  const color1 = useTransform(scrollYProgress, [0, 0.25, 0.5, 0.75, 1], ["#FF006E", "#FF9F1C", "#06D6A0", "#00C2FF", "#8338EC"]);
-  
+  const color1 = useTransform(
+    scrollYProgress,
+    [0, 0.25, 0.5, 0.75, 1],
+    ["#FF006E", "#FF9F1C", "#06D6A0", "#00C2FF", "#8338EC"],
+  );
+
   const gradient = useTransform(
     scrollYProgress,
     [0, 0.25, 0.5, 0.75, 1],
@@ -34,44 +54,45 @@ const SpectrumSpine = () => {
       "linear-gradient(to bottom, #FF9F1C, #FFE66D)",
       "linear-gradient(to bottom, #06D6A0, #00C2FF)",
       "linear-gradient(to bottom, #00C2FF, #3A86FF)",
-      "linear-gradient(to bottom, #8338EC, #FF006E)"
-    ]
+      "linear-gradient(to bottom, #8338EC, #FF006E)",
+    ],
   );
-  
+
   // Scale the inner progress bar
   const scaleY = useTransform(scrollYProgress, [0, 1], [0.1, 1]);
 
   return (
     <div className="fixed inset-y-0 left-0 w-1.5 sm:w-2 md:left-6 md:my-32 md:rounded-full bg-white/50 border border-[rgba(15,23,42,0.05)] overflow-hidden pointer-events-none z-50 shadow-sm backdrop-blur-md">
-       {/* Background structural tube */}
-       <div className="absolute inset-0 opacity-40 bg-gradient-to-b from-transparent via-white to-transparent" />
-       
-       {/* The filling liquid spectrum */}
-       <motion.div 
-         className="absolute top-0 left-0 right-0 origin-top blur-[1px]"
-         style={{
-           height: "100%",
-           scaleY,
-           background: gradient
-         }}
-       >
-          <motion.div 
-             className="absolute inset-0 mix-blend-overlay"
-             style={{
-               backgroundImage: "linear-gradient(to bottom, transparent, rgba(255,255,255,0.8))"
-             }}
-          />
-       </motion.div>
+      {/* Background structural tube */}
+      <div className="absolute inset-0 opacity-40 bg-gradient-to-b from-transparent via-white to-transparent" />
 
-       {/* Current active glow indicator moving down */}
-       <motion.div
-         className="absolute w-full h-12 rounded-full blur-[8px] opacity-60"
-         style={{
-           top: useTransform(scrollYProgress, [0, 1], ["0%", "100%"]),
-           translateY: "-50%",
-           backgroundColor: color1,
-         }}
-       />
+      {/* The filling liquid spectrum */}
+      <motion.div
+        className="absolute top-0 left-0 right-0 origin-top blur-[1px]"
+        style={{
+          height: "100%",
+          scaleY,
+          background: gradient,
+        }}
+      >
+        <motion.div
+          className="absolute inset-0 mix-blend-overlay"
+          style={{
+            backgroundImage:
+              "linear-gradient(to bottom, transparent, rgba(255,255,255,0.8))",
+          }}
+        />
+      </motion.div>
+
+      {/* Current active glow indicator moving down */}
+      <motion.div
+        className="absolute w-full h-12 rounded-full blur-[8px] opacity-60"
+        style={{
+          top: useTransform(scrollYProgress, [0, 1], ["0%", "100%"]),
+          translateY: "-50%",
+          backgroundColor: color1,
+        }}
+      />
     </div>
   );
 };
@@ -102,26 +123,48 @@ function AppContent() {
           <Route path="/fun" element={<FunPage />} />
           <Route path="/garden" element={<GardenPage />} />
           <Route path="/contact" element={<ContactPage />} />
-          <Route path="/chess" element={
-            <Suspense fallback={<ModuleSkeleton label="Loading Chess Archive..." />}>
-              <ChessModule />
-            </Suspense>
-          } />
-          <Route path="/basketball" element={
-            <Suspense fallback={<ModuleSkeleton label="Loading Basketball Archive..." />}>
-              <BasketballModule />
-            </Suspense>
-          } />
-          <Route path="/media" element={
-            <Suspense fallback={<ModuleSkeleton label="Loading Media Universe..." />}>
-              <GameMediaModule />
-            </Suspense>
-          } />
-          <Route path="/watering" element={
-            <Suspense fallback={<ModuleSkeleton label="Loading Watering System..." />}>
-              <WateringSystemModule />
-            </Suspense>
-          } />
+          <Route
+            path="/chess"
+            element={
+              <Suspense
+                fallback={<ModuleSkeleton label="Loading Chess Archive..." />}
+              >
+                <ChessModule />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/basketball"
+            element={
+              <Suspense
+                fallback={
+                  <ModuleSkeleton label="Loading Basketball Archive..." />
+                }
+              >
+                <BasketballModule />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/media"
+            element={
+              <Suspense
+                fallback={<ModuleSkeleton label="Loading Media Universe..." />}
+              >
+                <GameMediaModule />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/watering"
+            element={
+              <Suspense
+                fallback={<ModuleSkeleton label="Loading Watering System..." />}
+              >
+                <WateringSystemModule />
+              </Suspense>
+            }
+          />
         </Routes>
         <BackToTop />
       </main>

@@ -9,16 +9,16 @@
   --font-body: "Plus Jakarta Sans", sans-serif;
   --font-label: "JetBrains Mono", monospace;
 
-  --museum-paper: #FFF8EC;
-  --museum-paper-deep: #F1DFBD;
-  --museum-ink: #18120D;
-  --museum-brown: #3E2723;
+  --museum-paper: #fff8ec;
+  --museum-paper-deep: #f1dfbd;
+  --museum-ink: #18120d;
+  --museum-brown: #3e2723;
 
-  --accent-pink: #FF2E88;
-  --accent-orange: #FF9F1C;
-  --accent-cyan: #00C2FF;
-  --accent-green: #06D6A0;
-  --accent-purple: #8338EC;
+  --accent-pink: #ff2e88;
+  --accent-orange: #ff9f1c;
+  --accent-cyan: #00c2ff;
+  --accent-green: #06d6a0;
+  --accent-purple: #8338ec;
 
   --card-ivory: rgba(255, 252, 244, 0.82);
   --card-strong: rgba(255, 255, 255, 0.94);
@@ -28,8 +28,8 @@
   --canvas: var(--museum-paper);
   --canvas-soft: var(--museum-paper-deep);
   --ink: var(--museum-ink);
-  --ink-soft: #4A3E38;
-  --ink-muted: #8E7C74;
+  --ink-soft: #4a3e38;
+  --ink-muted: #8e7c74;
 
   --border: var(--line-soft);
   --border-strong: var(--line-strong);
@@ -43,10 +43,26 @@
   body {
     @apply text-[var(--lab-text)] font-body antialiased;
     background:
-      radial-gradient(circle at 10% 10%, rgba(255, 0, 110, 0.12), transparent 30%),
-      radial-gradient(circle at 90% 8%, rgba(0, 194, 255, 0.14), transparent 32%),
-      radial-gradient(circle at 18% 78%, rgba(6, 214, 160, 0.10), transparent 30%),
-      radial-gradient(circle at 82% 82%, rgba(255, 159, 28, 0.12), transparent 32%),
+      radial-gradient(
+        circle at 10% 10%,
+        rgba(255, 0, 110, 0.12),
+        transparent 30%
+      ),
+      radial-gradient(
+        circle at 90% 8%,
+        rgba(0, 194, 255, 0.14),
+        transparent 32%
+      ),
+      radial-gradient(
+        circle at 18% 78%,
+        rgba(6, 214, 160, 0.1),
+        transparent 30%
+      ),
+      radial-gradient(
+        circle at 82% 82%,
+        rgba(255, 159, 28, 0.12),
+        transparent 32%
+      ),
       linear-gradient(180deg, #fffdf8 0%, #f8fafc 48%, #fff7ed 100%);
     overflow-x: hidden;
   }
@@ -113,10 +129,26 @@
 @layer utilities {
   .rainbow-lab-bg {
     background:
-      radial-gradient(circle at 8% 12%, rgba(255, 0, 110, 0.14), transparent 28%),
-      radial-gradient(circle at 88% 8%, rgba(0, 194, 255, 0.15), transparent 30%),
-      radial-gradient(circle at 20% 75%, rgba(6, 214, 160, 0.12), transparent 28%),
-      radial-gradient(circle at 78% 82%, rgba(255, 159, 28, 0.13), transparent 30%),
+      radial-gradient(
+        circle at 8% 12%,
+        rgba(255, 0, 110, 0.14),
+        transparent 28%
+      ),
+      radial-gradient(
+        circle at 88% 8%,
+        rgba(0, 194, 255, 0.15),
+        transparent 30%
+      ),
+      radial-gradient(
+        circle at 20% 75%,
+        rgba(6, 214, 160, 0.12),
+        transparent 28%
+      ),
+      radial-gradient(
+        circle at 78% 82%,
+        rgba(255, 159, 28, 0.13),
+        transparent 30%
+      ),
       linear-gradient(180deg, #fffdf8 0%, #f8fafc 48%, #fff7ed 100%);
   }
 
@@ -158,7 +190,11 @@
   .hall-glow {
     background:
       radial-gradient(circle at 20% 10%, var(--hall-soft), transparent 34%),
-      radial-gradient(circle at 90% 70%, color-mix(in srgb, var(--hall-secondary) 14%, transparent), transparent 36%);
+      radial-gradient(
+        circle at 90% 70%,
+        color-mix(in srgb, var(--hall-secondary) 14%, transparent),
+        transparent 36%
+      );
   }
 
   .rainbow-rule {
@@ -186,7 +222,11 @@
     inset: 0;
     padding: 1px;
     border-radius: inherit;
-    background: linear-gradient(135deg, var(--hall-primary), var(--hall-secondary));
+    background: linear-gradient(
+      135deg,
+      var(--hall-primary),
+      var(--hall-secondary)
+    );
     mask:
       linear-gradient(#000 0 0) content-box,
       linear-gradient(#000 0 0);
@@ -290,16 +330,15 @@
     inset: 8% 4% auto auto;
     width: min(620px, 70vw);
     height: min(620px, 70vw);
-    background:
-      conic-gradient(
-        from 180deg,
-        rgba(255, 0, 110, 0.22),
-        rgba(255, 159, 28, 0.18),
-        rgba(6, 214, 160, 0.18),
-        rgba(0, 194, 255, 0.20),
-        rgba(131, 56, 236, 0.20),
-        rgba(255, 0, 110, 0.22)
-      );
+    background: conic-gradient(
+      from 180deg,
+      rgba(255, 0, 110, 0.22),
+      rgba(255, 159, 28, 0.18),
+      rgba(6, 214, 160, 0.18),
+      rgba(0, 194, 255, 0.2),
+      rgba(131, 56, 236, 0.2),
+      rgba(255, 0, 110, 0.22)
+    );
     filter: blur(70px);
     opacity: 0.8;
     pointer-events: none;
@@ -307,9 +346,21 @@
 
   .contact-portal {
     background:
-      radial-gradient(circle at 20% 20%, rgba(255, 0, 110, 0.18), transparent 32%),
-      radial-gradient(circle at 80% 20%, rgba(255, 159, 28, 0.18), transparent 32%),
-      radial-gradient(circle at 50% 100%, rgba(131, 56, 236, 0.16), transparent 38%),
+      radial-gradient(
+        circle at 20% 20%,
+        rgba(255, 0, 110, 0.18),
+        transparent 32%
+      ),
+      radial-gradient(
+        circle at 80% 20%,
+        rgba(255, 159, 28, 0.18),
+        transparent 32%
+      ),
+      radial-gradient(
+        circle at 50% 100%,
+        rgba(131, 56, 236, 0.16),
+        transparent 38%
+      ),
       rgba(255, 255, 255, 0.78);
   }
 
@@ -332,8 +383,16 @@
     width: 100%;
     overflow-x: hidden;
     background:
-      radial-gradient(circle at 20% 10%, rgba(212, 175, 55, 0.18), transparent 32%),
-      radial-gradient(circle at 80% 20%, rgba(131, 56, 236, 0.14), transparent 34%),
+      radial-gradient(
+        circle at 20% 10%,
+        rgba(212, 175, 55, 0.18),
+        transparent 32%
+      ),
+      radial-gradient(
+        circle at 80% 20%,
+        rgba(131, 56, 236, 0.14),
+        transparent 34%
+      ),
       linear-gradient(180deg, #080604 0%, #14100b 100%);
     color: white;
   }
@@ -525,19 +584,51 @@
 
   .homepage-rainbow-bg {
     background:
-      radial-gradient(circle at 10% 20%, rgba(255, 77, 109, 0.18), transparent 30%),
-      radial-gradient(circle at 90% 10%, rgba(58, 134, 255, 0.16), transparent 32%),
-      radial-gradient(circle at 20% 85%, rgba(6, 214, 160, 0.14), transparent 30%),
-      radial-gradient(circle at 85% 80%, rgba(131, 56, 236, 0.14), transparent 32%),
+      radial-gradient(
+        circle at 10% 20%,
+        rgba(255, 77, 109, 0.18),
+        transparent 30%
+      ),
+      radial-gradient(
+        circle at 90% 10%,
+        rgba(58, 134, 255, 0.16),
+        transparent 32%
+      ),
+      radial-gradient(
+        circle at 20% 85%,
+        rgba(6, 214, 160, 0.14),
+        transparent 30%
+      ),
+      radial-gradient(
+        circle at 85% 80%,
+        rgba(131, 56, 236, 0.14),
+        transparent 32%
+      ),
       var(--canvas);
   }
 
   .hero-entrance-bg {
     background:
-      radial-gradient(circle at 8% 18%, rgba(255, 46, 136, 0.22), transparent 32%),
-      radial-gradient(circle at 88% 12%, rgba(58, 134, 255, 0.20), transparent 34%),
-      radial-gradient(circle at 22% 86%, rgba(6, 214, 160, 0.16), transparent 30%),
-      radial-gradient(circle at 84% 82%, rgba(255, 159, 28, 0.18), transparent 32%),
+      radial-gradient(
+        circle at 8% 18%,
+        rgba(255, 46, 136, 0.22),
+        transparent 32%
+      ),
+      radial-gradient(
+        circle at 88% 12%,
+        rgba(58, 134, 255, 0.2),
+        transparent 34%
+      ),
+      radial-gradient(
+        circle at 22% 86%,
+        rgba(6, 214, 160, 0.16),
+        transparent 30%
+      ),
+      radial-gradient(
+        circle at 84% 82%,
+        rgba(255, 159, 28, 0.18),
+        transparent 32%
+      ),
       linear-gradient(135deg, #fff8ec 0%, #fffdf8 46%, #fff1d6 100%);
   }
 
@@ -688,36 +779,52 @@
   .capability-forge-shell {
     border: 2px solid rgba(62, 39, 35, 0.28);
     background:
-      radial-gradient(circle at 20% 10%, rgba(255,159,28,0.08), transparent 36%),
-      linear-gradient(135deg, rgba(255,248,236,.96), rgba(255,253,248,.86));
+      radial-gradient(
+        circle at 20% 10%,
+        rgba(255, 159, 28, 0.08),
+        transparent 36%
+      ),
+      linear-gradient(
+        135deg,
+        rgba(255, 248, 236, 0.96),
+        rgba(255, 253, 248, 0.86)
+      );
     border-radius: 36px;
     box-shadow:
       0 40px 120px rgba(62, 39, 35, 0.14),
-      inset 0 1px 0 rgba(255,255,255,.95);
+      inset 0 1px 0 rgba(255, 255, 255, 0.95);
   }
 
   .forge-reactor-panel {
-    background:
-      linear-gradient(180deg, rgba(24,18,13,.96), rgba(62,39,35,.92));
+    background: linear-gradient(
+      180deg,
+      rgba(24, 18, 13, 0.96),
+      rgba(62, 39, 35, 0.92)
+    );
     color: #fff8ec;
-    border: 1px solid rgba(255,255,255,.16);
+    border: 1px solid rgba(255, 255, 255, 0.16);
     border-radius: 28px;
     box-shadow:
-      inset 0 0 0 1px rgba(255,255,255,.06),
-      0 24px 80px rgba(24,18,13,.28);
+      inset 0 0 0 1px rgba(255, 255, 255, 0.06),
+      0 24px 80px rgba(24, 18, 13, 0.28);
   }
 
   .forge-evidence-dossier {
-    background: rgba(255,255,255,.72);
-    border: 1px solid rgba(62,39,35,.14);
+    background: rgba(255, 255, 255, 0.72);
+    border: 1px solid rgba(62, 39, 35, 0.14);
     border-radius: 18px;
   }
-  
-  .forge-domain-rail {}
-  .forge-domain-button {}
-  .forge-tool-chip {}
-  .forge-signal-meter {}
-  .forge-relationship-node {}
+
+  .forge-domain-rail {
+  }
+  .forge-domain-button {
+  }
+  .forge-tool-chip {
+  }
+  .forge-signal-meter {
+  }
+  .forge-relationship-node {
+  }
 
   /* Neo-Brutalist Module Architecture Utilities */
   .module-isolation-wrapper {

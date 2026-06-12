@@ -23,7 +23,9 @@ export function QuoteTemple() {
                   : "border-white/10 text-white/55 hover:bg-white/10"
               }`}
             >
-              <div className="font-medium text-white line-clamp-1">{quote.author}</div>
+              <div className="font-medium text-white line-clamp-1">
+                {quote.author}
+              </div>
             </button>
           ))}
         </div>
@@ -41,9 +43,7 @@ export function QuoteTemple() {
             “{active.text}”
           </blockquote>
 
-          <div className="mt-6 text-xl text-white/70">
-            — {active.author}
-          </div>
+          <div className="mt-6 text-xl text-white/70">— {active.author}</div>
 
           <div className="mt-12 rounded-2xl border border-white/10 bg-white/5 p-5 md:p-8 backdrop-blur-sm">
             <div className="text-xs font-mono uppercase tracking-[0.18em] text-white/40">

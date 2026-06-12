@@ -21,7 +21,8 @@ export const museumSections: MuseumSection[] = [
     id: "projects",
     code: "HALL 01",
     title: "Project Laboratory",
-    subtitle: "Selected builds and prototypes that show how I design, structure, and implement web interfaces.",
+    subtitle:
+      "Selected builds and prototypes that show how I design, structure, and implement web interfaces.",
     status: "Active",
     category: "Proof of Work",
   },
@@ -29,7 +30,8 @@ export const museumSections: MuseumSection[] = [
     id: "forge",
     code: "HALL 02",
     title: "The Forge",
-    subtitle: "A living map of the tools I use, the systems I am learning, and the projects that prove them.",
+    subtitle:
+      "A living map of the tools I use, the systems I am learning, and the projects that prove them.",
     status: "Active",
     category: "Capabilities",
   },
@@ -55,7 +57,8 @@ export const museumSections: MuseumSection[] = [
     id: "garden",
     code: "HALL 05",
     title: "Digital Garden",
-    subtitle: "Notes, essays, fragments, and reflections from the systems I build and the worlds I study.",
+    subtitle:
+      "Notes, essays, fragments, and reflections from the systems I build and the worlds I study.",
     status: "Active",
     category: "Writing",
   },
@@ -63,7 +66,8 @@ export const museumSections: MuseumSection[] = [
     id: "signal",
     code: "HALL 06",
     title: "Signal Room",
-    subtitle: "The route ends here. Open a channel for collaboration, project discussion, or contact.",
+    subtitle:
+      "The route ends here. Open a channel for collaboration, project discussion, or contact.",
     status: "Active",
     category: "Contact",
   },

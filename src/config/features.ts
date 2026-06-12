@@ -1,4 +1,4 @@
-import { env } from 'process';
+import { env } from "process";
 
 export const features = {
   aiPlayground: import.meta.env.VITE_ENABLE_AI_PLAYGROUND !== "false",

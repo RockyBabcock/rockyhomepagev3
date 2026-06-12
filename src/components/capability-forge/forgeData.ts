@@ -1,0 +1,30 @@
+import {
+  MonitorSmartphone,
+  Server,
+  Settings,
+  Sparkles,
+  Cpu,
+  Box,
+  Disc,
+  Speaker,
+  Fingerprint,
+  Braces,
+  Maximize,
+  TerminalSquare,
+  Database,
+} from "lucide-react";
+
+export const iconMap: Record<string, any> = {
+  frontend: MonitorSmartphone,
+  backend: Server,
+  devops: Settings,
+  design: Sparkles,
+  ai: Cpu,
+  web3: Box,
+  creative: Disc,
+  audio: Speaker,
+  hardware: Fingerprint,
+  language: Braces,
+  spatial: Maximize,
+  tooling: TerminalSquare,
+};
