@@ -1,6 +1,7 @@
 import React from "react";
 import { ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 type PersonalWorldPreviewProps = {
@@ -10,6 +11,7 @@ type PersonalWorldPreviewProps = {
   color: string;
   href: string;
   className?: string;
+  delay?: number;
 };
 
 export function PersonalWorldPreview({
@@ -19,15 +21,34 @@ export function PersonalWorldPreview({
   color,
   href,
   className,
+  delay = 0,
 }: PersonalWorldPreviewProps) {
   return (
-    <Link
-      to={href}
-      className={cn(
-        "group relative p-8 md:p-10 personal-world-card overflow-hidden",
-        "flex flex-col justify-between border border-[var(--border-strong)] rounded-2xl bg-[#080808]",
-        className,
-      )}
+    <motion.div
+      initial={{ y: 20, opacity: 0 }}
+      whileInView={{ y: 0, opacity: 1 }}
+      viewport={{ once: true, margin: "-100px" }}
+      animate={{
+        y: [0, -8, 0],
+      }}
+      transition={{
+        y: {
+          duration: 6,
+          repeat: Infinity,
+          repeatType: "reverse",
+          ease: "easeInOut",
+          delay: delay * 0.5,
+        },
+        opacity: { duration: 0.8 },
+      }}
+      className={cn("h-full", className)}
+    >
+      <Link
+        to={href}
+        className={cn(
+          "group relative p-8 md:p-10 personal-world-card overflow-hidden h-full",
+          "flex flex-col justify-between border border-[var(--border-strong)] rounded-2xl bg-[#080808]",
+        )}
       style={{
         boxShadow: `0 30px 90px rgba(0,0,0,0.5)`,
       }}
@@ -76,5 +97,6 @@ export function PersonalWorldPreview({
         </span>
       </div>
     </Link>
+    </motion.div>
   );
 }

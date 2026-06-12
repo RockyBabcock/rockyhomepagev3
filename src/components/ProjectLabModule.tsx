@@ -12,32 +12,70 @@ import {
   GitMerge,
 } from "lucide-react";
 
+import { motion } from "framer-motion";
+
 const SystemDiagramPlaceholder = ({ projectId }: { projectId: string }) => {
-  // Return different simple abstract diagrams based on ID to make it look like a system diagram
   if (projectId === "rocky-homepage-v3") {
     return (
-      <div className="w-full h-48 bg-[#FAFAFA] border border-[var(--border)] rounded-xl flex items-center justify-center p-4 gap-4 overflow-hidden relative">
-        <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] opacity-30 mask-image:linear-gradient(to_bottom,white,transparent)"></div>
-        <div className="flex flex-col gap-2 z-10 w-1/3">
-          <div className="bg-white border rounded-lg p-2 text-[10px] font-mono text-center shadow-sm">
-            Routing Layer
+      <div className="w-full min-h-[220px] bg-[#111] border border-[rgba(255,255,255,0.1)] rounded-xl flex flex-col md:flex-row items-center justify-between p-6 gap-6 relative overflow-hidden text-white shadow-2xl">
+        <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)] [background-size:16px_16px] opacity-20"></div>
+
+        {/* SVG Connection Lines */}
+        <svg
+          className="absolute inset-0 w-full h-full pointer-events-none"
+          preserveAspectRatio="none"
+        >
+          <motion.path
+            d="M 120 110 C 200 110, 200 60, 300 60"
+            fill="none"
+            stroke="var(--accent-orange)"
+            strokeWidth="2"
+            strokeDasharray="4 4"
+            className="opacity-50"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 1.5, ease: "easeInOut" }}
+          />
+          <motion.path
+            d="M 120 110 C 200 110, 200 160, 300 160"
+            fill="none"
+            stroke="var(--accent-cyan)"
+            strokeWidth="2"
+            strokeDasharray="4 4"
+            className="opacity-50"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 1.5, ease: "easeInOut", delay: 0.2 }}
+          />
+        </svg>
+
+        <div className="flex flex-col gap-3 z-10 w-full md:w-[120px] shrink-0">
+          <div className="bg-[#1a1a1a] border border-[rgba(255,255,255,0.2)] rounded p-2.5 text-[9px] font-mono text-center shadow-lg relative">
+            <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-rainbow-red)] absolute -left-0.5 -top-0.5 animate-pulse" />
+            MuseumEngineHero
           </div>
-          <div className="bg-white border rounded-lg p-2 text-[10px] font-mono text-center shadow-sm border-l-2 border-l-[var(--hall-primary)]">
-            Hero Entrance
+          <div className="bg-[var(--museum-brown)] text-white border border-[rgba(255,255,255,0.2)] rounded p-2.5 text-[9px] font-mono text-center shadow-lg">
+            ScrollEngine
           </div>
-          <div className="bg-white border rounded-lg p-2 text-[10px] font-mono text-center shadow-sm border-l-2 border-l-[var(--orange)]">
-            Capability Forge
+          <div className="bg-[#1a1a1a] border border-[rgba(255,255,255,0.2)] rounded p-2.5 text-[9px] font-mono text-center shadow-lg">
+            CapabilityForge
           </div>
         </div>
-        <div className="font-mono text-[#CCC]">→</div>
-        <div className="bg-[#121211] text-white border border-[#333] rounded-lg p-4 text-[10px] font-mono text-center shadow-lg z-10 w-1/3 flex flex-col gap-2">
-          <Layers className="w-4 h-4 mx-auto text-[var(--hall-primary)]" />
-          <span>
-            React
+
+        <div className="hidden md:flex flex-col gap-1 items-center z-10 flex-1">
+          <span className="font-mono text-[8px] uppercase tracking-widest text-white/40">
+            React State
+          </span>
+          <div className="w-full h-px bg-gradient-to-r from-transparent via-[var(--accent-orange)] to-transparent opacity-30" />
+        </div>
+
+        <div className="bg-[#222] border border-[rgba(255,255,255,0.1)] rounded-lg p-5 flex flex-col items-center gap-3 z-10 w-full md:w-[150px] shrink-0 shadow-[0_0_30px_rgba(0,0,0,0.5)] relative">
+          <div className="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-[var(--accent-cyan)] to-transparent opacity-50" />
+          <Layers className="w-6 h-6 text-[var(--accent-cyan)]" />
+          <span className="text-[10px] font-mono text-center tracking-widest uppercase font-bold">
+            Interactive
             <br />
-            Component
-            <br />
-            Tree
+            Renderer
           </span>
         </div>
       </div>

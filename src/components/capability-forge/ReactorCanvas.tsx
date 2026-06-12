@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useMemo } from "react";
+import { motion } from "framer-motion";
 import { cn } from "../../lib/utils";
-import { TechItem, levelColors } from "../../data/techStack";
+import { TechItem, techStackData, levelColors } from "../../data/techStack";
 
 interface Props {
   selectedTech: TechItem;
@@ -15,163 +16,219 @@ export function ReactorCanvas({
   accentColor,
   setSelectedTechId,
 }: Props) {
+  const orbitNodes = useMemo(() => {
+    let related = selectedTech.relatedTools || [];
+    if (related.length === 0) {
+      related = displayedTechs
+        .filter((t) => t.id !== selectedTech.id)
+        .slice(0, 3)
+        .map((t) => t.name);
+    }
+    return related.slice(0, 5); // max 5 for clean layout
+  }, [selectedTech, displayedTechs]);
+
+  const secondaryNodes = displayedTechs.filter(
+    (t) => t.id !== selectedTech.id && !orbitNodes.includes(t.name),
+  );
+
   return (
     <div className="lg:col-span-6 flex flex-col gap-6 w-full max-w-full">
-      <div className="forge-reactor-panel p-6 md:p-8 flex flex-col relative overflow-hidden w-full bg-[#111] text-white rounded-2xl shadow-[var(--shadow-elevated)] border border-[#333]">
+      <div className="forge-reactor-panel p-6 md:p-10 flex flex-col items-center justify-center relative overflow-hidden w-full bg-[var(--museum-ink)] text-white rounded-xl shadow-2xl border border-[rgba(255,255,255,0.1)] min-h-[400px]">
+        {/* Background glow */}
         <div
-          className="absolute -top-10 -right-10 w-64 h-64 blur-[80px] opacity-[0.15] rounded-full pointer-events-none"
+          className="absolute inset-0 opacity-20 blur-[100px] pointer-events-none transition-colors duration-1000"
           style={{ backgroundColor: accentColor }}
         />
 
-        <div className="flex justify-between items-start mb-6 relative z-10">
-          <div className="pr-4">
-            <div className="flex items-center gap-2 mb-2">
-              <span className="px-2 py-0.5 rounded-sm bg-white/10 border border-white/20 text-[9px] font-mono font-bold uppercase tracking-wider text-white">
-                {selectedTech.level}
-              </span>
-              <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-white/50">
-                {selectedTech.category}
-              </span>
-            </div>
-            <h2 className="text-3xl md:text-5xl font-space font-bold tracking-tight break-words">
-              {selectedTech.name}
-            </h2>
-          </div>
-          <div className="flex flex-col gap-1 items-end shrink-0">
-            <span className="text-[9px] font-mono uppercase text-white/40">
-              Status
+        {/* Status bar top */}
+        <div className="absolute top-4 left-6 right-6 flex justify-between items-start z-20">
+          <div className="flex flex-col">
+            <span className="text-[9px] font-mono font-bold tracking-widest text-white/50 uppercase">
+              Active Core
             </span>
-            <span className="flex items-center gap-1.5 text-[10px] font-mono font-bold text-white uppercase">
-              <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" />{" "}
-              Active
+            <span className="text-xs font-mono font-bold tracking-wider text-white uppercase">
+              {selectedTech.level}
+            </span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="text-[9px] font-mono font-bold tracking-widest text-[#06d6a0] uppercase flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#06d6a0] animate-pulse" />{" "}
+              Stable
             </span>
           </div>
         </div>
 
-        <div className="mb-8 relative z-10 w-full">
-          <span className="text-[10px] font-mono uppercase font-bold tracking-widest text-[#AAA] mb-2 block">
-            // System Role
-          </span>
-          <p
-            className="text-sm md:text-base font-medium leading-relaxed opacity-90 border-l-2 pl-4 break-words"
+        {/* Reactor Visual Engine */}
+        <div className="relative w-full max-w-[320px] aspect-square flex items-center justify-center my-6 z-10">
+          {/* SVG Connections & Scan Rings */}
+          <svg
+            className="absolute inset-0 w-full h-full overflow-visible"
+            viewBox="0 0 320 320"
+          >
+            <defs>
+              <radialGradient id="coreGlow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stopColor={accentColor} stopOpacity="0.4" />
+                <stop offset="100%" stopColor={accentColor} stopOpacity="0" />
+              </radialGradient>
+            </defs>
+
+            {/* Center Glow */}
+            <circle cx="160" cy="160" r="100" fill="url(#coreGlow)" />
+
+            {/* Scanning Rings */}
+            <motion.circle
+              cx="160"
+              cy="160"
+              r="60"
+              fill="none"
+              stroke={accentColor}
+              strokeWidth="1"
+              strokeDasharray="4 8"
+              animate={{ rotate: 360 }}
+              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+              className="opacity-50"
+            />
+            <motion.circle
+              cx="160"
+              cy="160"
+              r="100"
+              fill="none"
+              stroke="rgba(255,255,255,0.1)"
+              strokeWidth="1"
+              strokeDasharray="2 6"
+              animate={{ rotate: -360 }}
+              transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+            />
+
+            {/* Dynamic Connection Lines to Orbits */}
+            {orbitNodes.map((_, i) => {
+              const angle = i * (360 / orbitNodes.length) * (Math.PI / 180);
+              const radius = 120;
+              const targetX = 160 + radius * Math.cos(angle);
+              const targetY = 160 + radius * Math.sin(angle);
+              return (
+                <motion.line
+                  key={i}
+                  x1="160"
+                  y1="160"
+                  x2={targetX}
+                  y2={targetY}
+                  stroke={accentColor}
+                  strokeWidth="1.5"
+                  className="opacity-40"
+                  initial={{ pathLength: 0 }}
+                  animate={{ pathLength: 1 }}
+                  transition={{ duration: 0.5, delay: i * 0.1 }}
+                />
+              );
+            })}
+          </svg>
+
+          {/* Core Output */}
+          <motion.div
+            key={selectedTech.id}
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            className="relative z-20 flex flex-col items-center justify-center w-28 h-28 rounded-full bg-[#111] border-2 shadow-[0_0_30px_rgba(0,0,0,0.5)]"
             style={{ borderColor: accentColor }}
           >
-            {selectedTech.description}
-          </p>
-        </div>
+            <span className="font-space font-bold text-lg leading-tight text-center px-2 word-break-break-word">
+              {selectedTech.name}
+            </span>
+          </motion.div>
 
-        <div className="grid grid-cols-2 gap-6 mb-8 relative z-10 border-t border-white/10 pt-6">
-          <div className="flex flex-col gap-1">
-            <span className="text-[9px] font-mono uppercase text-[#888] font-bold mb-1">
-              Operational Confidence
-            </span>
-            <div className="flex gap-1">
-              {[...Array(10)].map((_, i) => (
-                <span
-                  key={i}
-                  className={cn(
-                    "h-1.5 flex-1 rounded-sm",
-                    i < (selectedTech.proficiency || 8)
-                      ? "opacity-100"
-                      : "opacity-20",
-                  )}
-                  style={{
-                    backgroundColor:
-                      i < (selectedTech.proficiency || 8)
-                        ? accentColor
-                        : "#666",
-                  }}
-                />
-              ))}
-            </div>
-            <span className="text-[9px] font-mono text-right text-white/50 mt-1">
-              {(selectedTech.proficiency || 8) * 10}%
-            </span>
-          </div>
-          <div className="flex flex-col gap-1">
-            <span className="text-[9px] font-mono uppercase text-[#888] font-bold mb-1">
-              Deployment Readiness
-            </span>
-            <div className="flex gap-1">
-              {[...Array(10)].map((_, i) => (
-                <span
-                  key={i}
-                  className={cn(
-                    "h-1.5 flex-1 rounded-sm",
-                    i < 9 ? "opacity-100" : "opacity-20",
-                  )}
-                  style={{
-                    backgroundColor: i < 9 ? accentColor : "#666",
-                  }}
-                />
-              ))}
-            </div>
-            <span className="text-[9px] font-mono text-right text-white/50 mt-1">
-              90%
-            </span>
-          </div>
-        </div>
+          {/* Orbital Nodes */}
+          {orbitNodes.map((toolName, i) => {
+            const angle =
+              (i * (360 / orbitNodes.length) - 90) * (Math.PI / 180);
+            const radius = 120;
+            const x = `calc(50% + ${radius * Math.cos(angle)}px)`;
+            const y = `calc(50% + ${radius * Math.sin(angle)}px)`;
 
-        {selectedTech.relatedTools && selectedTech.relatedTools.length > 0 && (
-          <div className="mt-auto relative z-10 pt-6 border-t border-white/10">
-            <span className="text-[10px] font-mono uppercase font-bold tracking-widest text-[#AAA] mb-4 block">
-              // Related Stack
-            </span>
-            <div className="relative flex flex-col md:flex-row items-start md:items-center gap-6 w-full">
-              <div
-                className="forge-relationship-node px-4 py-2 rounded border border-[var(--accent-orange)] text-[12px] font-mono font-bold text-white shadow-lg shrink-0 z-10"
-                style={{
-                  borderColor: accentColor,
-                  background: `color-mix(in srgb, ${accentColor} 15%, transparent)`,
-                  boxShadow: `0 0 20px color-mix(in srgb, ${accentColor} 20%, transparent)`,
-                }}
+            // Find if this exists in tech stack to make clickable
+            const matchedTool = techStackData.find((t) => t.name === toolName);
+
+            return (
+              <motion.button
+                key={toolName}
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.2 + i * 0.1, type: "spring" }}
+                onClick={() => matchedTool && setSelectedTechId(matchedTool.id)}
+                className={cn(
+                  "absolute w-16 h-16 rounded-full flex items-center justify-center text-[9px] font-mono font-bold leading-tight text-center px-1 z-30 transition-colors shadow-lg border",
+                  matchedTool
+                    ? "bg-[#1a1a1a] hover:bg-[#222] cursor-pointer text-white border-[rgba(255,255,255,0.2)] hover:border-white"
+                    : "bg-[#111] text-white/50 border-[rgba(255,255,255,0.05)] cursor-default",
+                )}
+                style={{ left: x, top: y, transform: "translate(-50%, -50%)" }}
               >
-                {selectedTech.name}
-              </div>
+                {toolName}
+              </motion.button>
+            );
+          })}
+        </div>
 
-              <div className="absolute left-6 top-10 bottom-4 w-px bg-white/20 md:hidden z-0" />
-              <div className="absolute left-[110px] top-6 w-12 h-px bg-white/20 hidden md:block z-0" />
-
-              <div className="flex flex-col md:flex-row gap-3 md:gap-4 flex-1 md:pl-8 relative z-10 flex-wrap">
-                {selectedTech.relatedTools.map((t) => (
-                  <div key={t} className="flex items-center gap-3 md:gap-0">
-                    <div className="w-4 h-px bg-white/20 md:hidden" />
-                    <span className="px-3 py-1.5 rounded bg-[#1f1a17] border border-white/10 text-[10px] font-mono text-[#CCC] hover:border-white/30 transition-colors">
-                      {t}
-                    </span>
-                  </div>
-                ))}
-              </div>
+        {/* Meters */}
+        <div className="w-full relative z-20 mt-4 grid grid-cols-2 gap-8 border-t border-white/10 pt-6">
+          <div className="flex flex-col gap-1">
+            <div className="flex items-end justify-between mb-1">
+              <span className="text-[9px] font-mono text-[#888] font-bold uppercase tracking-widest">
+                Proficiency
+              </span>
+              <span className="text-[10px] font-mono text-white">
+                {(selectedTech.proficiency || 8) * 10}%
+              </span>
+            </div>
+            <div className="h-1 bg-white/10 w-full overflow-hidden rounded-full">
+              <motion.div
+                className="h-full"
+                style={{ backgroundColor: accentColor }}
+                initial={{ width: 0 }}
+                animate={{ width: `${(selectedTech.proficiency || 8) * 10}%` }}
+                transition={{ duration: 1, ease: "easeOut" }}
+              />
             </div>
           </div>
-        )}
+
+          <div className="flex flex-col gap-1">
+            <div className="flex items-end justify-between mb-1">
+              <span className="text-[9px] font-mono text-[#888] font-bold uppercase tracking-widest">
+                Readiness
+              </span>
+              <span className="text-[10px] font-mono text-white">90%</span>
+            </div>
+            <div className="h-1 bg-white/10 w-full overflow-hidden rounded-full">
+              <motion.div
+                className="h-full"
+                style={{ backgroundColor: accentColor }}
+                initial={{ width: 0 }}
+                animate={{ width: `90%` }}
+                transition={{ duration: 1, ease: "easeOut" }}
+              />
+            </div>
+          </div>
+        </div>
       </div>
 
+      {/* Secondary Nodes (Cells) */}
       <div className="flex flex-col gap-3 w-full">
-        <span className="text-[10px] font-mono uppercase font-bold tracking-widest text-[var(--ink-muted)] px-1">
-          Secondary Nodes
+        <span className="text-[10px] font-mono uppercase font-bold tracking-widest text-[var(--ink-muted)]">
+          System Registry / Unlinked Nodes
         </span>
-        <div className="flex flex-wrap gap-2 w-full">
-          {displayedTechs
-            .filter((t) => t.id !== selectedTech.id)
-            .map((tool) => (
-              <button
-                key={tool.id}
-                onClick={() => setSelectedTechId(tool.id)}
-                className="forge-tool-chip px-3 py-2 rounded-lg bg-white/60 border border-[var(--border-strong)] text-[11px] font-bold font-mono text-[var(--ink-soft)] hover:bg-white hover:border-[var(--museum-brown)] hover:text-[var(--museum-ink)] transition-all outline-none focus-visible:ring-2 focus-visible:ring-[var(--museum-brown)] shadow-sm flex items-center gap-2 max-w-full"
-              >
-                <span
-                  className="w-1.5 h-1.5 rounded-full opacity-60 shrink-0"
-                  style={{
-                    backgroundColor: (levelColors as any)[tool.level] || "#aaa",
-                  }}
-                />
-                <span className="truncate">{tool.name}</span>
-              </button>
-            ))}
-          {displayedTechs.length <= 1 && (
-            <span className="text-[11px] font-mono text-[var(--ink-muted)] py-2">
-              No other nodes found.
+        <div className="flex gap-2 flex-wrap pb-2">
+          {secondaryNodes.map((tool) => (
+            <button
+              key={tool.id}
+              onClick={() => setSelectedTechId(tool.id)}
+              className="px-3 py-1.5 rounded bg-[var(--museum-paper)] border border-[rgba(62,39,35,0.1)] text-[10px] font-bold font-mono text-[var(--ink-soft)] hover:bg-white hover:border-[var(--museum-brown)] hover:text-[var(--museum-ink)] transition-all shadow-sm"
+            >
+              {tool.name}
+            </button>
+          ))}
+          {secondaryNodes.length === 0 && (
+            <span className="text-[10px] font-mono text-[var(--ink-muted)] border border-dashed border-[rgba(62,39,35,0.1)] px-3 py-1.5 rounded">
+              All filtered nodes linked.
             </span>
           )}
         </div>

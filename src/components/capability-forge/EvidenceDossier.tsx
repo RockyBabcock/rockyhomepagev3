@@ -27,7 +27,16 @@ export function EvidenceDossier({ selectedTech }: Props) {
       <div className="flex flex-col gap-8 flex-1">
         <div>
           <h4 className="text-[10px] font-mono uppercase font-bold tracking-[0.15em] text-[var(--ink-muted)] mb-3 flex items-center gap-2">
-            <CheckCircle2 className="w-3.5 h-3.5" /> Concrete Evidence
+            System Role
+          </h4>
+          <p className="text-sm font-medium leading-relaxed opacity-90 border-l-2 pl-4 border-[rgba(62,39,35,0.2)] text-[var(--ink-soft)]">
+            {selectedTech.description}
+          </p>
+        </div>
+
+        <div>
+          <h4 className="text-[10px] font-mono uppercase font-bold tracking-[0.15em] text-[var(--ink-muted)] mb-3 flex items-center gap-2">
+            <CheckCircle2 className="w-3.5 h-3.5" /> Proof Signals
           </h4>
           <ul className="space-y-3">
             {selectedTech.evidence.map((proof, i) => (
@@ -35,7 +44,7 @@ export function EvidenceDossier({ selectedTech }: Props) {
                 key={i}
                 className="bg-white border border-[rgba(62,39,35,0.08)] rounded-lg p-3 text-sm font-medium text-[var(--ink-soft)] leading-snug flex items-start gap-3 shadow-[0_2px_4px_rgba(62,39,35,0.02)] break-words"
               >
-                <span className="text-[10px] font-mono font-bold mt-0.5 opacity-40 shrink-0">
+                <span className="text-[10px] font-mono font-bold mt-0.5 text-[var(--museum-brown)] opacity-80 shrink-0">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <span>{proof}</span>
@@ -46,7 +55,7 @@ export function EvidenceDossier({ selectedTech }: Props) {
 
         <div>
           <h4 className="text-[10px] font-mono uppercase font-bold tracking-[0.15em] text-[var(--ink-muted)] mb-3 flex items-center gap-2">
-            <LayoutGrid className="w-3.5 h-3.5" /> Used In Productions
+            <LayoutGrid className="w-3.5 h-3.5" /> Used In
           </h4>
           <div className="flex flex-col gap-2">
             {selectedTech.usedIn.map((project, i) => (

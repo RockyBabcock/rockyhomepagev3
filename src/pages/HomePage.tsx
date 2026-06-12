@@ -1,6 +1,5 @@
 import React, { lazy, Suspense } from "react";
-import { ProfileModule } from "../components/ProfileModule";
-import { NowBuildingModule } from "../components/NowBuildingModule";
+import { MuseumEngineHero } from "../components/MuseumEngineHero";
 import { ProjectLabModule } from "../components/ProjectLabModule";
 import { FeaturedExhibitsWall } from "../components/FeaturedExhibitsWall";
 import { CoreCapabilitiesModule } from "../components/capability-forge/CoreCapabilitiesModule";
@@ -19,7 +18,7 @@ import { PersonalWorldPreview } from "@/components/PersonalWorldPreview";
 import { ModuleSkeleton } from "@/components/common/ModuleSkeleton";
 import { ModuleErrorBoundary } from "../components/common/ModuleErrorBoundary";
 import { SealedArchive } from "../components/SealedArchive";
-import { MuseumScrollMap } from "../components/common/MuseumScrollMap";
+import { MuseumScrollEngine } from "../components/MuseumScrollEngine";
 import { features } from "../config/features";
 
 const AIPlaygroundModule = lazy(() =>
@@ -51,8 +50,7 @@ const homeSections = [
     id: "entrance",
     component: (
       <div id="entrance-wrapper">
-        <ProfileModule />
-        <NowBuildingModule />
+        <MuseumEngineHero />
       </div>
     ),
     wrapLayout: false,
@@ -204,6 +202,7 @@ const homeSections = [
           description="A personal thinking hall about chess, constraints, and long-term planning."
           color="#D4AF37"
           href="/chess"
+          delay={0}
         />
         <PersonalWorldPreview
           title="Basketball Geometry"
@@ -211,6 +210,7 @@ const homeSections = [
           description="A cinematic archive about Spurs basketball, structure, movement, and design systems."
           color="#FF6B35"
           href="/basketball"
+          delay={1}
         />
         <PersonalWorldPreview
           title="Media Universe"
@@ -218,6 +218,7 @@ const homeSections = [
           description="Games, films, music, and visual references that shape my interface taste."
           color="#8338EC"
           href="/media"
+          delay={2}
         />
         <PersonalWorldPreview
           title="Watering System"
@@ -225,6 +226,7 @@ const homeSections = [
           description="A small personal system about routines, care, tracking, and growth."
           color="#06D6A0"
           href="/watering"
+          delay={3}
         />
       </>
     ),
@@ -272,8 +274,8 @@ const homeSections = [
 
 export default function HomePage() {
   return (
-    <main className="homepage-rainbow-bg text-[var(--museum-text)] museum-page-shell relative">
-      <MuseumScrollMap />
+    <main className="text-[var(--museum-text)] museum-page-shell relative bg-transparent">
+      <MuseumScrollEngine />
       {homeSections.map((section) =>
         section.wrapLayout === false ? (
           <React.Fragment key={section.id}>{section.component}</React.Fragment>
