@@ -35,7 +35,7 @@ export function BatmanModule() {
       id="batman"
       className="col-span-12 h-full flex flex-col"
     >
-      <MuseumCard className="p-0 flex flex-col min-h-[800px] border border-ink/10 dark:border-base/10 bg-[#0a0a0a] text-white overflow-hidden relative font-mono h-full rounded-3xl">
+      <div className="flex flex-col min-h-[800px] bg-[#080808] border border-[var(--ink)]/5 text-white overflow-hidden relative font-mono h-full rounded-2xl shadow-xl">
       <AnimatePresence mode="wait">
         {stage === "auth" && (
           <motion.div
@@ -136,7 +136,7 @@ export function BatmanModule() {
           </motion.div>
         )}
       </AnimatePresence>
-      </MuseumCard>
+      </div>
     </div>
   );
 }

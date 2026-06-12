@@ -65,70 +65,72 @@ export function BasketballModule() {
   return (
     <div className="col-span-12 md:col-span-12 my-10">
       <MuseumCard className="!p-0 font-sans relative overflow-hidden rounded-3xl border border-[var(--museum-border-strong)] bg-black text-[var(--museum-text)] tracking-wide">
-      <div className="absolute top-0 left-0 w-full h-full pointer-events-none z-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')]" />
+        <div className="absolute top-0 left-0 w-full h-full pointer-events-none z-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')]" />
 
-      <div className="absolute top-6 left-6 z-50 flex gap-4 items-center">
-        <StatusPill status="Personal Archive" />
-      </div>
-
-      <button
-        onClick={() => {
-          setSoundEnabled(!soundEnabled);
-          if (!soundEnabled) playAudio("door", true);
-        }}
-        className="absolute top-6 right-6 z-50 p-3 border-[2px] border-[var(--museum-border-strong)] bg-black/50 hover:bg-[var(--museum-accent)] hover:text-white transition-colors"
-      >
-        {soundEnabled ? (
-          <Volume2 className="w-5 h-5" />
-        ) : (
-          <VolumeX className="w-5 h-5" />
-        )}
-      </button>
-
-      {/* Evidence Block */}
-      <div className="relative z-40 mt-24 mx-6 p-6 flex flex-col lg:flex-row gap-6 bg-black/80 border border-[var(--museum-border-strong)] backdrop-blur-md rounded-2xl">
-        <div className="flex-1">
-          <h4 className="font-mono text-[10px] text-[#C0C0C0] uppercase tracking-widest font-bold mb-1">
-            What I built
-          </h4>
-          <p className="text-sm text-[#C0C0C0]/80 leading-relaxed bg-[#111111]/80 backdrop-blur-sm p-3 rounded-none border border-[#4C392D]/50">
-            An immersive narrative scroll exploring the geometry, history, and
-            physics of San Antonio Spurs basketball.
-          </p>
+        <div className="absolute top-6 left-6 z-50 flex gap-4 items-center">
+          <StatusPill status="Personal Archive" />
         </div>
-        <div className="flex-1">
-          <h4 className="font-mono text-[10px] text-[#C0C0C0] uppercase tracking-widest font-bold mb-1">
-            What I learned
-          </h4>
-          <p className="text-sm text-[#C0C0C0]/80 leading-relaxed bg-[#111111]/80 backdrop-blur-sm p-3 rounded-none border border-[#4C392D]/50">
-            Web design can be cinematic; using scroll-linked animations and
-            spatial storytelling creates a powerful mood.
-          </p>
-        </div>
-        <div className="flex-1">
-          <h4 className="font-mono text-[10px] text-[#C0C0C0] uppercase tracking-widest font-bold mb-1">
-            What's next
-          </h4>
-          <div className="text-sm text-[#C0C0C0]/80 leading-relaxed bg-[#111111]/80 backdrop-blur-sm p-3 rounded-none border border-[#4C392D]/50 flex items-start gap-2">
-            <AlertCircle
-              size={14}
-              className="mt-0.5 text-[#C0C0C0]/70 shrink-0"
-            />
-            <span>Add live game score tickers and player stat telemetry.</span>
+
+        <button
+          onClick={() => {
+            setSoundEnabled(!soundEnabled);
+            if (!soundEnabled) playAudio("door", true);
+          }}
+          className="absolute top-6 right-6 z-50 p-3 border-[2px] border-[var(--museum-border-strong)] bg-black/50 hover:bg-[var(--museum-accent)] hover:text-white transition-colors"
+        >
+          {soundEnabled ? (
+            <Volume2 className="w-5 h-5" />
+          ) : (
+            <VolumeX className="w-5 h-5" />
+          )}
+        </button>
+
+        {/* Evidence Block */}
+        <div className="relative z-40 mt-24 mx-6 p-6 flex flex-col lg:flex-row gap-6 bg-black/80 border border-[var(--museum-border-strong)] backdrop-blur-md rounded-2xl">
+          <div className="flex-1">
+            <h4 className="font-mono text-[10px] text-[#C0C0C0] uppercase tracking-widest font-bold mb-1">
+              What I built
+            </h4>
+            <p className="text-sm text-[#C0C0C0]/80 leading-relaxed bg-[#111111]/80 backdrop-blur-sm p-3 rounded-none border border-[#4C392D]/50">
+              An immersive narrative scroll exploring the geometry, history, and
+              physics of San Antonio Spurs basketball.
+            </p>
+          </div>
+          <div className="flex-1">
+            <h4 className="font-mono text-[10px] text-[#C0C0C0] uppercase tracking-widest font-bold mb-1">
+              What I learned
+            </h4>
+            <p className="text-sm text-[#C0C0C0]/80 leading-relaxed bg-[#111111]/80 backdrop-blur-sm p-3 rounded-none border border-[#4C392D]/50">
+              Web design can be cinematic; using scroll-linked animations and
+              spatial storytelling creates a powerful mood.
+            </p>
+          </div>
+          <div className="flex-1">
+            <h4 className="font-mono text-[10px] text-[#C0C0C0] uppercase tracking-widest font-bold mb-1">
+              What's next
+            </h4>
+            <div className="text-sm text-[#C0C0C0]/80 leading-relaxed bg-[#111111]/80 backdrop-blur-sm p-3 rounded-none border border-[#4C392D]/50 flex items-start gap-2">
+              <AlertCircle
+                size={14}
+                className="mt-0.5 text-[#C0C0C0]/70 shrink-0"
+              />
+              <span>
+                Add live game score tickers and player stat telemetry.
+              </span>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Narrative Scenes */}
-      <div className="flex flex-col relative z-30 w-full mt-8">
-        <Narthex soundEnabled={soundEnabled} />
-        <TheBodyAsStructure soundEnabled={soundEnabled} />
-        <TheFiveAndTheOne soundEnabled={soundEnabled} />
-        <ThePhysicsOfMotion soundEnabled={soundEnabled} />
-        <TheSpursTime soundEnabled={soundEnabled} />
-        <SilenceAndNoise soundEnabled={soundEnabled} />
-        <ThePureShape soundEnabled={soundEnabled} />
-      </div>
+        {/* Narrative Scenes */}
+        <div className="flex flex-col relative z-30 w-full mt-8">
+          <Narthex soundEnabled={soundEnabled} />
+          <TheBodyAsStructure soundEnabled={soundEnabled} />
+          <TheFiveAndTheOne soundEnabled={soundEnabled} />
+          <ThePhysicsOfMotion soundEnabled={soundEnabled} />
+          <TheSpursTime soundEnabled={soundEnabled} />
+          <SilenceAndNoise soundEnabled={soundEnabled} />
+          <ThePureShape soundEnabled={soundEnabled} />
+        </div>
       </MuseumCard>
     </div>
   );

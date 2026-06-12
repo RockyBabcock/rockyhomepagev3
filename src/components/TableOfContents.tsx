@@ -61,14 +61,19 @@ export function TableOfContents() {
 
   return (
     <>
-      <nav aria-label="Mobile Route Navigation" className="sticky top-0 z-40 overflow-x-auto border-b border-stone-800 bg-stone-950/90 px-3 py-2 backdrop-blur lg:hidden flex gap-2">
+      <nav
+        aria-label="Mobile Route Navigation"
+        className="sticky top-0 z-40 overflow-x-auto border-b border-stone-800 bg-stone-950/90 px-3 py-2 backdrop-blur lg:hidden flex gap-2"
+      >
         {museumSections.map(({ id, title }) => (
-          <a 
+          <a
             key={id}
-            href={`#${id}`} 
+            href={`#${id}`}
             className={cn(
               "whitespace-nowrap px-3 py-2 text-xs font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-400 rounded transition-colors",
-              activeSection === id ? "bg-orange-500/20 text-orange-400" : "text-stone-400 hover:text-stone-200"
+              activeSection === id
+                ? "bg-orange-500/20 text-orange-400"
+                : "text-stone-400 hover:text-stone-200",
             )}
             onClick={(e) => {
               e.preventDefault();
@@ -103,7 +108,7 @@ export function TableOfContents() {
                   "block w-[2px] transition-all duration-300 rounded-full shrink-0",
                   activeSection === id
                     ? "h-8 bg-orange-500"
-                    : "h-3 bg-slate-700 group-hover:bg-orange-500/50 group-hover:h-5"
+                    : "h-3 bg-slate-700 group-hover:bg-orange-500/50 group-hover:h-5",
                 )}
               />
               <span
@@ -111,10 +116,12 @@ export function TableOfContents() {
                   "font-mono text-[11px] uppercase tracking-[0.15em] font-medium transition-all duration-300 leading-tight",
                   activeSection === id
                     ? "text-orange-500 opacity-100"
-                    : "text-slate-500 opacity-60 group-hover:opacity-100 group-hover:text-slate-300"
+                    : "text-slate-500 opacity-60 group-hover:opacity-100 group-hover:text-slate-300",
                 )}
               >
-                <span className="block text-[9px] opacity-70 mb-0.5">{code}</span>
+                <span className="block text-[9px] opacity-70 mb-0.5">
+                  {code}
+                </span>
                 {title}
               </span>
             </button>

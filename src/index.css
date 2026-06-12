@@ -10,7 +10,7 @@
   --font-label: "JetBrains Mono", monospace;
 
   --museum-paper: #FFF8EC;
-  --museum-paper-deep: #F3E4C8;
+  --museum-paper-deep: #F1DFBD;
   --museum-ink: #18120D;
   --museum-brown: #3E2723;
 
@@ -23,7 +23,7 @@
   --card-ivory: rgba(255, 252, 244, 0.82);
   --card-strong: rgba(255, 255, 255, 0.94);
   --line-soft: rgba(62, 39, 35, 0.12);
-  --line-strong: rgba(62, 39, 35, 0.28);
+  --line-strong: rgba(62, 39, 35, 0.32);
 
   --canvas: var(--museum-paper);
   --canvas-soft: var(--museum-paper-deep);

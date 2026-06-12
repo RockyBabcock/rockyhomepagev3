@@ -200,189 +200,192 @@ export function GitHubModule() {
         className="col-span-12 md:col-span-6 relative overflow-hidden h-full flex flex-col"
       >
         <MuseumCard className="h-full flex flex-col p-8 md:p-10 rounded-3xl">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
-          <div className="flex items-center gap-3">
-            <div className="p-3 bg-[var(--museum-panel-elevated)] rounded-lg border border-[var(--museum-border)]">
-              <Github className="w-6 h-6 text-[var(--museum-text)]" />
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+            <div className="flex items-center gap-3">
+              <div className="p-3 bg-[var(--museum-panel-elevated)] rounded-lg border border-[var(--museum-border)]">
+                <Github className="w-6 h-6 text-[var(--museum-text)]" />
+              </div>
+              <div>
+                <h2 className="text-2xl font-bold text-[var(--museum-text)] tracking-tight">
+                  Digital Wilderness
+                </h2>
+                <p className="text-sm text-[var(--museum-text-muted)]">
+                  Journey from zero to one
+                </p>
+              </div>
             </div>
-            <div>
-              <h2 className="text-2xl font-bold text-[var(--museum-text)] tracking-tight">
-                Digital Wilderness
-              </h2>
-              <p className="text-sm text-[var(--museum-text-muted)]">Journey from zero to one</p>
-            </div>
-          </div>
-          <MuseumButton
-            as="a"
-            variant="primary"
-            href="https://github.com/RockyBabcock"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Visit github.com/RockyBabcock <ExternalLink className="w-4 h-4 ml-2" />
-          </MuseumButton>
-        </div>
-
-        <div className="grid grid-cols-1 2xl:grid-cols-3 gap-6 flex-1">
-          {/* Empty State (Wilderness Survival) */}
-          <div className="2xl:col-span-2 flex flex-col gap-6">
-            <div
-              className="border-2 border-dashed border-[var(--museum-border-strong)] hover:border-[var(--museum-accent)] bg-[var(--museum-panel-elevated)] rounded-3xl p-12 flex flex-col items-center justify-center relative cursor-pointer group transition-colors min-h-[200px]"
-              onClick={() => setShowTooltip(true)}
-              onMouseLeave={() => setShowTooltip(false)}
+            <MuseumButton
+              as="a"
+              variant="primary"
+              href="https://github.com/RockyBabcock"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              <TreePine className="w-12 h-12 text-[var(--museum-text-muted)] mb-4 group-hover:text-[var(--museum-accent)] transition-colors" />
-              <p className="animate-pulse font-mono text-sm text-[var(--museum-text-muted)]">
-                Surviving in the Wilderness... Coming Soon.
-              </p>
-
-              <AnimatePresence>
-                {showTooltip && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 10 }}
-                    className="absolute top-4 bg-[var(--museum-accent)] text-white text-xs px-4 py-2 rounded shadow-xl font-bold tracking-wide"
-                  >
-                    Star me to witness the journey from zero to one.
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-
-            {/* AI Showcase Area */}
-            <div className="relative">
-              <AnimatePresence>
-                {showSpeechBubble && (
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.8, y: 10 }}
-                    animate={{ opacity: 1, scale: 1, y: 0 }}
-                    exit={{ opacity: 0, scale: 0.8, y: 10 }}
-                    className="absolute -top-14 left-1/2 -translate-x-1/2 bg-[var(--museum-accent)] text-white text-sm font-bold px-6 py-3 rounded-3xl whitespace-nowrap z-10 shadow-2xl"
-                  >
-                    I'm working on it, I'm working on it! (Really!)
-                    <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 border-8 border-transparent border-t-[var(--museum-accent)]" />
-                  </motion.div>
-                )}
-              </AnimatePresence>
-
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                {AI_PROJECTS.map((proj, i) => (
-                  <motion.div
-                    key={i}
-                    whileHover={{ rotateX: 5, rotateY: 5, scale: 1.05 }}
-                    onClick={() => handleCardClick(i)}
-                    className={cn(
-                      "bg-[var(--museum-panel-elevated)] p-5 rounded-3xl border cursor-pointer relative overflow-hidden transition-colors",
-                      clickedCards.has(i)
-                        ? "border-[var(--museum-accent)]"
-                        : "border-[var(--museum-border-strong)] hover:border-[var(--museum-text-muted)]",
-                    )}
-                  >
-                    <div className="absolute top-3 right-3 bg-[var(--museum-bg)] text-[var(--museum-text-muted)] text-[9px] font-mono px-2 py-1 rounded-full font-bold uppercase tracking-wider">
-                      WIP
-                    </div>
-                    <proj.icon className="w-8 h-8 mb-4 text-[var(--museum-accent)]" />
-                    <h4 className="font-bold text-sm text-[var(--museum-text)]">
-                      {proj.title}
-                    </h4>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
+              Visit github.com/RockyBabcock{" "}
+              <ExternalLink className="w-4 h-4 ml-2" />
+            </MuseumButton>
           </div>
 
-          {/* Right Column: Octocat & Graph */}
-          <div className="flex flex-col gap-6">
-            {/* Octocat Evolution */}
-            <div className="bg-[var(--museum-panel-elevated)] p-6 rounded-3xl border border-[var(--museum-border)] flex flex-col items-center justify-center relative overflow-hidden min-h-[200px]">
-              <h3 className="font-mono text-[10px] uppercase tracking-widest text-[var(--museum-text-muted)] mb-6 font-bold">
-                Octocat Evolution
-              </h3>
-
-              <motion.div
-                className={cn(
-                  "text-7xl cursor-pointer select-none transition-all duration-500 relative z-10",
-                  octoClicks >= 50
-                    ? "drop-shadow-[0_0_20px_rgba(255,215,0,0.6)]"
-                    : "",
-                )}
-                style={{
-                  filter:
-                    octoClicks >= 50
-                      ? "sepia(1) saturate(5) hue-rotate(10deg)"
-                      : "none",
-                }}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                onClick={handleOctoClick}
-              >
-                {getOctoVisual()}
-              </motion.div>
-
-              <div className="mt-6 font-mono text-xs font-bold text-[var(--museum-accent)] bg-[var(--museum-accent)]/10 px-3 py-1 rounded-full border border-[var(--museum-accent)]/20">
-                Level: {octoClicks}
-              </div>
-
-              <AnimatePresence>
-                {octoClicks >= 10 && octoClicks < 20 && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0 }}
-                    className="absolute bottom-4 font-bold text-white text-sm"
-                  >
-                    Hi Rocky! 👋
-                  </motion.div>
-                )}
-                {cheatState === "chess" && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0 }}
-                    className="absolute bottom-4 font-bold text-white text-sm"
-                  >
-                    Checkmate incoming. ♟️
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-
-            {/* Contribution Graph & Predictor */}
-            <div className="bg-[var(--museum-panel-elevated)] p-6 rounded-3xl border border-[var(--museum-border)]">
-              <div className="flex gap-1 mb-6 overflow-hidden justify-center">
-                {Array.from({ length: 14 }).map((_, col) => (
-                  <div key={col} className="flex flex-col gap-1">
-                    {Array.from({ length: 7 }).map((_, row) => (
-                      <div
-                        key={row}
-                        className={cn(
-                          "w-3 h-3 rounded-sm transition-colors duration-500",
-                          getGraphColor(col, row),
-                        )}
-                      />
-                    ))}
-                  </div>
-                ))}
-              </div>
-
+          <div className="grid grid-cols-1 2xl:grid-cols-3 gap-6 flex-1">
+            {/* Empty State (Wilderness Survival) */}
+            <div className="2xl:col-span-2 flex flex-col gap-6">
               <div
-                className="p-4 bg-[var(--museum-bg)] rounded-lg cursor-pointer border border-[var(--museum-border)] hover:border-[var(--museum-accent)]/50 transition-colors group"
-                onClick={() => setPredictorMode((p) => (p + 1) % 3)}
+                className="border-2 border-dashed border-[var(--museum-border-strong)] hover:border-[var(--museum-accent)] bg-[var(--museum-panel-elevated)] rounded-3xl p-12 flex flex-col items-center justify-center relative cursor-pointer group transition-colors min-h-[200px]"
+                onClick={() => setShowTooltip(true)}
+                onMouseLeave={() => setShowTooltip(false)}
               >
-                <div className="font-mono text-[10px] uppercase tracking-widest text-[var(--museum-text-muted)] mb-2 flex justify-between items-center">
-                  <span>Contribution Predictor</span>
-                  <span className="text-[var(--museum-accent)] opacity-0 group-hover:opacity-100 transition-opacity">
-                    Click to cycle
-                  </span>
+                <TreePine className="w-12 h-12 text-[var(--museum-text-muted)] mb-4 group-hover:text-[var(--museum-accent)] transition-colors" />
+                <p className="animate-pulse font-mono text-sm text-[var(--museum-text-muted)]">
+                  Surviving in the Wilderness... Coming Soon.
+                </p>
+
+                <AnimatePresence>
+                  {showTooltip && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 10 }}
+                      className="absolute top-4 bg-[var(--museum-accent)] text-white text-xs px-4 py-2 rounded shadow-xl font-bold tracking-wide"
+                    >
+                      Star me to witness the journey from zero to one.
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
+              {/* AI Showcase Area */}
+              <div className="relative">
+                <AnimatePresence>
+                  {showSpeechBubble && (
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.8, y: 10 }}
+                      animate={{ opacity: 1, scale: 1, y: 0 }}
+                      exit={{ opacity: 0, scale: 0.8, y: 10 }}
+                      className="absolute -top-14 left-1/2 -translate-x-1/2 bg-[var(--museum-accent)] text-white text-sm font-bold px-6 py-3 rounded-3xl whitespace-nowrap z-10 shadow-2xl"
+                    >
+                      I'm working on it, I'm working on it! (Really!)
+                      <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 border-8 border-transparent border-t-[var(--museum-accent)]" />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  {AI_PROJECTS.map((proj, i) => (
+                    <motion.div
+                      key={i}
+                      whileHover={{ rotateX: 5, rotateY: 5, scale: 1.05 }}
+                      onClick={() => handleCardClick(i)}
+                      className={cn(
+                        "bg-[var(--museum-panel-elevated)] p-5 rounded-3xl border cursor-pointer relative overflow-hidden transition-colors",
+                        clickedCards.has(i)
+                          ? "border-[var(--museum-accent)]"
+                          : "border-[var(--museum-border-strong)] hover:border-[var(--museum-text-muted)]",
+                      )}
+                    >
+                      <div className="absolute top-3 right-3 bg-[var(--museum-bg)] text-[var(--museum-text-muted)] text-[9px] font-mono px-2 py-1 rounded-full font-bold uppercase tracking-wider">
+                        WIP
+                      </div>
+                      <proj.icon className="w-8 h-8 mb-4 text-[var(--museum-accent)]" />
+                      <h4 className="font-bold text-sm text-[var(--museum-text)]">
+                        {proj.title}
+                      </h4>
+                    </motion.div>
+                  ))}
                 </div>
-                <div className="font-body text-sm font-bold text-[var(--museum-text)] min-h-[40px] flex items-center">
-                  {PREDICTOR_MODES[predictorMode]}
+              </div>
+            </div>
+
+            {/* Right Column: Octocat & Graph */}
+            <div className="flex flex-col gap-6">
+              {/* Octocat Evolution */}
+              <div className="bg-[var(--museum-panel-elevated)] p-6 rounded-3xl border border-[var(--museum-border)] flex flex-col items-center justify-center relative overflow-hidden min-h-[200px]">
+                <h3 className="font-mono text-[10px] uppercase tracking-widest text-[var(--museum-text-muted)] mb-6 font-bold">
+                  Octocat Evolution
+                </h3>
+
+                <motion.div
+                  className={cn(
+                    "text-7xl cursor-pointer select-none transition-all duration-500 relative z-10",
+                    octoClicks >= 50
+                      ? "drop-shadow-[0_0_20px_rgba(255,215,0,0.6)]"
+                      : "",
+                  )}
+                  style={{
+                    filter:
+                      octoClicks >= 50
+                        ? "sepia(1) saturate(5) hue-rotate(10deg)"
+                        : "none",
+                  }}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  onClick={handleOctoClick}
+                >
+                  {getOctoVisual()}
+                </motion.div>
+
+                <div className="mt-6 font-mono text-xs font-bold text-[var(--museum-accent)] bg-[var(--museum-accent)]/10 px-3 py-1 rounded-full border border-[var(--museum-accent)]/20">
+                  Level: {octoClicks}
+                </div>
+
+                <AnimatePresence>
+                  {octoClicks >= 10 && octoClicks < 20 && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0 }}
+                      className="absolute bottom-4 font-bold text-white text-sm"
+                    >
+                      Hi Rocky! 👋
+                    </motion.div>
+                  )}
+                  {cheatState === "chess" && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0 }}
+                      className="absolute bottom-4 font-bold text-white text-sm"
+                    >
+                      Checkmate incoming. ♟️
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
+              {/* Contribution Graph & Predictor */}
+              <div className="bg-[var(--museum-panel-elevated)] p-6 rounded-3xl border border-[var(--museum-border)]">
+                <div className="flex gap-1 mb-6 overflow-hidden justify-center">
+                  {Array.from({ length: 14 }).map((_, col) => (
+                    <div key={col} className="flex flex-col gap-1">
+                      {Array.from({ length: 7 }).map((_, row) => (
+                        <div
+                          key={row}
+                          className={cn(
+                            "w-3 h-3 rounded-sm transition-colors duration-500",
+                            getGraphColor(col, row),
+                          )}
+                        />
+                      ))}
+                    </div>
+                  ))}
+                </div>
+
+                <div
+                  className="p-4 bg-[var(--museum-bg)] rounded-lg cursor-pointer border border-[var(--museum-border)] hover:border-[var(--museum-accent)]/50 transition-colors group"
+                  onClick={() => setPredictorMode((p) => (p + 1) % 3)}
+                >
+                  <div className="font-mono text-[10px] uppercase tracking-widest text-[var(--museum-text-muted)] mb-2 flex justify-between items-center">
+                    <span>Contribution Predictor</span>
+                    <span className="text-[var(--museum-accent)] opacity-0 group-hover:opacity-100 transition-opacity">
+                      Click to cycle
+                    </span>
+                  </div>
+                  <div className="font-body text-sm font-bold text-[var(--museum-text)] min-h-[40px] flex items-center">
+                    {PREDICTOR_MODES[predictorMode]}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
         </MuseumCard>
       </motion.div>
     </>

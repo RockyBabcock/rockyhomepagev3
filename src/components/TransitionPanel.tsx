@@ -42,7 +42,8 @@ export function TransitionPanel({
 
       {next && (
         <div className="mt-8 pt-6 border-t border-[rgba(15,23,42,0.05)] text-xs font-body font-bold uppercase tracking-[0.15em] text-[var(--museum-text-muted)] inline-flex items-center gap-2">
-           Next Section: <span className="text-[var(--museum-text)]">{next}</span>
+          Next Section:{" "}
+          <span className="text-[var(--museum-text)]">{next}</span>
         </div>
       )}
     </motion.section>

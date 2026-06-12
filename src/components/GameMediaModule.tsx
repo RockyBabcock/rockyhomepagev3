@@ -499,182 +499,181 @@ export function GameMediaModule() {
   }, [vinylClicks]);
 
   return (
-    <div
-      id="GameMedia"
-      className="col-span-12 h-full flex flex-col"
-    >
-      <MuseumCard className={`!p-0 !bg-[#0b0c10] overflow-hidden relative h-full flex flex-col rounded-3xl ${eminemMode ? "animate-pulse bg-red-900/20" : ""}`}>
-      {/* Global Easter Egg Effects */}
-      {eminemMode && (
-        <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-t from-red-900/40 to-transparent mix-blend-overlay" />
-          {[...Array(5)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-32 h-[200%] bg-white/10 blur-2xl transform -rotate-45"
-              style={{ left: `${i * 25}%`, top: "-50%" }}
-              animate={{ opacity: [0, 1, 0], x: [-100, 100] }}
-              transition={{
-                duration: 0.5,
-                repeat: Infinity,
-                repeatType: "reverse",
-                delay: i * 0.1,
-              }}
-            />
-          ))}
-        </div>
-      )}
-
-      {noteRain && (
-        <div className="absolute inset-0 pointer-events-none z-50 overflow-hidden">
-          <div className="absolute top-4 left-1/2 -translate-x-1/2 bg-primary text-black font-bold px-4 py-2 rounded-full text-sm animate-bounce">
-            MEDIA LEVEL UP! 🎵🎮
-          </div>
-          {[...Array(30)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute text-primary text-xl"
-              style={{ left: `${Math.random() * 100}%`, top: -20 }}
-              animate={{ y: "120vh", rotate: Math.random() * 360 }}
-              transition={{
-                duration: Math.random() * 2 + 1,
-                repeat: Infinity,
-                ease: "linear",
-              }}
-            >
-              {["♪", "♫", "♩", "♬"][Math.floor(Math.random() * 4)]}
-            </motion.div>
-          ))}
-        </div>
-      )}
-
-      {/* Top Hero Section */}
-      <div className="relative z-10 border-b border-white/10 bg-black/40 backdrop-blur-md p-6 md:p-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-        <div>
-          <h2 className="text-2xl md:text-3xl font-black text-white uppercase tracking-tighter flex items-center gap-3">
-            DESTINYROCKY’S MEDIA UNIVERSE
-            <Disc3
-              className="w-6 h-6 text-primary cursor-pointer hover:scale-110 transition-transform"
-              onClick={() => setVinylClicks((prev) => prev + 1)}
-            />
-          </h2>
-          <p className="text-sm text-white/60 font-mono mt-1">
-            Music that hits hard • Games that change everything
-          </p>
-        </div>
-        <div className="flex flex-col md:flex-row md:items-center gap-4">
-          <StatusPill status="Personal Archive" />
-          <div className="hidden sm:flex items-center gap-2 bg-white/5 border border-white/10 px-3 py-1.5 rounded-full">
-            <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-            <span className="text-[10px] font-mono text-white/80 uppercase tracking-widest">
-              Currently Rotating: Eminem × AC Unity
-            </span>
-          </div>
-        </div>
-      </div>
-
-      {/* Evidence Block */}
-      <div className="relative z-10 p-6 flex flex-col lg:flex-row gap-6 bg-black/60 border-b border-white/10">
-        <div className="flex-1">
-          <h4 className="font-mono text-[10px] text-primary uppercase tracking-widest font-bold mb-1">
-            What I built
-          </h4>
-          <p className="text-sm text-white/80 leading-relaxed bg-[#111]/80 backdrop-blur-sm p-3 rounded-lg border border-white/5">
-            A cultural archive capturing the creative media that influences my
-            taste and design philosophy.
-          </p>
-        </div>
-        <div className="flex-1">
-          <h4 className="font-mono text-[10px] text-primary uppercase tracking-widest font-bold mb-1">
-            What I learned
-          </h4>
-          <p className="text-sm text-white/80 leading-relaxed bg-[#111]/80 backdrop-blur-sm p-3 rounded-lg border border-white/5">
-            Personal context creates stronger emotional resonance than just
-            listing professional achievements.
-          </p>
-        </div>
-        <div className="flex-1">
-          <h4 className="font-mono text-[10px] text-primary uppercase tracking-widest font-bold mb-1">
-            What's next
-          </h4>
-          <div className="text-sm text-white/80 leading-relaxed bg-[#111]/80 backdrop-blur-sm p-3 rounded-lg border border-white/5 flex items-start gap-2">
-            <AlertCircle
-              size={14}
-              className="mt-0.5 text-primary/70 shrink-0"
-            />
-            <span>
-              Connect to Spotify/Steam APIs to show true live metrics and recent
-              activity.
-            </span>
-          </div>
-        </div>
-      </div>
-
-      {/* Split Layout */}
-      <div className="flex flex-col lg:flex-row relative z-10">
-        {/* Section 1: Music Hall (45% width on desktop) */}
-        <div className="w-full lg:w-[45%] p-6 md:p-8 border-b lg:border-b-0 lg:border-r border-white/10 bg-gradient-to-br from-black to-[#0a0a0a]">
-          <div className="flex items-center gap-3 mb-6">
-            <Music className="w-5 h-5 text-primary" />
-            <h3 className="font-mono text-xs uppercase tracking-[0.2em] font-bold text-white/80">
-              Music Hall
-            </h3>
-          </div>
-
-          <div className="flex flex-col">
-            {musicData.map((data) => (
-              <MusicCard key={data.id} data={data} onPlay={setPlayingTrack} />
-            ))}
-          </div>
-        </div>
-
-        {/* Section 2: Game Vault (55% width on desktop) */}
-        <div className="w-full lg:w-[55%] p-6 md:p-8 bg-gradient-to-bl from-[#0a0a0a] to-black">
-          <div className="flex items-center justify-between mb-6">
-            <div className="flex items-center gap-3">
-              <Gamepad2 className="w-5 h-5 text-primary" />
-              <h3 className="font-mono text-xs uppercase tracking-[0.2em] font-bold text-white/80">
-                Game Vault
-              </h3>
-            </div>
-            {/* Eagle Emblem Easter Egg Trigger */}
-            <ShieldAlert
-              className="w-5 h-5 text-white/20 hover:text-white/50 cursor-pointer transition-colors"
-              onClick={() => setEagleClicks((prev) => prev + 1)}
-            />
-          </div>
-
-          <div className="flex flex-col">
-            {gameData.map((data) => (
-              <GameCard
-                key={data.id}
-                data={data}
-                onClick={() => setSelectedGame(data)}
-                globalGlitch={globalGlitch}
+    <div id="GameMedia" className="col-span-12 h-full flex flex-col">
+      <MuseumCard
+        className={`!p-0 !bg-[#0b0c10] overflow-hidden relative h-full flex flex-col rounded-3xl ${eminemMode ? "animate-pulse bg-red-900/20" : ""}`}
+      >
+        {/* Global Easter Egg Effects */}
+        {eminemMode && (
+          <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-t from-red-900/40 to-transparent mix-blend-overlay" />
+            {[...Array(5)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute w-32 h-[200%] bg-white/10 blur-2xl transform -rotate-45"
+                style={{ left: `${i * 25}%`, top: "-50%" }}
+                animate={{ opacity: [0, 1, 0], x: [-100, 100] }}
+                transition={{
+                  duration: 0.5,
+                  repeat: Infinity,
+                  repeatType: "reverse",
+                  delay: i * 0.1,
+                }}
               />
             ))}
           </div>
+        )}
+
+        {noteRain && (
+          <div className="absolute inset-0 pointer-events-none z-50 overflow-hidden">
+            <div className="absolute top-4 left-1/2 -translate-x-1/2 bg-primary text-black font-bold px-4 py-2 rounded-full text-sm animate-bounce">
+              MEDIA LEVEL UP! 🎵🎮
+            </div>
+            {[...Array(30)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute text-primary text-xl"
+                style={{ left: `${Math.random() * 100}%`, top: -20 }}
+                animate={{ y: "120vh", rotate: Math.random() * 360 }}
+                transition={{
+                  duration: Math.random() * 2 + 1,
+                  repeat: Infinity,
+                  ease: "linear",
+                }}
+              >
+                {["♪", "♫", "♩", "♬"][Math.floor(Math.random() * 4)]}
+              </motion.div>
+            ))}
+          </div>
+        )}
+
+        {/* Top Hero Section */}
+        <div className="relative z-10 border-b border-white/10 bg-black/40 backdrop-blur-md p-6 md:p-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+          <div>
+            <h2 className="text-2xl md:text-3xl font-black text-white uppercase tracking-tighter flex items-center gap-3">
+              DESTINYROCKY’S MEDIA UNIVERSE
+              <Disc3
+                className="w-6 h-6 text-primary cursor-pointer hover:scale-110 transition-transform"
+                onClick={() => setVinylClicks((prev) => prev + 1)}
+              />
+            </h2>
+            <p className="text-sm text-white/60 font-mono mt-1">
+              Music that hits hard • Games that change everything
+            </p>
+          </div>
+          <div className="flex flex-col md:flex-row md:items-center gap-4">
+            <StatusPill status="Personal Archive" />
+            <div className="hidden sm:flex items-center gap-2 bg-white/5 border border-white/10 px-3 py-1.5 rounded-full">
+              <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+              <span className="text-[10px] font-mono text-white/80 uppercase tracking-widest">
+                Currently Rotating: Eminem × AC Unity
+              </span>
+            </div>
+          </div>
         </div>
-      </div>
 
-      {/* Overlays & Modals */}
-      <AnimatePresence>
-        {playingTrack && (
-          <NowPlayingOverlay
-            track={playingTrack}
-            onClose={() => setPlayingTrack(null)}
-          />
-        )}
-      </AnimatePresence>
+        {/* Evidence Block */}
+        <div className="relative z-10 p-6 flex flex-col lg:flex-row gap-6 bg-black/60 border-b border-white/10">
+          <div className="flex-1">
+            <h4 className="font-mono text-[10px] text-primary uppercase tracking-widest font-bold mb-1">
+              What I built
+            </h4>
+            <p className="text-sm text-white/80 leading-relaxed bg-[#111]/80 backdrop-blur-sm p-3 rounded-lg border border-white/5">
+              A cultural archive capturing the creative media that influences my
+              taste and design philosophy.
+            </p>
+          </div>
+          <div className="flex-1">
+            <h4 className="font-mono text-[10px] text-primary uppercase tracking-widest font-bold mb-1">
+              What I learned
+            </h4>
+            <p className="text-sm text-white/80 leading-relaxed bg-[#111]/80 backdrop-blur-sm p-3 rounded-lg border border-white/5">
+              Personal context creates stronger emotional resonance than just
+              listing professional achievements.
+            </p>
+          </div>
+          <div className="flex-1">
+            <h4 className="font-mono text-[10px] text-primary uppercase tracking-widest font-bold mb-1">
+              What's next
+            </h4>
+            <div className="text-sm text-white/80 leading-relaxed bg-[#111]/80 backdrop-blur-sm p-3 rounded-lg border border-white/5 flex items-start gap-2">
+              <AlertCircle
+                size={14}
+                className="mt-0.5 text-primary/70 shrink-0"
+              />
+              <span>
+                Connect to Spotify/Steam APIs to show true live metrics and
+                recent activity.
+              </span>
+            </div>
+          </div>
+        </div>
 
-      <AnimatePresence>
-        {selectedGame && (
-          <GameModal
-            game={selectedGame}
-            onClose={() => setSelectedGame(null)}
-          />
-        )}
-      </AnimatePresence>
+        {/* Split Layout */}
+        <div className="flex flex-col lg:flex-row relative z-10">
+          {/* Section 1: Music Hall (45% width on desktop) */}
+          <div className="w-full lg:w-[45%] p-6 md:p-8 border-b lg:border-b-0 lg:border-r border-white/10 bg-gradient-to-br from-black to-[#0a0a0a]">
+            <div className="flex items-center gap-3 mb-6">
+              <Music className="w-5 h-5 text-primary" />
+              <h3 className="font-mono text-xs uppercase tracking-[0.2em] font-bold text-white/80">
+                Music Hall
+              </h3>
+            </div>
+
+            <div className="flex flex-col">
+              {musicData.map((data) => (
+                <MusicCard key={data.id} data={data} onPlay={setPlayingTrack} />
+              ))}
+            </div>
+          </div>
+
+          {/* Section 2: Game Vault (55% width on desktop) */}
+          <div className="w-full lg:w-[55%] p-6 md:p-8 bg-gradient-to-bl from-[#0a0a0a] to-black">
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center gap-3">
+                <Gamepad2 className="w-5 h-5 text-primary" />
+                <h3 className="font-mono text-xs uppercase tracking-[0.2em] font-bold text-white/80">
+                  Game Vault
+                </h3>
+              </div>
+              {/* Eagle Emblem Easter Egg Trigger */}
+              <ShieldAlert
+                className="w-5 h-5 text-white/20 hover:text-white/50 cursor-pointer transition-colors"
+                onClick={() => setEagleClicks((prev) => prev + 1)}
+              />
+            </div>
+
+            <div className="flex flex-col">
+              {gameData.map((data) => (
+                <GameCard
+                  key={data.id}
+                  data={data}
+                  onClick={() => setSelectedGame(data)}
+                  globalGlitch={globalGlitch}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Overlays & Modals */}
+        <AnimatePresence>
+          {playingTrack && (
+            <NowPlayingOverlay
+              track={playingTrack}
+              onClose={() => setPlayingTrack(null)}
+            />
+          )}
+        </AnimatePresence>
+
+        <AnimatePresence>
+          {selectedGame && (
+            <GameModal
+              game={selectedGame}
+              onClose={() => setSelectedGame(null)}
+            />
+          )}
+        </AnimatePresence>
       </MuseumCard>
     </div>
   );

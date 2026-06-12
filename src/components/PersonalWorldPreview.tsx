@@ -24,47 +24,53 @@ export function PersonalWorldPreview({
     <Link
       to={href}
       className={cn(
-        "group lab-card lab-card-hover relative p-6 personal-world-card",
-        "flex flex-col justify-between",
+        "group relative p-8 md:p-10 personal-world-card overflow-hidden",
+        "flex flex-col justify-between border border-[var(--border-strong)] rounded-2xl bg-[#080808]",
         className,
       )}
       style={{
-        boxShadow: `0 24px 70px ${color}20`,
+        boxShadow: `0 30px 90px rgba(0,0,0,0.5)`,
       }}
     >
-      <div
-        className="pointer-events-none absolute -right-16 -top-16 h-44 w-44 rounded-full blur-3xl opacity-45"
-        style={{ backgroundColor: color }}
-      />
-
-      <div>
+      <div className="absolute inset-0 z-0">
         <div
-          className="inline-flex rounded-full border bg-white/75 px-3 py-1 text-[10px] font-mono uppercase tracking-[0.18em]"
+          className="w-full h-full opacity-[0.25] transition-opacity duration-700 group-hover:opacity-[0.4]"
+          style={{
+            background: `radial-gradient(circle at 70% 30%, ${color}, transparent 60%)`,
+          }}
+        />
+        <div className="absolute inset-0 bg-[#080808]/40" />
+      </div>
+
+      <div className="relative z-10">
+        <div
+          className="inline-flex rounded border px-3 py-1 text-[10px] font-mono uppercase tracking-[0.2em] font-bold"
           style={{
             color,
-            borderColor: `${color}55`,
+            borderColor: `${color}40`,
+            backgroundColor: `${color}15`,
           }}
         >
           {eyebrow}
         </div>
 
-        <h3 className="mt-6 font-space text-3xl font-bold tracking-[-0.04em] text-slate-950">
+        <h3 className="mt-8 font-space text-3xl md:text-4xl font-bold tracking-tight text-white drop-shadow-sm">
           {title}
         </h3>
 
-        <p className="mt-4 text-sm leading-6 text-slate-600">
+        <p className="mt-5 text-sm md:text-base leading-relaxed text-[#CCC] max-w-sm">
           {description}
         </p>
       </div>
 
-      <div className="mt-8 flex items-center justify-between">
-        <span className="text-sm font-semibold text-slate-800">
-          Open exhibit
+      <div className="mt-12 flex items-center justify-between relative z-10 border-t border-white/10 pt-6">
+        <span className="text-[10px] font-mono uppercase tracking-widest font-bold text-white/60 group-hover:text-white transition-colors">
+          Enter Archive Wing
         </span>
 
         <span
-          className="flex h-10 w-10 items-center justify-center rounded-full text-white transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"
-          style={{ backgroundColor: color }}
+          className="flex h-10 w-10 items-center justify-center rounded-full text-white transition-all transform group-hover:scale-110"
+          style={{ backgroundColor: color, boxShadow: `0 0 20px ${color}50` }}
         >
           <ArrowUpRight size={18} />
         </span>

@@ -21,6 +21,8 @@ import { ModuleSkeleton } from "@/components/common/ModuleSkeleton";
 import { features } from "../config/features";
 import { ModuleErrorBoundary } from "../components/common/ModuleErrorBoundary";
 
+import { MuseumScrollMap } from "../components/common/MuseumScrollMap";
+
 // Lazy-loaded heavy modules
 const AIPlaygroundModule = lazy(() =>
   import("../components/AIPlaygroundModule").then((m) => ({
@@ -48,11 +50,14 @@ const VisitorAnalyticsModule = lazy(() =>
 
 export default function HomePage() {
   return (
-    <main className="homepage-rainbow-bg text-[var(--museum-text)] museum-page-shell">
+    <main className="homepage-rainbow-bg text-[var(--museum-text)] museum-page-shell relative">
+      <MuseumScrollMap />
+      
       {/* 01 Entrance */}
-      <ProfileModule />
-
-      <NowBuildingModule />
+      <div id="entrance-wrapper">
+        <ProfileModule />
+        <NowBuildingModule />
+      </div>
 
       {/* 02 Proof of Work */}
       <MuseumSectionLayout

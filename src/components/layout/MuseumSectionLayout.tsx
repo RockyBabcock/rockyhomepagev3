@@ -286,8 +286,14 @@ export function MuseumSectionLayout({
         className="pointer-events-none absolute inset-0 opacity-60 hall-glow"
       />
 
-      {/* Subtle top border for section transition */}
-      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-[var(--hall-primary)] to-transparent opacity-20" />
+      {/* Threshold Divider */}
+      <div className="absolute top-0 inset-x-0 w-full flex items-center justify-center pointer-events-none opacity-40 mix-blend-multiply">
+         <div className="flex-1 h-px bg-gradient-to-r from-transparent to-[var(--hall-primary)]" />
+         <span className="px-4 font-mono text-[8px] font-bold text-[var(--hall-primary)] tracking-[0.3em] uppercase">
+             ━━ TRANSITION / TONE {tone.toUpperCase()} ━━
+         </span>
+         <div className="flex-1 h-px bg-gradient-to-l from-transparent to-[var(--hall-primary)]" />
+      </div>
 
       <div className={cn("mx-auto w-full px-4 sm:px-6 lg:px-8 relative z-10", widthClasses[width])}>
         <SectionHeader

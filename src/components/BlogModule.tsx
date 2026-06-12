@@ -26,46 +26,46 @@ export function BlogModule() {
   return (
     <div
       id="BlogModule"
-      className="col-span-12 md:col-span-7 h-full flex flex-col"
+      className="col-span-12 md:col-span-7 h-full flex flex-col pt-4"
     >
-      <MuseumCard className="p-8 md:p-10 h-full flex flex-col rounded-3xl">
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-4">
-        <h2 className="text-4xl md:text-5xl font-headline font-black leading-none text-[var(--museum-text)]">
-          Dispatches <br /> from the{" "}
-          <span className="italic text-[var(--museum-accent)]">Grid.</span>
-        </h2>
-        <Link
-          to="/blog"
-          className="font-label text-xs uppercase tracking-widest border-b-2 border-[var(--museum-accent)] text-[var(--museum-accent)] pb-1 font-black hover:tracking-[0.2em] transition-all"
-        >
-          View Archive
-        </Link>
-      </div>
-
       <div className="space-y-12 md:space-y-16 flex-1">
         {blogs.map((blog) => (
           <Link
             to={`/blog/${blog.slug}`}
             key={blog.slug}
-            className="block group cursor-pointer border border-transparent hover:border-[var(--museum-border)] hover:bg-[var(--museum-panel-elevated)] p-4 -m-4 rounded-2xl transition-all"
+            className="block group cursor-pointer border-t-2 border-[var(--ink)]/10 pt-6 transition-all hover:-translate-y-1"
           >
-            <span className="font-mono text-[10px] uppercase text-[var(--museum-accent)] font-black tracking-widest bg-[var(--museum-accent)]/10 px-3 py-1 rounded border border-[var(--museum-accent)]/20">
-              {blog.date} • {blog.readTime}
-            </span>
-            <h3 className="text-2xl md:text-3xl font-headline font-black mt-4 text-[var(--museum-text)] group-hover:text-[var(--museum-accent)] transition-colors duration-300 leading-tight">
+            <div className="flex items-center gap-4 mb-4">
+              <span className="font-mono text-[10px] uppercase text-[var(--ink-soft)] font-bold tracking-[0.2em] relative">
+                {blog.date}
+              </span>
+              <div className="w-4 h-px bg-[var(--ink)]/20" />
+              <span className="font-mono text-[10px] uppercase text-[var(--ink-muted)] font-bold tracking-widest">
+                {blog.readTime}
+              </span>
+            </div>
+            <h3 className="text-2xl md:text-3xl font-space font-bold mt-2 text-[var(--museum-ink)] group-hover:text-[var(--accent-pink)] transition-colors duration-300 leading-tight">
               {blog.title}
             </h3>
-            <p className="font-body text-[var(--museum-text-muted)] text-lg mt-4 line-clamp-2 leading-relaxed">
+            <p className="font-sans text-[var(--ink-soft)] text-base md:text-lg mt-4 line-clamp-3 leading-relaxed opacity-90 max-w-2xl">
               {blog.excerpt}
             </p>
-            <div className="mt-4 flex items-center gap-2 font-label text-[10px] uppercase tracking-widest font-bold text-[var(--museum-text-faint)] group-hover:text-[var(--museum-accent)] transition-colors">
-              Read Article{" "}
-              <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+            <div className="mt-6 flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] font-bold text-[var(--museum-ink)] group-hover:text-[var(--accent-pink)] transition-colors">
+              Read{" "}
+              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
             </div>
           </Link>
         ))}
       </div>
-      </MuseumCard>
+
+      <div className="mt-16 pt-8 border-t-2 border-[var(--ink)]/5">
+        <Link
+          to="/blog"
+          className="inline-flex items-center gap-3 bg-[var(--museum-ink)] text-white px-6 py-3 rounded-full font-mono text-[10px] uppercase tracking-[0.2em] font-bold hover:bg-[var(--accent-pink)] transition-colors"
+        >
+          Enter Digital Garden Archives <ArrowRight className="w-3 h-3" />
+        </Link>
+      </div>
     </div>
   );
 }

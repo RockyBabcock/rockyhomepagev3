@@ -798,320 +798,320 @@ export function WateringSystemModule() {
       className="col-span-12 h-full flex flex-col"
     >
       <MuseumCard className="grid grid-cols-1 lg:grid-cols-3 gap-6 p-6 md:p-8 h-full rounded-3xl !bg-black/95 text-white overflow-hidden shadow-2xl relative">
-      <Background
-        stageIndex={currentStageIndex}
-        isSunbathing={isSunbathing}
-        isWhySoSerious={isWhySoSerious}
-        theme={theme}
-      />
-      <Particles particles={particles} />
+        <Background
+          stageIndex={currentStageIndex}
+          isSunbathing={isSunbathing}
+          isWhySoSerious={isWhySoSerious}
+          theme={theme}
+        />
+        <Particles particles={particles} />
 
-      {/* Left/Center: Tree & Actions */}
-      <div className="lg:col-span-2 flex flex-col items-center justify-between min-h-[500px] relative z-10">
-        {/* Header */}
-        <div className="w-full flex flex-col md:flex-row justify-between items-start mb-4 gap-4">
-          <div>
-            <div className="flex items-center gap-3 mb-1">
-              <h3 className="font-label text-xs uppercase tracking-[0.2em] font-black text-white drop-shadow-md">
-                Digital Garden
-              </h3>
-              <StatusPill status="Experimental Prototype" />
+        {/* Left/Center: Tree & Actions */}
+        <div className="lg:col-span-2 flex flex-col items-center justify-between min-h-[500px] relative z-10">
+          {/* Header */}
+          <div className="w-full flex flex-col md:flex-row justify-between items-start mb-4 gap-4">
+            <div>
+              <div className="flex items-center gap-3 mb-1">
+                <h3 className="font-label text-xs uppercase tracking-[0.2em] font-black text-white drop-shadow-md">
+                  Digital Garden
+                </h3>
+                <StatusPill status="Experimental Prototype" />
+              </div>
+              <p className="font-mono text-[10px] text-white/80 uppercase drop-shadow-md">
+                Mood: {mood} | Height: {currentHeight} cm
+              </p>
             </div>
-            <p className="font-mono text-[10px] text-white/80 uppercase drop-shadow-md">
-              Mood: {mood} | Height: {currentHeight} cm
-            </p>
-          </div>
-          <div className="flex gap-2">
-            <button
-              onClick={() => setIsWhySoSerious(!isWhySoSerious)}
-              className="px-2 py-1 bg-purple-600 hover:bg-purple-500 text-white text-[10px] font-bold rounded uppercase shadow-lg"
-            >
-              Why So Serious?
-            </button>
-            <button
-              onClick={resetTree}
-              className="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors backdrop-blur-sm"
-              title="Reset Day"
-            >
-              <RotateCcw size={16} />
-            </button>
-          </div>
-        </div>
-
-        {/* Evidence Block */}
-        <div className="w-full relative z-20 flex flex-col lg:flex-row gap-4 bg-black/40 border border-white/10 rounded-xl p-4 backdrop-blur-md mb-4 text-left">
-          <div className="flex-1">
-            <h4 className="font-mono text-[10px] text-green-400 uppercase tracking-widest font-bold mb-1">
-              What I built
-            </h4>
-            <p className="text-xs text-white/80 leading-relaxed">
-              A playful gamified habit tracker built with React and GSAP, using
-              local storage for progression.
-            </p>
-          </div>
-          <div className="flex-1">
-            <h4 className="font-mono text-[10px] text-green-400 uppercase tracking-widest font-bold mb-1">
-              What I learned
-            </h4>
-            <p className="text-xs text-white/80 leading-relaxed">
-              Complex state management, particle animation performance
-              optimizations, and SVG transformations.
-            </p>
-          </div>
-          <div className="flex-1">
-            <h4 className="font-mono text-[10px] text-green-400 uppercase tracking-widest font-bold mb-1">
-              What's next
-            </h4>
-            <div className="text-xs text-white/80 leading-relaxed flex items-start gap-1.5">
-              <AlertCircle
-                size={12}
-                className="mt-0.5 text-green-400/70 shrink-0"
-              />
-              <span>
-                Connect to a backend to make gardens multiplayer so users can
-                water each other's trees.
-              </span>
+            <div className="flex gap-2">
+              <button
+                onClick={() => setIsWhySoSerious(!isWhySoSerious)}
+                className="px-2 py-1 bg-purple-600 hover:bg-purple-500 text-white text-[10px] font-bold rounded uppercase shadow-lg"
+              >
+                Why So Serious?
+              </button>
+              <button
+                onClick={resetTree}
+                className="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors backdrop-blur-sm"
+                title="Reset Day"
+              >
+                <RotateCcw size={16} />
+              </button>
             </div>
           </div>
-        </div>
 
-        {/* Speech Bubble */}
-        <div className="h-16 w-full max-w-md flex items-end justify-center z-20">
-          <AnimatePresence>
-            {speech && (
-              <motion.div
-                initial={{ opacity: 0, y: 10, scale: 0.9 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: -10, scale: 0.9 }}
-                className="bg-white border-2 border-ink text-ink font-bold text-sm px-4 py-2 rounded-3xl rounded-br-none shadow-[4px_4px_0px_rgba(0,0,0,1)] text-center"
-              >
-                {speech}
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-
-        {/* Tree Container */}
-        <div className="flex-1 w-full relative flex items-end justify-center perspective-1000 my-4">
-          <TreeSVG
-            stageIndex={currentStageIndex}
-            isJoker={isJoker}
-            isKnight={isKnight}
-            isGotham={isGotham}
-            isWemby={isWemby}
-            theme={theme}
-          />
-
-          {/* Fruits */}
-          <AnimatePresence>
-            {currentStageIndex >= 3 && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="absolute inset-0 pointer-events-none z-30"
-              >
-                {FRUITS.map((fruit, i) => {
-                  // Only show fruits based on stage
-                  if (i > currentStageIndex - 3) return null;
-
-                  const positions = [
-                    { top: "30%", left: "30%" },
-                    { top: "40%", left: "70%" },
-                    { top: "20%", left: "50%" },
-                    { top: "50%", left: "20%" },
-                    { top: "60%", left: "80%" },
-                  ];
-                  const pos = positions[i % positions.length];
-
-                  return (
-                    <motion.a
-                      key={fruit.id}
-                      href={fruit.link}
-                      initial={{ scale: 0, y: 20 }}
-                      animate={{
-                        scale: 1,
-                        y: [0, -10, 0],
-                      }}
-                      transition={{
-                        scale: { type: "spring", bounce: 0.5 },
-                        y: {
-                          repeat: Infinity,
-                          duration: 3 + i,
-                          ease: "easeInOut",
-                        },
-                      }}
-                      className={`absolute w-10 h-10 ${fruit.color} rounded-full flex items-center justify-center text-white shadow-lg pointer-events-auto cursor-pointer hover:scale-110 transition-transform group border-2 border-white`}
-                      style={pos}
-                      title={fruit.label}
-                    >
-                      {fruit.icon}
-                      <span className="absolute -top-8 bg-black text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                        {fruit.label}
-                      </span>
-                    </motion.a>
-                  );
-                })}
-              </motion.div>
-            )}
-          </AnimatePresence>
-
-          {/* Celebration Overlay */}
-          <AnimatePresence>
-            {showCelebration && (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.5 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 1.5 }}
-                className="absolute inset-0 flex items-center justify-center z-50 pointer-events-none"
-              >
-                <div className="bg-white/90 backdrop-blur-md px-8 py-4 rounded-3xl border-4 border-green-500 shadow-[0_0_50px_rgba(34,197,94,0.5)] text-center">
-                  <h2 className="text-3xl font-black text-green-600 uppercase tracking-widest mb-2">
-                    Level Up!
-                  </h2>
-                  <p className="text-xl font-bold text-gray-800">
-                    {celebrationText}
-                  </p>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-
-        {/* Action Buttons */}
-        <div className="flex flex-wrap justify-center gap-3 z-20 w-full bg-black/20 p-4 rounded-3xl backdrop-blur-sm border border-white/10">
-          <button
-            onClick={() => handleAction("water")}
-            className="flex items-center gap-2 px-4 py-2 bg-blue-500 hover:bg-blue-400 text-white rounded-full font-bold text-sm shadow-[0_4px_0_rgb(29,78,216)] hover:shadow-[0_2px_0_rgb(29,78,216)] hover:translate-y-[2px] transition-all"
-          >
-            <Droplets size={16} /> Water
-          </button>
-          <button
-            onClick={() => handleAction("fertilize")}
-            className={`flex items-center gap-2 px-4 py-2 rounded-full font-bold text-sm transition-all ${fertilizeUsesToday >= 5 ? "bg-gray-400 text-gray-600 cursor-not-allowed" : "bg-purple-500 hover:bg-purple-400 text-white shadow-[0_4px_0_rgb(126,34,206)] hover:shadow-[0_2px_0_rgb(126,34,206)] hover:translate-y-[2px]"}`}
-          >
-            <Sparkles size={16} /> Fertilize ({5 - fertilizeUsesToday})
-          </button>
-          <button
-            onClick={() => handleAction("sunbathe")}
-            className="flex items-center gap-2 px-4 py-2 bg-orange-500 hover:bg-orange-400 text-white rounded-full font-bold text-sm shadow-[0_4px_0_rgb(194,65,12)] hover:shadow-[0_2px_0_rgb(194,65,12)] hover:translate-y-[2px] transition-all"
-          >
-            <Sun size={16} /> Sunbathe
-          </button>
-          <button
-            onClick={() => handleAction("prune")}
-            className="flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-500 text-white rounded-full font-bold text-sm shadow-[0_4px_0_rgb(21,128,61)] hover:shadow-[0_2px_0_rgb(21,128,61)] hover:translate-y-[2px] transition-all"
-          >
-            <Scissors size={16} /> Prune
-          </button>
-        </div>
-      </div>
-
-      {/* Right: Stats & Log */}
-      <div className="lg:col-span-1 border-t lg:border-t-0 lg:border-l border-white/20 pt-6 lg:pt-0 lg:pl-6 flex flex-col z-10">
-        <h4 className="font-mono text-xs uppercase tracking-widest font-bold text-white mb-4 drop-shadow-md">
-          Growth Stats
-        </h4>
-
-        <div className="space-y-3 mb-6">
-          <div className="flex justify-between items-center p-3 bg-white/10 backdrop-blur-sm rounded-3xl border border-white/20 text-white">
-            <span className="text-sm font-bold flex items-center gap-2">
-              <Droplets size={14} className="text-blue-300" /> Watered
-            </span>
-            <span className="font-mono font-black">{stats.water}</span>
-          </div>
-          <div className="flex justify-between items-center p-3 bg-white/10 backdrop-blur-sm rounded-3xl border border-white/20 text-white">
-            <span className="text-sm font-bold flex items-center gap-2">
-              <Sparkles size={14} className="text-purple-300" /> Fertilized
-            </span>
-            <span className="font-mono font-black">{stats.fertilize}</span>
-          </div>
-          <div className="flex justify-between items-center p-3 bg-white/10 backdrop-blur-sm rounded-3xl border border-white/20 text-white">
-            <span className="text-sm font-bold flex items-center gap-2">
-              <Sun size={14} className="text-orange-300" /> Sunbathed
-            </span>
-            <span className="font-mono font-black">{stats.sunbathe}</span>
-          </div>
-          <div className="flex justify-between items-center p-3 bg-white/10 backdrop-blur-sm rounded-3xl border border-white/20 text-white">
-            <span className="text-sm font-bold flex items-center gap-2">
-              <Scissors size={14} className="text-green-300" /> Pruned
-            </span>
-            <span className="font-mono font-black">{stats.prune}</span>
-          </div>
-        </div>
-
-        <div className="flex-1 bg-black/40 backdrop-blur-md rounded-3xl p-4 border border-white/20 flex flex-col justify-center items-center text-center text-white relative overflow-hidden">
-          {/* Theme Switcher (Unlocked at Stage 6) */}
-          {currentStageIndex >= 6 && (
-            <div className="absolute top-2 right-2 flex gap-1 z-20">
-              {["classic", "pvz", "cyber", "silver"].map((t) => (
-                <button
-                  key={t}
-                  onClick={() => setTheme(t)}
-                  className={`w-4 h-4 rounded-full border border-white/50 ${theme === t ? "ring-2 ring-white scale-110" : "opacity-50"} ${
-                    t === "classic"
-                      ? "bg-green-500"
-                      : t === "pvz"
-                        ? "bg-lime-400"
-                        : t === "cyber"
-                          ? "bg-cyan-400"
-                          : "bg-gray-300"
-                  }`}
-                  title={`Theme: ${t}`}
+          {/* Evidence Block */}
+          <div className="w-full relative z-20 flex flex-col lg:flex-row gap-4 bg-black/40 border border-white/10 rounded-xl p-4 backdrop-blur-md mb-4 text-left">
+            <div className="flex-1">
+              <h4 className="font-mono text-[10px] text-green-400 uppercase tracking-widest font-bold mb-1">
+                What I built
+              </h4>
+              <p className="text-xs text-white/80 leading-relaxed">
+                A playful gamified habit tracker built with React and GSAP,
+                using local storage for progression.
+              </p>
+            </div>
+            <div className="flex-1">
+              <h4 className="font-mono text-[10px] text-green-400 uppercase tracking-widest font-bold mb-1">
+                What I learned
+              </h4>
+              <p className="text-xs text-white/80 leading-relaxed">
+                Complex state management, particle animation performance
+                optimizations, and SVG transformations.
+              </p>
+            </div>
+            <div className="flex-1">
+              <h4 className="font-mono text-[10px] text-green-400 uppercase tracking-widest font-bold mb-1">
+                What's next
+              </h4>
+              <div className="text-xs text-white/80 leading-relaxed flex items-start gap-1.5">
+                <AlertCircle
+                  size={12}
+                  className="mt-0.5 text-green-400/70 shrink-0"
                 />
-              ))}
+                <span>
+                  Connect to a backend to make gardens multiplayer so users can
+                  water each other's trees.
+                </span>
+              </div>
             </div>
-          )}
-
-          <div className="font-black uppercase tracking-tight text-2xl leading-none mb-2">
-            {currentStage.name}
-          </div>
-          <div className="text-xs font-mono text-white/60 uppercase mb-4">
-            Stage {currentStageIndex + 1} of 9
           </div>
 
-          <div className="w-full bg-white/10 h-2 rounded-full overflow-hidden mb-2">
-            <motion.div
-              className="h-full bg-green-400"
-              initial={{ width: 0 }}
-              animate={{ width: `${progressToNext}%` }}
-              transition={{ duration: 0.5 }}
+          {/* Speech Bubble */}
+          <div className="h-16 w-full max-w-md flex items-end justify-center z-20">
+            <AnimatePresence>
+              {speech && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10, scale: 0.9 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -10, scale: 0.9 }}
+                  className="bg-white border-2 border-ink text-ink font-bold text-sm px-4 py-2 rounded-3xl rounded-br-none shadow-[4px_4px_0px_rgba(0,0,0,1)] text-center"
+                >
+                  {speech}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
+          {/* Tree Container */}
+          <div className="flex-1 w-full relative flex items-end justify-center perspective-1000 my-4">
+            <TreeSVG
+              stageIndex={currentStageIndex}
+              isJoker={isJoker}
+              isKnight={isKnight}
+              isGotham={isGotham}
+              isWemby={isWemby}
+              theme={theme}
             />
+
+            {/* Fruits */}
+            <AnimatePresence>
+              {currentStageIndex >= 3 && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="absolute inset-0 pointer-events-none z-30"
+                >
+                  {FRUITS.map((fruit, i) => {
+                    // Only show fruits based on stage
+                    if (i > currentStageIndex - 3) return null;
+
+                    const positions = [
+                      { top: "30%", left: "30%" },
+                      { top: "40%", left: "70%" },
+                      { top: "20%", left: "50%" },
+                      { top: "50%", left: "20%" },
+                      { top: "60%", left: "80%" },
+                    ];
+                    const pos = positions[i % positions.length];
+
+                    return (
+                      <motion.a
+                        key={fruit.id}
+                        href={fruit.link}
+                        initial={{ scale: 0, y: 20 }}
+                        animate={{
+                          scale: 1,
+                          y: [0, -10, 0],
+                        }}
+                        transition={{
+                          scale: { type: "spring", bounce: 0.5 },
+                          y: {
+                            repeat: Infinity,
+                            duration: 3 + i,
+                            ease: "easeInOut",
+                          },
+                        }}
+                        className={`absolute w-10 h-10 ${fruit.color} rounded-full flex items-center justify-center text-white shadow-lg pointer-events-auto cursor-pointer hover:scale-110 transition-transform group border-2 border-white`}
+                        style={pos}
+                        title={fruit.label}
+                      >
+                        {fruit.icon}
+                        <span className="absolute -top-8 bg-black text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                          {fruit.label}
+                        </span>
+                      </motion.a>
+                    );
+                  })}
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            {/* Celebration Overlay */}
+            <AnimatePresence>
+              {showCelebration && (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 1.5 }}
+                  className="absolute inset-0 flex items-center justify-center z-50 pointer-events-none"
+                >
+                  <div className="bg-white/90 backdrop-blur-md px-8 py-4 rounded-3xl border-4 border-green-500 shadow-[0_0_50px_rgba(34,197,94,0.5)] text-center">
+                    <h2 className="text-3xl font-black text-green-600 uppercase tracking-widest mb-2">
+                      Level Up!
+                    </h2>
+                    <p className="text-xl font-bold text-gray-800">
+                      {celebrationText}
+                    </p>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
-          <div className="text-[10px] font-mono text-white/40 uppercase w-full text-right">
-            {Math.floor(progressToNext)}% to next stage
-          </div>
 
-          {currentStageIndex === 8 && (
-            <div className="mt-4 text-xs font-bold text-yellow-900 bg-yellow-400 px-3 py-1 rounded-full animate-pulse shadow-[0_0_15px_rgba(250,204,21,0.5)]">
-              Legendary Status Achieved!
-            </div>
-          )}
-        </div>
-
-        {/* Share Button */}
-        <button
-          onClick={() => {
-            showSpeech("Screenshot saved! (Simulated)");
-            playAudio(1966);
-          }}
-          className="mt-4 w-full py-3 bg-white/10 hover:bg-white/20 border border-white/20 rounded-3xl text-white font-bold text-sm flex items-center justify-center gap-2 transition-colors backdrop-blur-sm"
-        >
-          Share Your Tree
-        </button>
-
-        {/* Batman Audio Archives */}
-        <div className="mt-4 flex justify-between gap-2">
-          {[1966, 1989, 2008, 2022].map((year) => (
+          {/* Action Buttons */}
+          <div className="flex flex-wrap justify-center gap-3 z-20 w-full bg-black/20 p-4 rounded-3xl backdrop-blur-sm border border-white/10">
             <button
-              key={year}
-              onClick={() => playAudio(year)}
-              className="flex-1 py-1 bg-white/5 hover:bg-white/20 border border-white/10 rounded text-[9px] font-mono text-white/50 hover:text-white transition-colors"
+              onClick={() => handleAction("water")}
+              className="flex items-center gap-2 px-4 py-2 bg-blue-500 hover:bg-blue-400 text-white rounded-full font-bold text-sm shadow-[0_4px_0_rgb(29,78,216)] hover:shadow-[0_2px_0_rgb(29,78,216)] hover:translate-y-[2px] transition-all"
             >
-              {year}
+              <Droplets size={16} /> Water
             </button>
-          ))}
+            <button
+              onClick={() => handleAction("fertilize")}
+              className={`flex items-center gap-2 px-4 py-2 rounded-full font-bold text-sm transition-all ${fertilizeUsesToday >= 5 ? "bg-gray-400 text-gray-600 cursor-not-allowed" : "bg-purple-500 hover:bg-purple-400 text-white shadow-[0_4px_0_rgb(126,34,206)] hover:shadow-[0_2px_0_rgb(126,34,206)] hover:translate-y-[2px]"}`}
+            >
+              <Sparkles size={16} /> Fertilize ({5 - fertilizeUsesToday})
+            </button>
+            <button
+              onClick={() => handleAction("sunbathe")}
+              className="flex items-center gap-2 px-4 py-2 bg-orange-500 hover:bg-orange-400 text-white rounded-full font-bold text-sm shadow-[0_4px_0_rgb(194,65,12)] hover:shadow-[0_2px_0_rgb(194,65,12)] hover:translate-y-[2px] transition-all"
+            >
+              <Sun size={16} /> Sunbathe
+            </button>
+            <button
+              onClick={() => handleAction("prune")}
+              className="flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-500 text-white rounded-full font-bold text-sm shadow-[0_4px_0_rgb(21,128,61)] hover:shadow-[0_2px_0_rgb(21,128,61)] hover:translate-y-[2px] transition-all"
+            >
+              <Scissors size={16} /> Prune
+            </button>
+          </div>
         </div>
-      </div>
+
+        {/* Right: Stats & Log */}
+        <div className="lg:col-span-1 border-t lg:border-t-0 lg:border-l border-white/20 pt-6 lg:pt-0 lg:pl-6 flex flex-col z-10">
+          <h4 className="font-mono text-xs uppercase tracking-widest font-bold text-white mb-4 drop-shadow-md">
+            Growth Stats
+          </h4>
+
+          <div className="space-y-3 mb-6">
+            <div className="flex justify-between items-center p-3 bg-white/10 backdrop-blur-sm rounded-3xl border border-white/20 text-white">
+              <span className="text-sm font-bold flex items-center gap-2">
+                <Droplets size={14} className="text-blue-300" /> Watered
+              </span>
+              <span className="font-mono font-black">{stats.water}</span>
+            </div>
+            <div className="flex justify-between items-center p-3 bg-white/10 backdrop-blur-sm rounded-3xl border border-white/20 text-white">
+              <span className="text-sm font-bold flex items-center gap-2">
+                <Sparkles size={14} className="text-purple-300" /> Fertilized
+              </span>
+              <span className="font-mono font-black">{stats.fertilize}</span>
+            </div>
+            <div className="flex justify-between items-center p-3 bg-white/10 backdrop-blur-sm rounded-3xl border border-white/20 text-white">
+              <span className="text-sm font-bold flex items-center gap-2">
+                <Sun size={14} className="text-orange-300" /> Sunbathed
+              </span>
+              <span className="font-mono font-black">{stats.sunbathe}</span>
+            </div>
+            <div className="flex justify-between items-center p-3 bg-white/10 backdrop-blur-sm rounded-3xl border border-white/20 text-white">
+              <span className="text-sm font-bold flex items-center gap-2">
+                <Scissors size={14} className="text-green-300" /> Pruned
+              </span>
+              <span className="font-mono font-black">{stats.prune}</span>
+            </div>
+          </div>
+
+          <div className="flex-1 bg-black/40 backdrop-blur-md rounded-3xl p-4 border border-white/20 flex flex-col justify-center items-center text-center text-white relative overflow-hidden">
+            {/* Theme Switcher (Unlocked at Stage 6) */}
+            {currentStageIndex >= 6 && (
+              <div className="absolute top-2 right-2 flex gap-1 z-20">
+                {["classic", "pvz", "cyber", "silver"].map((t) => (
+                  <button
+                    key={t}
+                    onClick={() => setTheme(t)}
+                    className={`w-4 h-4 rounded-full border border-white/50 ${theme === t ? "ring-2 ring-white scale-110" : "opacity-50"} ${
+                      t === "classic"
+                        ? "bg-green-500"
+                        : t === "pvz"
+                          ? "bg-lime-400"
+                          : t === "cyber"
+                            ? "bg-cyan-400"
+                            : "bg-gray-300"
+                    }`}
+                    title={`Theme: ${t}`}
+                  />
+                ))}
+              </div>
+            )}
+
+            <div className="font-black uppercase tracking-tight text-2xl leading-none mb-2">
+              {currentStage.name}
+            </div>
+            <div className="text-xs font-mono text-white/60 uppercase mb-4">
+              Stage {currentStageIndex + 1} of 9
+            </div>
+
+            <div className="w-full bg-white/10 h-2 rounded-full overflow-hidden mb-2">
+              <motion.div
+                className="h-full bg-green-400"
+                initial={{ width: 0 }}
+                animate={{ width: `${progressToNext}%` }}
+                transition={{ duration: 0.5 }}
+              />
+            </div>
+            <div className="text-[10px] font-mono text-white/40 uppercase w-full text-right">
+              {Math.floor(progressToNext)}% to next stage
+            </div>
+
+            {currentStageIndex === 8 && (
+              <div className="mt-4 text-xs font-bold text-yellow-900 bg-yellow-400 px-3 py-1 rounded-full animate-pulse shadow-[0_0_15px_rgba(250,204,21,0.5)]">
+                Legendary Status Achieved!
+              </div>
+            )}
+          </div>
+
+          {/* Share Button */}
+          <button
+            onClick={() => {
+              showSpeech("Screenshot saved! (Simulated)");
+              playAudio(1966);
+            }}
+            className="mt-4 w-full py-3 bg-white/10 hover:bg-white/20 border border-white/20 rounded-3xl text-white font-bold text-sm flex items-center justify-center gap-2 transition-colors backdrop-blur-sm"
+          >
+            Share Your Tree
+          </button>
+
+          {/* Batman Audio Archives */}
+          <div className="mt-4 flex justify-between gap-2">
+            {[1966, 1989, 2008, 2022].map((year) => (
+              <button
+                key={year}
+                onClick={() => playAudio(year)}
+                className="flex-1 py-1 bg-white/5 hover:bg-white/20 border border-white/10 rounded text-[9px] font-mono text-white/50 hover:text-white transition-colors"
+              >
+                {year}
+              </button>
+            ))}
+          </div>
+        </div>
       </MuseumCard>
     </div>
   );
